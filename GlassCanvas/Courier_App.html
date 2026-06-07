@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Active Manifest - Neon Courier</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#001a1a",
+                    "outline": "#5a5068",
+                    "primary-fixed": "#ffe0ec",
+                    "inverse-primary": "#8c0038",
+                    "surface-container-low": "#111118",
+                    "error-container": "#3d0f0f",
+                    "on-surface": "#e8e0f0",
+                    "surface": "#0f0f1a",
+                    "secondary-container": "#004d3d",
+                    "on-error": "#1a0000",
+                    "on-error-container": "#ffa0a0",
+                    "inverse-surface": "#e8e0f0",
+                    "surface-variant": "#1e1e30",
+                    "surface-container-high": "#1e1e30",
+                    "on-tertiary-fixed": "#1a1000",
+                    "on-background": "#e8e0f0",
+                    "tertiary-container": "#665200",
+                    "on-tertiary-fixed-variant": "#665200",
+                    "on-tertiary": "#1a1000",
+                    "on-secondary-container": "#c0fff4",
+                    "on-tertiary-container": "#fff0c0",
+                    "surface-bright": "#1a1a2e",
+                    "outline-variant": "#302840",
+                    "on-secondary": "#001a1a",
+                    "surface-tint": "#ff2d78",
+                    "surface-container": "#141422",
+                    "surface-container-lowest": "#0a0a12",
+                    "on-primary-container": "#ffe0ec",
+                    "secondary-fixed-dim": "#00e6b8",
+                    "secondary-fixed": "#c0fff4",
+                    "on-surface-variant": "#a098b0",
+                    "secondary": "#00ffcc",
+                    "primary": "#ff2d78",
+                    "tertiary-fixed-dim": "#ffe04a",
+                    "tertiary-fixed": "#fff0c0",
+                    "surface-container-highest": "#28283e",
+                    "on-secondary-fixed-variant": "#004d4d",
+                    "inverse-on-surface": "#0a0a12",
+                    "background": "#0a0a12",
+                    "on-primary-fixed-variant": "#8c0038",
+                    "surface-dim": "#0f0f1a",
+                    "on-primary": "#1a0010",
+                    "error": "#ff4444",
+                    "tertiary": "#ffe04a",
+                    "primary-container": "#b3004e",
+                    "on-primary-fixed": "#3d0020",
+                    "primary-fixed-dim": "#ff80aa"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Sora"],
+                    "display": ["Sora"],
+                    "body": ["Inter"],
+                    "label": ["Space Grotesk"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background: linear-gradient(180deg, #0a0a12 0%, #111118 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        .glow-text-primary {
+            text-shadow: 0 0 8px currentColor;
+        }
+        .glow-text-secondary {
+            text-shadow: 0 0 8px currentColor;
+        }
+        .glow-border-primary {
+            box-shadow: inset 0 0 12px rgba(255, 45, 120, 0.1);
+        }
+        .glow-button:hover {
+            box-shadow: 0 0 16px rgba(255, 45, 120, 0.4);
+        }
+        
+        /* Custom map styling overlay */
+        .cyber-map-overlay {
+            background: linear-gradient(to bottom, transparent, #0a0a12);
+            pointer-events: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body pb-24 md:pb-0 md:pl-64 antialiased selection:bg-primary/30 selection:text-primary">
+<!-- TopNavBar (Web & Mobile) -->
+<nav class="fixed top-0 w-full z-50 bg-surface-container-highest dark:bg-surface-container-highest shadow-lg border-b border-outline-variant/30 flex justify-between items-center px-6 py-4 md:hidden">
+<div class="flex items-center gap-4">
+<span class="text-xl font-headline font-bold text-primary dark:text-primary [text-shadow:0_0_8px_#ff2d78]">Neon Courier</span>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-secondary cursor-pointer transition-colors duration-200">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-secondary cursor-pointer transition-colors duration-200">account_circle</span>
+</div>
+</nav>
+<!-- TopNavBar (Web Only) -->
+<nav class="fixed top-0 w-full z-50 bg-surface-container-highest dark:bg-surface-container-highest shadow-lg border-b border-outline-variant/30 hidden md:flex justify-between items-center px-6 py-4">
+<div class="flex items-center gap-8 pl-64">
+<div class="flex gap-6">
+<a class="text-primary dark:text-primary border-b-2 border-primary pb-1 [text-shadow:0_0_8px_#ff2d78] font-label font-bold" href="#">Active</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label" href="#">History</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label" href="#">Maps</a>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-secondary cursor-pointer transition-colors duration-200">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-secondary cursor-pointer transition-colors duration-200">account_circle</span>
+</div>
+</nav>
+<!-- SideNavBar (Web Only) -->
+<nav class="hidden md:flex h-screen w-64 fixed left-0 top-0 bg-surface-container dark:bg-surface-container-low border-r border-outline-variant/30 shadow-[inset_0_0_12px_rgba(255,45,120,0.1)] flex-col py-6 z-50">
+<div class="px-6 mb-8">
+<h1 class="text-2xl font-headline font-bold text-primary dark:text-primary [text-shadow:0_0_8px_#ff2d78]">Neon Tokyo</h1>
+<p class="text-sm text-on-surface-variant font-label mt-1">Admin Hub</p>
+</div>
+<div class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:text-secondary hover:bg-surface-variant/50 transition-all duration-300 font-label" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary dark:text-primary font-bold border-l-4 border-primary bg-primary-container/10 [text-shadow:0_0_8px_#ff2d78] font-label" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+                Logistics
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:text-secondary hover:bg-surface-variant/50 transition-all duration-300 font-label" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+                Art Vault
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:text-secondary hover:bg-surface-variant/50 transition-all duration-300 font-label" href="#">
+<span class="material-symbols-outlined">package_2</span>
+                Shipments
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:text-secondary hover:bg-surface-variant/50 transition-all duration-300 font-label" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</div>
+<div class="px-4 mt-auto">
+<button class="w-full bg-surface-container-high border border-primary/50 text-primary py-3 rounded glow-button transition-all duration-300 font-label font-bold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span>
+                New Shipment
+            </button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-24 md:pt-28 px-4 md:px-8 max-w-7xl mx-auto space-y-6">
+<!-- Header Section -->
+<header class="flex justify-between items-end border-b border-outline-variant/30 pb-4 mb-6">
+<div>
+<h2 class="text-3xl md:text-4xl font-headline font-extrabold text-on-surface glow-text-primary tracking-tight">Active Manifest</h2>
+<p class="text-on-surface-variant font-label mt-2 text-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-sm">my_location</span>
+                    Sector 4 - Neo Shibuya
+                </p>
+</div>
+<div class="text-right">
+<span class="text-2xl font-headline font-bold text-secondary glow-text-secondary">4/12</span>
+<p class="text-xs text-on-surface-variant font-label uppercase tracking-wider mt-1">Stops Complete</p>
+</div>
+</header>
+<!-- Grid Layout for Bento -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Column 1: Current Delivery Details (Spans 2 cols on lg) -->
+<div class="lg:col-span-2 space-y-6">
+<!-- Priority Delivery Card (Glassmorphism) -->
+<div class="bg-surface-container/60 backdrop-blur-md border border-primary/30 rounded-xl p-6 glow-border-primary relative overflow-hidden group">
+<div class="absolute top-0 right-0 bg-primary text-on-primary font-label text-xs font-bold px-3 py-1 rounded-bl-lg">
+                        NEXT STOP
+                    </div>
+<div class="flex items-start justify-between mb-6">
+<div>
+<h3 class="font-headline font-bold text-xl text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">package</span>
+                                Cipher Node #809
+                            </h3>
+<p class="text-on-surface-variant font-body mt-1">ID: TRK-992-XD</p>
+</div>
+<div class="bg-surface border border-outline rounded p-2 text-center min-w-[80px]">
+<span class="block text-secondary font-headline font-bold text-lg glow-text-secondary">14:30</span>
+<span class="block text-xs font-label text-on-surface-variant">ETA</span>
+</div>
+</div>
+<div class="space-y-4 mb-6">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-secondary mt-1">place</span>
+<div>
+<p class="font-body text-on-surface">Level 42, Neon Plaza Tower</p>
+<p class="text-sm text-on-surface-variant font-label mt-1">Access code: 0984*</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-tertiary mt-1">warning</span>
+<div>
+<p class="font-body text-on-surface">Fragile Contents</p>
+<p class="text-sm text-on-surface-variant font-label mt-1">Handle with extreme care. Temperature controlled.</p>
+</div>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="flex-1 bg-surface-container-highest border border-outline-variant hover:border-secondary text-on-surface py-3 rounded-lg transition-colors font-label font-bold flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-sm">call</span>
+                            Contact
+                        </button>
+<button class="flex-1 bg-surface border border-primary text-primary py-3 rounded-lg glow-button transition-all font-label font-bold flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                            Arrived
+                        </button>
+</div>
+</div>
+<!-- Signature Capture Area -->
+<div class="bg-surface-container/40 border border-outline-variant/50 rounded-xl p-6">
+<h3 class="font-headline font-bold text-lg text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">draw</span>
+                        Receiver Authentication
+                    </h3>
+<div class="bg-surface border border-outline-variant rounded-lg h-32 w-full mb-4 relative overflow-hidden group">
+<!-- Simulated signature canvas -->
+<div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(#302840 1px, transparent 1px); background-size: 10px 10px;"></div>
+<p class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-on-surface-variant/50 font-label text-sm uppercase tracking-widest pointer-events-none">Sign Here</p>
+</div>
+<div class="flex justify-between items-center">
+<button class="text-on-surface-variant hover:text-primary transition-colors text-sm font-label flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">clear</span>
+                            Clear
+                        </button>
+<button class="bg-primary/20 border border-primary/50 text-primary px-6 py-2 rounded-lg font-label font-bold hover:bg-primary hover:text-on-primary transition-all">
+                            Submit
+                        </button>
+</div>
+</div>
+</div>
+<!-- Column 2: Route & Queue (Spans 1 col on lg) -->
+<div class="space-y-6">
+<!-- Live Map Card -->
+<div class="bg-surface-container/60 rounded-xl overflow-hidden border border-outline-variant/50 relative h-64 md:h-80">
+<!-- Placeholder map image -->
+<img alt="Cyberpunk city map" class="w-full h-full object-cover opacity-60" data-alt="A highly detailed, futuristic city map viewed from a top-down perspective, glowing with intense neon cyan and hot pink route lines against a deep, dark blue-black background. The map features intricate, glowing grid patterns and geometric sector overlays typical of a cyberpunk interface. Soft, high-tech HUD elements and precise navigation markers hover over the dark metropolitan landscape. The overall mood is tense, electrifying, and distinctly neon-noir." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHvLTK1L9bfjAzRo_fflcYyE9B6qK_k1PlcjhyAA7T_1_O2cjBkzxlXGB080dKHQy3jKPhgzHtCMj1foKTImr0LiPQHz-Zb0vNZMWIqacyt5P-A2cevFmQosDMMAEdFbskcJEDwQ_NL9px_23-5rr1plCdt-OOoIIqQo_hsGeXDvLAhlyPKwcz1uz2o5xYaQihlqR6EyWeBWsoTdKk03jakuG--kMJwOauyRUOV2RdaMm3ofQuEiCmyr1Jmgg9G8YZ3jQ5XwnHOL0k"/>
+<div class="absolute inset-0 cyber-map-overlay"></div>
+<div class="absolute top-4 left-4 right-4 flex justify-between items-center">
+<div class="bg-surface/80 backdrop-blur border border-secondary/30 text-secondary px-3 py-1 rounded font-label text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">satellite_alt</span>
+                            LIVE TRACKING
+                        </div>
+</div>
+<div class="absolute bottom-4 left-4 right-4 bg-surface/90 backdrop-blur border border-outline-variant rounded-lg p-3 flex items-center justify-between">
+<div>
+<p class="font-headline font-bold text-on-surface text-sm">Navigating to Sector 4</p>
+<p class="text-xs text-secondary font-label mt-1">2.4 km remaining</p>
+</div>
+<button class="bg-surface-container-high p-2 rounded-full border border-outline hover:border-secondary transition-colors text-secondary">
+<span class="material-symbols-outlined">navigation</span>
+</button>
+</div>
+</div>
+<!-- Upcoming Stops List -->
+<div class="bg-surface-container/40 border border-outline-variant/50 rounded-xl p-5">
+<h3 class="font-headline font-bold text-md text-on-surface mb-4 border-b border-outline-variant/30 pb-2">Upcoming Queue</h3>
+<div class="space-y-4">
+<!-- Stop Item -->
+<div class="flex items-center gap-4 group cursor-pointer">
+<div class="flex flex-col items-center">
+<div class="w-3 h-3 rounded-full border-2 border-outline-variant group-hover:border-secondary transition-colors"></div>
+<div class="w-0.5 h-8 bg-outline-variant/30 my-1"></div>
+</div>
+<div class="flex-1 pb-4">
+<p class="font-body text-sm text-on-surface group-hover:text-secondary transition-colors">Neon Biotech Labs</p>
+<p class="text-xs text-on-surface-variant font-label">TRK-442-AL • Dropoff</p>
+</div>
+</div>
+<!-- Stop Item -->
+<div class="flex items-center gap-4 group cursor-pointer">
+<div class="flex flex-col items-center">
+<div class="w-3 h-3 rounded-full border-2 border-outline-variant group-hover:border-secondary transition-colors"></div>
+<div class="w-0.5 h-8 bg-outline-variant/30 my-1"></div>
+</div>
+<div class="flex-1 pb-4">
+<p class="font-body text-sm text-on-surface group-hover:text-secondary transition-colors">SynthWave Records</p>
+<p class="text-xs text-on-surface-variant font-label">TRK-119-BB • Pickup</p>
+</div>
+</div>
+<!-- Stop Item (Last) -->
+<div class="flex items-center gap-4 group cursor-pointer">
+<div class="flex flex-col items-center">
+<div class="w-3 h-3 rounded-full border-2 border-outline-variant group-hover:border-secondary transition-colors"></div>
+</div>
+<div class="flex-1">
+<p class="font-body text-sm text-on-surface group-hover:text-secondary transition-colors">Hub Return</p>
+<p class="text-xs text-on-surface-variant font-label">End of Shift</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant/30 shadow-[0_-4px_20px_rgba(0,255,204,0.1)] md:hidden flex justify-around items-center h-16 px-4">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-secondary" href="#">
+<span class="material-symbols-outlined mb-1">warehouse</span>
+<span class="font-label text-[10px] uppercase tracking-wider">Hub</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary [text-shadow:0_0_8px_#ff2d78]" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">route</span>
+<span class="font-label text-[10px] uppercase tracking-wider">Deliveries</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-secondary" href="#">
+<span class="material-symbols-outlined mb-1">emergency_home</span>
+<span class="font-label text-[10px] uppercase tracking-wider">Alerts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-secondary" href="#">
+<span class="material-symbols-outlined mb-1">person_filled</span>
+<span class="font-label text-[10px] uppercase tracking-wider">Profile</span>
+</a>
+</nav>
+<script>
+        // Simple JS to simulate interaction on the signature pad
+        document.addEventListener('DOMContentLoaded', () => {
+            const clearBtn = document.querySelector('button:has(.material-symbols-outlined:contains("clear"))');
+            if(clearBtn) {
+                 clearBtn.addEventListener('click', (e) => {
+                     e.preventDefault();
+                     // Add slight flash effect to pad to simulate clear
+                     const pad = e.target.closest('.bg-surface-container\\/40').querySelector('.bg-surface');
+                     pad.classList.add('bg-outline-variant/20');
+                     setTimeout(() => pad.classList.remove('bg-outline-variant/20'), 150);
+                 });
+            }
+        });
+    </script>
+</body></html>

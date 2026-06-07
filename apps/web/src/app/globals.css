@@ -1,0 +1,249 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: var(--background);
+  --color-card: var(--card);
+  --color-text: var(--text);
+  --color-accent: var(--accent);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-tertiary: var(--tertiary);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-surface-container-highest: var(--surface-container-highest);
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+
+  /* Compatibility layer for old theme colors */
+  --color-midnight-bg: var(--background);
+  --color-midnight-card: var(--card);
+  --color-midnight-text: var(--text);
+  --color-midnight-accent: var(--accent);
+
+  --color-alabaster-bg: var(--background);
+  --color-alabaster-card: var(--card);
+  --color-alabaster-text: var(--text);
+  --color-alabaster-accent: var(--accent);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-label: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+
+  /* Spacing and Radius matching Neon Tokyo */
+  --radius-DEFAULT: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
+
+  --spacing-bento-gap: 20px;
+  --spacing-margin-mobile: 16px;
+  --spacing-margin-desktop: 64px;
+  --spacing-gutter: 24px;
+  --spacing-unit: 4px;
+}
+
+:root {
+  /* Neon Tokyo Light Mode variables */
+  --background: #f5f5f7;
+  --card: #ffffff;
+  --text: #0a0a12;
+  --accent: #ff2d78;
+  --accent-rgb: 255, 45, 120;
+  
+  --primary: #ff2d78;
+  --secondary: #00b38f;
+  --tertiary: #d4af37;
+  --surface-container: #ffffff;
+  --surface-container-high: #f2f2f7;
+  --surface-container-low: #fafafc;
+  --surface-container-lowest: #ffffff;
+  --surface-container-highest: #e5e5ea;
+  
+  --outline: #8a8a93;
+  --outline-variant: #e5e5ea;
+}
+
+.dark {
+  /* Neon Tokyo Dark Mode variables */
+  --background: #0a0a12;
+  --card: #141422; /* surface-container */
+  --text: #e8e0f0;
+  --accent: #ff2d78;
+  --accent-rgb: 255, 45, 120;
+
+  --primary: #ff2d78;
+  --secondary: #00ffcc;
+  --tertiary: #ffe04a;
+  
+  --surface-container: #141422;
+  --surface-container-high: #1e1e30;
+  --surface-container-low: #111118;
+  --surface-container-lowest: #0a0a12;
+  --surface-container-highest: #28283e;
+  
+  --outline: #5a5068;
+  --outline-variant: #302840;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Luxury Animated Background Spotlights */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: 
+    radial-gradient(circle at 15% 20%, rgba(255, 45, 120, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(0, 255, 204, 0.04) 0%, transparent 45%),
+    radial-gradient(circle at 50% 40%, rgba(255, 224, 74, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  filter: blur(40px);
+  animation: bgPulse 20s infinite alternate ease-in-out;
+}
+
+.dark body::before {
+  background: 
+    radial-gradient(circle at 15% 20%, rgba(255, 45, 120, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(0, 255, 204, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 50% 45%, rgba(255, 224, 74, 0.04) 0%, transparent 50%);
+}
+
+@keyframes bgPulse {
+  0% {
+    transform: scale(1) translate(0px, 0px);
+  }
+  50% {
+    transform: scale(1.06) translate(25px, -15px);
+  }
+  100% {
+    transform: scale(0.98) translate(-15px, 20px);
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--outline-variant);
+  }
+}
+
+/* Custom utilities */
+@utility glass-panel {
+  background-color: rgba(15, 15, 26, 0.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(90, 80, 104, 0.2);
+}
+
+@utility glass-pill {
+  background-color: rgba(15, 15, 26, 0.8);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(90, 80, 104, 0.3);
+}
+
+@utility neon-text-primary {
+  text-shadow: 0 0 8px currentColor;
+}
+
+@utility neon-border-primary {
+  border: 1px solid rgba(255, 45, 120, 0.5);
+  box-shadow: inset 0 0 12px rgba(255, 45, 120, 0.1);
+}
+
+@utility neon-border-secondary {
+  border: 1px solid rgba(0, 255, 204, 0.5);
+  box-shadow: inset 0 0 12px rgba(0, 255, 204, 0.1);
+}
+
+@utility neon-glow-primary {
+  transition: all 0.3s ease;
+  &:hover {
+    box-shadow: 0 0 16px rgba(255, 45, 120, 0.4);
+  }
+}
+
+@utility neon-glow-secondary {
+  transition: all 0.3s ease;
+  &:hover {
+    box-shadow: 0 0 16px rgba(0, 255, 204, 0.4);
+  }
+}
+
+@utility scan-line {
+  background: linear-gradient(
+      to bottom,
+      rgba(255,255,255,0),
+      rgba(255,255,255,0) 50%,
+      rgba(0,0,0,0.2) 50%,
+      rgba(0,0,0,0.2)
+  );
+  background-size: 100% 4px;
+}
+
+@utility btn-glow-shimmer {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: skewX(-20deg);
+  }
+  &:hover::after {
+    animation: shimmer-effect 1.5s infinite;
+  }
+}
+
+@keyframes shimmer-effect {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+@utility terra-card {
+  background: var(--surface-container);
+  border: 1px solid var(--outline-variant);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  &:hover {
+    border-color: var(--primary);
+    box-shadow: 0 0 25px -5px rgba(255, 45, 120, 0.4), inset 0 0 15px -5px rgba(255, 45, 120, 0.2);
+    transform: translateY(-4px);
+    z-index: 10;
+  }
+}
+
+/* Scrollbars styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--outline-variant);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 45, 120, 0.5);
+}

@@ -1,0 +1,437 @@
+@reference "../../../app/globals.css";
+
+.container {
+  @apply flex flex-col gap-6 py-4 px-2 sm:px-4;
+}
+
+.title {
+  @apply text-3xl font-black text-text;
+}
+
+/* ─── Tab Bar with Glass Pill Indicator ─── */
+.tabBar {
+  @apply
+    flex gap-1 p-1
+    rounded-2xl
+    bg-gradient-to-r from-white/[0.04] to-white/[0.02]
+    border border-white/8
+    backdrop-blur-xl
+    overflow-x-auto
+    shadow-[inset_0_1px_3px_rgba(0,0,0,0.2)];
+}
+
+.tabBtn {
+  @apply
+    px-5 py-2.5
+    text-xs font-bold uppercase tracking-wider
+    text-text/45
+    rounded-xl
+    transition-all duration-300
+    cursor-pointer
+    hover:text-text/70 hover:bg-white/[0.04];
+}
+
+.activeTabBtn {
+  @apply
+    text-accent font-black
+    bg-gradient-to-br from-white/[0.10] to-white/[0.04]
+    border border-white/10
+    shadow-[0_4px_16px_rgba(0,0,0,0.2),0_0_12px_rgba(255,20,147,0.08)]
+    backdrop-blur-xl;
+}
+
+.tabContent {
+  @apply flex flex-col gap-6 mt-4;
+}
+
+/* ─── Glass Tables ─── */
+.tableContainer {
+  @apply
+    rounded-2xl
+    border border-white/10
+    backdrop-blur-2xl
+    shadow-[0_8px_32px_0_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.04)];
+  background: var(--surface-container, #141422);
+  overflow: visible;
+}
+
+.adminTable {
+  @apply w-full text-left border-collapse text-xs sm:text-sm;
+}
+
+.adminTable thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.adminTable th {
+  @apply
+    p-4 font-black text-text/55
+    border-b border-white/10
+    text-[10px] uppercase tracking-[0.12em]
+    bg-gradient-to-r from-white/[0.05] to-white/[0.02]
+    backdrop-blur-xl;
+}
+
+.adminTable th:first-child {
+  @apply rounded-tl-2xl;
+}
+
+.adminTable th:last-child {
+  @apply rounded-tr-2xl;
+}
+
+.adminTable tbody tr {
+  @apply transition-all duration-300;
+}
+
+.adminTable tbody tr:hover {
+  @apply bg-white/[0.04];
+  box-shadow: inset 3px 0 0 rgba(255, 45, 120, 0.6), 0 0 20px rgba(255, 45, 120, 0.03);
+}
+
+.adminTable td {
+  @apply p-4 border-b border-white/[0.04] text-text/80 align-middle;
+}
+
+/* ─── Role Select (fallback for non-GlassSelect) ─── */
+.roleSelect {
+  @apply
+    px-3 py-1.5
+    rounded-xl
+    border border-white/10
+    bg-gradient-to-br from-white/[0.06] to-white/[0.02]
+    backdrop-blur-xl
+    text-text text-xs
+    outline-none
+    focus:border-accent/50 focus:bg-white/10 focus:shadow-[0_0_12px_rgba(255,20,147,0.1)]
+    transition-all duration-300;
+}
+
+/* ─── Role Badges ─── */
+.badge {
+  @apply
+    inline-flex px-2.5 py-1 rounded-lg
+    text-[10px] font-black uppercase tracking-wider
+    backdrop-blur-sm;
+}
+
+.badgeAdmin {
+  @apply bg-red-500/10 text-red-400 border border-red-500/20 shadow-[0_0_8px_rgba(239,68,68,0.1)];
+}
+
+.badgeEmployee {
+  @apply bg-blue-500/10 text-blue-400 border border-blue-500/20 shadow-[0_0_8px_rgba(59,130,246,0.1)];
+}
+
+.badgeCourier {
+  @apply bg-purple-500/10 text-purple-400 border border-purple-500/20 shadow-[0_0_8px_rgba(168,85,247,0.1)];
+}
+
+.badgeCustomer {
+  @apply bg-white/8 text-text/60 border border-white/12;
+}
+
+/* ─── Config & CRUD Forms ─── */
+.formCard {
+  @apply p-6 flex flex-col gap-5 relative z-20;
+}
+
+.sectionHeader {
+  @apply text-lg font-bold text-text border-b border-white/[0.06] pb-2;
+}
+
+.formGrid {
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-end;
+}
+
+.inputGroup {
+  @apply flex flex-col gap-1.5;
+}
+
+.inputLabel {
+  @apply text-xs font-bold uppercase tracking-wider text-text/80;
+}
+
+.textInput {
+  @apply
+    w-full px-4 py-2.5
+    rounded-xl
+    border border-white/10
+    bg-gradient-to-br from-white/[0.06] to-white/[0.02]
+    backdrop-blur-xl
+    text-text placeholder-text/25
+    outline-none
+    transition-all duration-300
+    focus:border-accent/50 focus:from-white/[0.10] focus:to-white/[0.04]
+    focus:ring-1 focus:ring-accent/25
+    focus:shadow-[0_0_18px_rgba(255,20,147,0.12)]
+    text-xs sm:text-sm;
+}
+
+.formBtn {
+  @apply
+    px-6 py-2.5
+    rounded-xl font-bold
+    bg-accent text-midnight-bg
+    hover:brightness-110 active:scale-[0.98]
+    transition-all duration-200
+    shadow-[0_4px_16px_rgba(255,20,147,0.25)]
+    hover:shadow-[0_6px_24px_rgba(255,20,147,0.35)]
+    cursor-pointer text-xs sm:text-sm uppercase tracking-wider
+    text-center h-10 flex items-center justify-center
+    relative overflow-hidden;
+}
+
+/* Shimmer on hover for form buttons */
+.formBtn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: skewX(-20deg);
+}
+
+.formBtn:hover::after {
+  animation: shimmerBtn 1.2s infinite;
+}
+
+@keyframes shimmerBtn {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* ─── Action Buttons (Pill Style) ─── */
+.deleteBtn {
+  @apply
+    px-3.5 py-1.5
+    rounded-xl
+    bg-red-500/8 text-red-400
+    hover:bg-red-500/15 hover:shadow-[0_0_12px_rgba(239,68,68,0.12)]
+    border border-red-500/15
+    text-xs font-bold cursor-pointer
+    transition-all duration-300
+    active:scale-[0.97];
+}
+
+.editBtn {
+  @apply
+    px-3.5 py-1.5
+    rounded-xl
+    bg-white/6 text-text/80
+    hover:bg-white/12 hover:shadow-[0_0_12px_rgba(255,255,255,0.05)]
+    border border-white/10
+    text-xs font-bold cursor-pointer
+    transition-all duration-300
+    active:scale-[0.97]
+    mr-2;
+}
+
+/* ─── Gallery Audit Grid ─── */
+.auditGrid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+}
+
+.auditCard {
+  @apply
+    p-4 flex flex-col gap-4
+    hover:shadow-[0_12px_40px_0_rgba(0,0,0,0.3),0_0_20px_rgba(255,20,147,0.08)]
+    transition-all duration-400
+    hover:-translate-y-1;
+}
+
+.auditImgWrapper {
+  @apply
+    w-full aspect-square rounded-2xl overflow-hidden
+    bg-white/5 border border-white/12
+    relative
+    shadow-[0_4px_16px_rgba(0,0,0,0.3)]
+    transition-all duration-500;
+}
+
+.auditImg {
+  @apply object-cover w-full h-full transition-transform duration-700 ease-out;
+}
+
+.auditImgWrapper:hover .auditImg {
+  transform: scale(1.08);
+}
+
+.auditImgWrapper:hover {
+  @apply shadow-[0_8px_32px_rgba(0,0,0,0.4),0_0_12px_rgba(255,20,147,0.08)];
+}
+
+.auditInfo {
+  @apply flex flex-col gap-1 text-xs;
+}
+
+.artistName {
+  @apply font-bold text-text text-sm;
+}
+
+.auditDate {
+  @apply text-[10px] text-text/40;
+}
+
+.btnGroup {
+  @apply flex gap-3 mt-2;
+}
+
+.publishBtn {
+  @apply
+    flex-grow py-2.5 px-4
+    rounded-xl font-bold
+    bg-gradient-to-r from-emerald-500 to-emerald-600
+    text-white
+    hover:brightness-110 hover:shadow-[0_4px_16px_rgba(16,185,129,0.25)]
+    active:scale-[0.98]
+    transition-all duration-200
+    cursor-pointer text-xs text-center
+    relative overflow-hidden;
+}
+
+.publishBtn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transform: skewX(-20deg);
+}
+
+.publishBtn:hover::after {
+  animation: shimmerBtn 1.2s infinite;
+}
+
+/* ─── Modal Publish Popup ─── */
+.modalOverlay {
+  @apply
+    fixed inset-0 z-50
+    flex items-center justify-center
+    bg-midnight-bg/90 backdrop-blur-lg
+    p-4;
+}
+
+.modalContent {
+  @apply
+    w-full max-w-md p-8 md:p-10
+    shadow-[0_24px_64px_rgba(0,0,0,0.5),0_0_30px_rgba(255,20,147,0.06)]
+    flex flex-col gap-6
+    border-white/10 dark:border-white/5;
+}
+
+.modalTitle {
+  @apply text-xl font-extrabold text-text;
+}
+
+.textarea {
+  @apply min-h-[80px] resize-none;
+}
+
+.modalBtnSuccess {
+  @apply
+    w-full py-3.5 px-6
+    rounded-xl font-bold
+    bg-gradient-to-r from-emerald-500 to-emerald-600
+    text-white
+    hover:brightness-110 hover:shadow-[0_6px_20px_rgba(16,185,129,0.3)]
+    active:scale-[0.98]
+    transition-all duration-200
+    shadow-[0_4px_16px_rgba(16,185,129,0.2)]
+    cursor-pointer text-center text-sm
+    relative overflow-hidden;
+}
+
+.modalBtnSuccess::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transform: skewX(-20deg);
+}
+
+.modalBtnSuccess:hover::after {
+  animation: shimmerBtn 1.2s infinite;
+}
+
+.modalCloseBtn {
+  @apply
+    w-full py-3 px-6
+    rounded-xl font-semibold
+    bg-white/5 text-text/55
+    hover:bg-white/10 hover:text-text/75
+    active:scale-[0.98]
+    transition-all duration-200
+    cursor-pointer text-center text-sm
+    border border-white/[0.04];
+}
+
+/* ─── Empty + Loading States ─── */
+.emptyState {
+  @apply flex flex-col items-center justify-center py-20 text-center text-text/50 gap-4;
+}
+
+.emptyIcon {
+  @apply w-12 h-12 opacity-20;
+}
+
+.loader {
+  @apply flex flex-col items-center justify-center gap-3 py-20 text-sm text-text/60 font-semibold;
+}
+
+/* ─── Mobile Table Card Transformation ─── */
+@media (max-width: 640px) {
+  .adminTable,
+  .adminTable thead,
+  .adminTable tbody,
+  .adminTable tr,
+  .adminTable td {
+    display: block;
+    width: 100%;
+  }
+
+  .adminTable thead {
+    display: none; /* Hide standard column headers */
+  }
+
+  .adminTable tbody tr {
+    @apply border-b border-white/[0.06] p-5 flex flex-col gap-3.5 relative;
+  }
+
+  .adminTable tbody tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+    box-shadow: inset 4px 0 0 rgba(255, 45, 120, 0.6);
+  }
+
+  .adminTable td {
+    @apply p-0 border-0 flex justify-between items-center text-right min-h-[28px] gap-4;
+  }
+
+  .adminTable td::before {
+    content: attr(data-label);
+    @apply font-bold text-text/45 text-[10px] uppercase tracking-wider text-left shrink-0;
+  }
+
+  /* RTL Support for stacked elements */
+  :global([dir="rtl"]) .adminTable {
+    text-align: right;
+  }
+  
+  :global([dir="rtl"]) .adminTable td {
+    @apply text-left;
+  }
+  
+  :global([dir="rtl"]) .adminTable td::before {
+    @apply text-right;
+  }
+}
+

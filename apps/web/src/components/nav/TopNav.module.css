@@ -1,0 +1,139 @@
+@reference "../../app/globals.css";
+
+.navHeader {
+  @apply fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-5xl rounded-full border border-outline-variant/40 bg-surface-container/70 backdrop-blur-2xl shadow-lg shadow-primary/5 transition-all duration-300 py-2 px-3;
+}
+
+.navContainer {
+  @apply flex items-center justify-between gap-4 w-full;
+}
+
+/* Brand styling */
+.brandWrapper {
+  @apply flex items-center pl-2;
+}
+
+.brandLink {
+  @apply flex items-center gap-3 text-sm md:text-base font-black tracking-wider transition-colors duration-300 text-text hover:opacity-90;
+}
+
+.brandLogoIcon {
+  @apply flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 border border-primary/30;
+}
+
+.logoDot {
+  @apply w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_var(--primary)];
+}
+
+.brandText {
+  @apply font-heading text-xs md:text-sm font-extrabold tracking-[0.1em] text-text uppercase;
+}
+
+/* Desktop menus */
+.desktopMenu {
+  @apply hidden md:flex items-center gap-2;
+}
+
+.desktopControls {
+  @apply hidden md:flex items-center gap-3 pr-2;
+}
+
+.menuLink {
+  @apply text-xs font-semibold tracking-wide transition-all duration-300 text-text/75 hover:text-primary px-3 py-1.5 rounded-full hover:bg-white/5;
+}
+
+.activeLink {
+  @apply text-primary bg-primary/10 font-bold shadow-[inset_0_0_10px_rgba(255,45,120,0.1)];
+}
+
+.divider {
+  @apply h-4 w-[1px] bg-white/20 dark:bg-white/10;
+}
+
+.themeBtn {
+  @apply p-2 rounded-full bg-white/5 border border-white/10 text-text/75 hover:text-primary hover:bg-white/10 transition-all duration-300 flex items-center justify-center cursor-pointer;
+}
+
+.langBtn {
+  @apply text-[10px] tracking-wide font-black text-text/75 border border-white/10 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer;
+}
+
+.logoutBtn {
+  @apply text-[10px] tracking-wider font-bold text-red-400 hover:text-red-300 hover:bg-red-500/10 px-3 py-1.5 border border-red-500/20 rounded-full transition-all duration-300 cursor-pointer;
+}
+
+.loginLink {
+  @apply text-[10px] tracking-wider font-bold text-text/80 hover:text-primary bg-primary/5 border border-primary/20 hover:bg-primary/10 px-4 py-1.5 rounded-full transition-all duration-300;
+}
+
+.activeLoginLink {
+  @apply bg-primary/25 border-primary text-primary;
+}
+
+/* Far Right Avatar */
+.avatarLink {
+  @apply w-8 h-8 rounded-full overflow-hidden border border-white/15 transition-all duration-300 hover:scale-105 cursor-pointer flex items-center justify-center;
+}
+
+.avatarActive {
+  @apply border-primary ring-2 ring-primary/30 scale-105;
+}
+
+.avatarImage {
+  @apply w-full h-full object-cover;
+}
+
+.avatarGradient {
+  @apply w-full h-full bg-gradient-to-tr from-primary to-rose-500 flex items-center justify-center shadow-md;
+}
+
+/* Mobile styles */
+.mobileActions {
+  @apply flex md:hidden items-center gap-3 pr-2;
+}
+
+.mobileMenuToggle {
+  @apply flex items-center justify-center p-2 rounded-full bg-white/5 border border-white/10 text-text/85 hover:text-primary transition-colors duration-200 cursor-pointer;
+}
+
+.langBtnMobile {
+  @apply text-[9px] font-black tracking-wider text-text/75 border border-white/10 px-2.5 py-1 rounded-full bg-white/5 cursor-pointer;
+}
+
+.mobileOverlay {
+  @apply fixed inset-0 z-40 bg-black/60 backdrop-blur-md pt-24 px-4 flex justify-center;
+}
+
+.mobileDrawer {
+  @apply w-full max-w-md p-6 h-fit max-h-[70vh] overflow-y-auto border border-outline-variant/40 rounded-2xl shadow-2xl;
+  background-color: var(--surface-container);
+  backdrop-filter: blur(20px);
+}
+
+.mobileMenuList {
+  @apply flex flex-col gap-4 items-stretch text-center;
+}
+
+.mobileMenuLink {
+  @apply text-sm font-semibold py-3 text-text/75 hover:text-primary border-b border-white/5 transition-all duration-200;
+}
+
+.mobileActiveLink {
+  @apply text-primary font-black border-b-2 border-primary;
+}
+
+.mobileMenuDivider {
+  @apply h-[1px] w-full bg-white/10 my-2;
+}
+
+.mobileThemeBtn {
+  @apply flex items-center justify-center gap-3 w-full py-3 bg-white/5 border border-white/10 rounded-xl font-semibold text-xs text-text/80 hover:bg-white/10 transition-colors duration-200 cursor-pointer;
+}
+
+.mobileLoginBtn {
+  @apply w-full py-3 text-center rounded-xl bg-primary text-white font-black text-xs shadow-md transition-all duration-200 hover:brightness-110 active:scale-[0.99];
+}
+
+.mobileLogoutBtn {
+  @apply w-full py-3 text-center rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 font-bold text-xs hover:bg-red-500/20 transition-all duration-200 cursor-pointer;
+}

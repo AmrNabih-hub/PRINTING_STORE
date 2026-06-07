@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Neon Tokyo Gallery Grid</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "tertiary-fixed": "#fff0c0",
+                "surface-container-high": "#1e1e30",
+                "on-tertiary-fixed-variant": "#665200",
+                "on-background": "#e8e0f0",
+                "on-tertiary": "#1a1000",
+                "on-primary": "#1a0010",
+                "secondary-container": "#004d3d",
+                "surface-container": "#141422",
+                "surface-container-low": "#111118",
+                "secondary-fixed": "#c0fff4",
+                "inverse-on-surface": "#0a0a12",
+                "primary-container": "#b3004e",
+                "on-primary-fixed": "#3d0020",
+                "on-primary-container": "#ffe0ec",
+                "surface-tint": "#ff2d78",
+                "on-tertiary-fixed": "#1a1000",
+                "inverse-primary": "#8c0038",
+                "error-container": "#3d0f0f",
+                "tertiary-container": "#665200",
+                "tertiary": "#ffe04a",
+                "secondary-fixed-dim": "#00e6b8",
+                "tertiary-fixed-dim": "#ffe04a",
+                "outline": "#5a5068",
+                "outline-variant": "#302840",
+                "on-secondary-container": "#c0fff4",
+                "surface-container-lowest": "#0a0a12",
+                "secondary": "#00ffcc",
+                "on-primary-fixed-variant": "#8c0038",
+                "error": "#ff4444",
+                "on-tertiary-container": "#fff0c0",
+                "on-error": "#1a0000",
+                "on-secondary": "#001a1a",
+                "primary": "#ff2d78",
+                "surface-bright": "#1a1a2e",
+                "on-surface": "#e8e0f0",
+                "surface-container-highest": "#28283e",
+                "on-secondary-fixed": "#001a1a",
+                "background": "#0a0a12",
+                "primary-fixed": "#ffe0ec",
+                "primary-fixed-dim": "#ff80aa",
+                "on-error-container": "#ffa0a0",
+                "surface-variant": "#1e1e30",
+                "inverse-surface": "#e8e0f0",
+                "on-secondary-fixed-variant": "#004d4d",
+                "surface": "#0f0f1a",
+                "on-surface-variant": "#a098b0",
+                "surface-dim": "#0f0f1a"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "margin-mobile": "16px",
+                "bento-gap": "20px",
+                "gutter": "24px",
+                "unit": "4px",
+                "margin-desktop": "64px"
+        },
+        "fontFamily": {
+                "headline": [
+                        "Sora"
+                ],
+                "display": [
+                        "Sora"
+                ],
+                "body": [
+                        "Inter"
+                ],
+                "label": [
+                        "Space Grotesk"
+                ]
+        },
+        "fontSize": {}
+      },
+    },
+  }
+</script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            background-image: 
+                linear-gradient(theme('colors.primary/5') 1px, transparent 1px),
+                linear-gradient(90deg, theme('colors.primary/5') 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center center;
+            background-attachment: fixed;
+        }
+
+        .terra-card {
+            background: theme('colors.surface-container');
+            border: 1px solid theme('colors.outline-variant');
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .terra-card:hover {
+            border-color: theme('colors.primary');
+            box-shadow: 0 0 25px -5px theme('colors.primary/40'), inset 0 0 15px -5px theme('colors.primary/20');
+            transform: translateY(-4px);
+            z-index: 10;
+        }
+
+        .terra-card img {
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: scale(1.02);
+            filter: contrast(1.1) brightness(0.9) saturate(1.2);
+        }
+
+        .terra-card:hover img {
+            transform: scale(1.05);
+            filter: contrast(1.1) brightness(1) saturate(1.3);
+        }
+
+        .terra-card .artwork-overlay {
+            background: linear-gradient(to top, rgba(10, 10, 18, 0.95) 0%, rgba(10, 10, 18, 0.6) 50%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .terra-card:hover .artwork-overlay {
+            opacity: 1;
+        }
+
+        .terra-card .artwork-details > * {
+            transform: translateY(15px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .terra-card:hover .artwork-details > * {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .terra-card:hover .artwork-details > *:nth-child(1) { transition-delay: 0.05s; }
+        .terra-card:hover .artwork-details > *:nth-child(2) { transition-delay: 0.1s; }
+        .terra-card:hover .artwork-details > *:nth-child(3) { transition-delay: 0.15s; }
+        .terra-card:hover .artwork-details > *:nth-child(4) { transition-delay: 0.2s; }
+
+        /* Bento Grid Specifics */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: 300px;
+            gap: theme('spacing.bento-gap');
+        }
+        
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+                grid-auto-rows: minmax(300px, auto);
+            }
+            .bento-item {
+                grid-column: span 1 !important;
+                grid-row: span 1 !important;
+            }
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: theme('colors.background'); 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.surface-variant'); 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.primary/50'); 
+        }
+
+        /* Entrance Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+
+        /* Neon Text Effect */
+        .neon-text {
+            text-shadow: 0 0 10px theme('colors.primary/50'), 0 0 20px theme('colors.primary/30');
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen pb-32">
+<!-- Top Navigation (Web) -->
+<nav class="hidden md:flex fixed top-0 left-0 right-0 z-50 items-center justify-between px-gutter py-unit max-w-7xl mx-auto rounded-full mt-gutter w-fit bg-surface-container/80 backdrop-blur-xl border border-surface-variant shadow-[0_0_15px_rgba(255,45,120,0.1)] hover:shadow-[0_0_20px_rgba(255,45,120,0.2)] hover:border-primary/50 transition-all duration-300 animate-fade-in-up" style="animation-delay: 0.1s;">
+<div class="flex items-center gap-3 px-4">
+<img alt="Glass-Canvas Logo" class="h-8 w-8 object-contain drop-shadow-[0_0_8px_rgba(255,45,120,0.8)]" src="https://lh3.googleusercontent.com/aida/AP1WRLto5QI64A_prMpmOaD9QH5KbQqKMXEPhtnXKB5rJeR84DqLEDg12yBMrt4KCTwvTvv0uOMNP24o4iFm0cNF4Oj3EunMw2TJh_InLmjO65bSvq-xsu1gtIrzZKvO552_fVoXRq3h0RaR1bM1afg6R-9wR-lSo8jlnluaSOy8_FJmV95pxecr5rXp2WjF7ejDgQM6WQE_0pnEthYwmNsF7cl5Go0UB83nOwsHAuD5b_awDWwpY9Nec2ueZfs"/>
+<div class="font-headline text-[22px] font-bold text-on-surface tracking-tight uppercase">Neon Tokyo</div>
+</div>
+<div class="flex gap-8 px-6 border-l border-surface-variant">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-body text-base neon-text" href="#">Gallery</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body text-base" href="#">Dashboard</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body text-base" href="#">Auth</a>
+</div>
+<div class="px-4 border-l border-surface-variant pl-6">
+<button class="bg-primary/20 text-primary font-label text-xs font-semibold tracking-wider px-6 py-2.5 rounded-full border border-primary/50 hover:bg-primary hover:text-on-primary hover:shadow-[0_0_15px_rgba(255,45,120,0.6)] transition-all duration-300 uppercase">Create</button>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="pt-32 px-margin-mobile md:px-margin-desktop max-w-[1600px] mx-auto relative z-10">
+<!-- Header -->
+<header class="mb-12 text-center md:text-left animate-fade-in-up" style="animation-delay: 0.2s;">
+<h1 class="font-display text-4xl leading-tight md:text-6xl md:leading-tight md:tracking-tight font-extrabold text-on-surface mb-4 uppercase neon-text">Electric Nightscape</h1>
+<p class="font-body text-lg leading-relaxed text-on-surface-variant max-w-2xl">Discover exclusive digital masterpieces. Rooted in neon lights and cybernetic cityscapes, each piece brings a sense of electric energy to your collection.</p>
+</header>
+<!-- Categories / Filters -->
+<div class="flex flex-wrap gap-4 mb-12 animate-fade-in-up" style="animation-delay: 0.3s;">
+<button class="bg-primary/20 border border-primary/50 rounded-full px-6 py-2 font-label text-xs font-bold tracking-wider text-primary shadow-[0_0_10px_rgba(255,45,120,0.3)] transition-colors hover:bg-primary/30 uppercase">All Artworks</button>
+<button class="bg-surface-container border border-surface-variant rounded-full px-6 py-2 font-label text-xs font-bold tracking-wider text-on-surface-variant hover:text-primary hover:border-primary/50 hover:shadow-[0_0_10px_rgba(255,45,120,0.2)] transition-all uppercase">Cyberpunk</button>
+<button class="bg-surface-container border border-surface-variant rounded-full px-6 py-2 font-label text-xs font-bold tracking-wider text-on-surface-variant hover:text-primary hover:border-primary/50 hover:shadow-[0_0_10px_rgba(255,45,120,0.2)] transition-all uppercase">Synthwave</button>
+<button class="bg-surface-container border border-surface-variant rounded-full px-6 py-2 font-label text-xs font-bold tracking-wider text-on-surface-variant hover:text-primary hover:border-primary/50 hover:shadow-[0_0_10px_rgba(255,45,120,0.2)] transition-all uppercase">Glitch Art</button>
+</div>
+<!-- Bento Grid -->
+<div class="bento-grid">
+<!-- Hero Piece (2x2) -->
+<article class="bento-item col-span-12 md:col-span-8 md:row-span-2 rounded-xl terra-card group cursor-pointer animate-fade-in-up" style="animation-delay: 0.4s;">
+<img class="w-full h-full object-cover rounded-xl z-0" data-alt="A striking abstract digital art piece featuring swirling, luminous textures in deep indigo, electric blue, and subtle gold accents. The composition is highly dynamic, resembling fluid glass or liquid metal suspended in a dark void. The lighting is dramatic, emphasizing the reflective qualities of the premium glassmorphism aesthetic. Set against the charcoal dark mode environment, it exudes a quiet luxury and sophisticated modernity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDI_DUJ2GVwxDnYQ0zfhnt_Gr3X7LzI1Sn3Oonn9jzUzQZGVSIoUo7LM9JJhiHvaGgsrTiVOtWexXK_vfUH5xGuvOsMN0VUeQie6mo5ykdSZrE0roObPXfM4iaBhn1LiOTOsNq8YdLD3IBc0e_QI9vBzcQoWkaNTH3-OXKy_Q8YCCjLPk1Y2aXvjUS0Sc_EvE8m9ZOEfFqT0eRs64KF6ykpqHG1Tsv2H6P47gg5_KhgEWNxGJxZiH3QjjXQHEJuMyuHPdh-huSoAQvf"/>
+<div class="absolute inset-0 z-10 artwork-overlay flex flex-col justify-end p-8 md:p-12 rounded-xl border border-transparent group-hover:border-primary/50 transition-colors">
+<div class="artwork-details">
+<span class="inline-block px-3 py-1 bg-surface-container-high/80 backdrop-blur-md rounded-full font-label text-xs font-bold tracking-wider text-primary mb-3 border border-primary/50 uppercase shadow-[0_0_10px_rgba(255,45,120,0.3)]">Cyberpunk</span>
+<h2 class="font-headline text-4xl leading-tight font-bold text-on-surface mb-2 neon-text">Neon Resonance</h2>
+<p class="font-body text-lg leading-relaxed text-on-surface-variant mb-6">By Kaelen X</p>
+<div class="flex items-center justify-between">
+<span class="font-headline text-3xl leading-snug font-bold text-primary">2.4 ETH</span>
+<button class="bg-primary text-on-primary font-label text-xs font-bold tracking-wider px-8 py-3 rounded-full hover:bg-primary/90 transition-all shadow-[0_0_15px_rgba(255,45,120,0.6)] hover:shadow-[0_0_25px_rgba(255,45,120,0.8)] uppercase">Mint Now</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Tall Side Piece (1x2) -->
+<article class="bento-item col-span-12 md:col-span-4 md:row-span-2 rounded-xl terra-card group cursor-pointer animate-fade-in-up" style="animation-delay: 0.5s;">
+<img class="w-full h-full object-cover rounded-xl z-0" data-alt="A minimalist and high-end photographic art piece displaying subtle gradients of warm amber and deep shadow. The composition plays with light refraction and optical depth, perfectly aligned with the premium glass gallery style. The dark background enhances the soft glow of the central abstract figure, offering a serene, sophisticated visual experience suitable for a modern art collector." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnM5ciL3GitAZRPMzY8a1KDQBCTG36Vr23JZHuDvmzKVKNJ1Fw1iIqoOViCzG2e45zlaDUinlwmUDGjtaWGDBOcgaabiuSSsMi-vs0S9HG0lbx6dED1IvBeqKwP0jla_f1rOcyufIuMtukuZJ-LgWherws9JFqjTS2jL57Gh4p0N_hDoLoLhsCxAgtkViB5HbKm9WM1xs9HmXhw6CzL0Z2r8cr30Md73RndrMnIvUkEEIZp_Jen-lj7-4OB3qUSlxczjupU5rEekm8"/>
+<div class="absolute inset-0 z-10 artwork-overlay flex flex-col justify-end p-8 rounded-xl border border-transparent group-hover:border-secondary/50 transition-colors">
+<div class="artwork-details">
+<span class="inline-block px-3 py-1 bg-surface-container-high/80 backdrop-blur-md rounded-full font-label text-xs font-bold tracking-wider text-secondary mb-3 border border-secondary/50 uppercase shadow-[0_0_10px_rgba(0,255,204,0.3)]">Synthwave</span>
+<h2 class="font-headline text-3xl leading-snug font-bold text-on-surface mb-2">Electric Void</h2>
+<p class="font-body text-base leading-relaxed text-on-surface-variant mb-6">By V. R. Nexus</p>
+<button class="w-full bg-surface-container-high/80 backdrop-blur-md text-on-surface font-label text-xs font-bold tracking-wider px-6 py-3 rounded-full border border-surface-variant hover:border-secondary hover:text-secondary hover:shadow-[0_0_15px_rgba(0,255,204,0.4)] transition-all uppercase">View Details</button>
+</div>
+</div>
+</article>
+<!-- Standard Piece (1x1) -->
+<article class="bento-item col-span-12 md:col-span-4 md:row-span-1 rounded-xl terra-card group cursor-pointer animate-fade-in-up" style="animation-delay: 0.6s;">
+<img class="w-full h-full object-cover rounded-xl z-0" data-alt="A sleek, futuristic architectural rendering showcasing impossible geometry intersecting in a dark, atmospheric environment. Thin lines of neon light trace the edges of massive concrete and glass structures. The piece fits seamlessly into a luxury dark-mode digital gallery, using stark contrast, deep shadows, and subtle refractions to convey immense scale and quiet tension." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrm2L--igOxhemEYDs2i8TxRg3gmbzxL9lcORvTLxw7XpiEswos8-nVbK1OvJVFJk6IH4b5AUhGMx4ocQPNePs9E4l_PKLAlb-NWh_dq2ZyT5ypMHpCWWDvQenOVJSugZOHmSOgyOjVXJWCLrgOn2-FlHkhOaiw2FyhSOKW4z5GK25RkSjbfhnN4IE99Y4v-KhjgDeLkQVNeEJhjTQx4bI1_lbNEKj3vD5zkH7fpVLASTByztyTsOwdvcqLGc4xYN71YsOVBPmBTcT"/>
+<div class="absolute inset-0 z-10 artwork-overlay flex flex-col justify-end p-6 rounded-xl border border-transparent group-hover:border-primary/50 transition-colors">
+<div class="artwork-details">
+<h2 class="font-headline text-2xl font-bold text-on-surface mb-1">Grid Architecture</h2>
+<p class="font-body text-base leading-relaxed text-on-surface-variant mb-4">By Studio Null</p>
+<button class="bg-primary/20 text-primary font-label text-xs font-bold tracking-wider px-6 py-2.5 rounded-full border border-primary/50 hover:bg-primary hover:text-on-primary hover:shadow-[0_0_15px_rgba(255,45,120,0.6)] transition-all uppercase">Mint</button>
+</div>
+</div>
+</article>
+<!-- Standard Piece (1x1) -->
+<article class="bento-item col-span-12 md:col-span-4 md:row-span-1 rounded-xl terra-card group cursor-pointer animate-fade-in-up" style="animation-delay: 0.7s;">
+<img class="w-full h-full object-cover rounded-xl z-0" data-alt="An ethereal surrealist landscape where soft, glowing geometric forms float above a dark, misty terrain. The colors are muted mauves, deep charcoal, and soft silver, creating a dreamy, high-end gallery aesthetic. The artwork emphasizes quiet luxury and introspection, beautifully framed by a digital glassmorphic interface that catches subtle reflections." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0vp_A9wVnhtfBpBbHcAhe4ZpdNCf_CQpxuOF9-hlsnDAGmWNTNl7Oq2oWvDlsSakfL1--EeepkJSHZVD6FNs_Kg5xJabB1_4OBLseQUWmPPYRnbDKKbNl_Gy8zs5GUuD5jLtFA-WnyEzC0NKtqDAwIyRDME1QQ19GGYHaJG4v6fHNmPp91srI7QlxVHyxvwpL88tcFIrhfo4GICdiZSI0hxZIr6PmqeYrlGcdp4TLGuGP0UzE1-9ng3aO-6ppT6rs4FKgg5s1sgB1"/>
+<div class="absolute inset-0 z-10 artwork-overlay flex flex-col justify-end p-6 rounded-xl border border-transparent group-hover:border-primary/50 transition-colors">
+<div class="artwork-details">
+<h2 class="font-headline text-2xl font-bold text-on-surface mb-1">Glitch Ascent</h2>
+<p class="font-body text-base leading-relaxed text-on-surface-variant mb-4">By J. D. Silva</p>
+<button class="bg-primary/20 text-primary font-label text-xs font-bold tracking-wider px-6 py-2.5 rounded-full border border-primary/50 hover:bg-primary hover:text-on-primary hover:shadow-[0_0_15px_rgba(255,45,120,0.6)] transition-all uppercase">Mint</button>
+</div>
+</div>
+</article>
+<!-- Standard Piece (1x1) -->
+<article class="bento-item col-span-12 md:col-span-4 md:row-span-1 rounded-xl terra-card group cursor-pointer animate-fade-in-up" style="animation-delay: 0.8s;">
+<img class="w-full h-full object-cover rounded-xl z-0" data-alt="A macro shot of a complex fluid dynamic simulation, frozen in time. The colors shift between deep onyx, iridescent purple, and sharp metallic silver. The intricate details of the liquid folds are highlighted by a soft, directional light, fitting perfectly within a premium, dark-themed art collection. It feels tactile, immersive, and highly sophisticated." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFzesQ4SzXjtkm6SmAbyto9qQB77NHvAu7k7j1r1hKGWgaGRLgsroP1dY3IW4PptpMU0W2sITMK8WUtLOST3jG8_gcZ2uSOQC2iEBLAyQWP22giLPs4cKqTKNjJL46rPgXx5U54Ziq8nqXTLxnldxPW-B-ymdo4siUunYkGfHQnVMlllUjtlmCGdzgziJMS3yCIAQEfZaB-u8jYGYmTRNO9bQSO6TODIwVnE6u7yA9VkbpJUv-MZS2revCvEnlqDCEBkT8i-xVvxtl"/>
+<div class="absolute inset-0 z-10 artwork-overlay flex flex-col justify-end p-6 rounded-xl border border-transparent group-hover:border-primary/50 transition-colors">
+<div class="artwork-details">
+<h2 class="font-headline text-2xl font-bold text-on-surface mb-1">Plasma Flow</h2>
+<p class="font-body text-base leading-relaxed text-on-surface-variant mb-4">By T. L. Nguyen</p>
+<button class="bg-primary/20 text-primary font-label text-xs font-bold tracking-wider px-6 py-2.5 rounded-full border border-primary/50 hover:bg-primary hover:text-on-primary hover:shadow-[0_0_15px_rgba(255,45,120,0.6)] transition-all uppercase">Mint</button>
+</div>
+</div>
+</article>
+</div>
+<!-- Pagination Marker -->
+<div class="mt-20 flex justify-center pb-20 animate-fade-in-up" style="animation-delay: 0.9s;">
+<div class="flex items-center gap-4 opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
+<div class="h-[1px] w-16 bg-gradient-to-r from-transparent to-primary"></div>
+<span class="material-symbols-outlined text-primary">expand_more</span>
+<span class="font-label text-xs font-bold text-primary tracking-widest uppercase">Scroll to dive deeper</span>
+<div class="h-[1px] w-16 bg-gradient-to-l from-transparent to-primary"></div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 flex justify-center items-center gap-gutter bg-surface-container-high/80 backdrop-blur-xl rounded-full mb-8 mx-auto w-max px-6 py-3 border border-surface-variant shadow-[0_0_20px_rgba(255,45,120,0.15)] animate-fade-in-up" style="animation-delay: 1s;">
+<a class="flex flex-col items-center justify-center bg-primary text-on-primary rounded-full p-3 scale-110 shadow-[0_0_15px_rgba(255,45,120,0.5)] transition-all duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="font-label text-[10px] font-bold mt-1 uppercase">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-3 hover:text-primary hover:scale-105 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">palette</span>
+<span class="font-label text-[10px] font-bold mt-1 uppercase">Studio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-3 hover:text-primary hover:scale-105 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-label text-[10px] font-bold mt-1 uppercase">Activity</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-3 hover:text-primary hover:scale-105 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">person_outline</span>
+<span class="font-label text-[10px] font-bold mt-1 uppercase">Profile</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,173 @@
+@reference "../../app/globals.css";
+
+/* ─── Dropzone Container ─── */
+.dropzoneContainer {
+  @apply
+    relative flex flex-col items-center justify-center
+    border-2 border-dashed border-white/12
+    rounded-[28px]
+    p-12 text-center cursor-pointer
+    backdrop-blur-2xl
+    transition-all duration-500
+    bg-gradient-to-br from-white/[0.05] to-white/[0.015]
+    shadow-[0_8px_32px_0_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.05)]
+    hover:scale-[1.008]
+    hover:border-accent/35
+    hover:from-white/[0.08] hover:to-white/[0.025]
+    hover:shadow-[0_12px_48px_rgba(0,0,0,0.35),0_0_25px_rgba(255,20,147,0.08),inset_0_1px_0_rgba(255,255,255,0.08)]
+    overflow-hidden;
+}
+
+/* Animated gradient border overlay */
+.dropzoneContainer::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 30px;
+  padding: 2px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    transparent 25%,
+    rgba(255, 45, 120, 0.15) 30%,
+    rgba(0, 255, 204, 0.1) 50%,
+    transparent 55%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  animation: rotateBorder 6s linear infinite;
+}
+
+.dropzoneContainer:hover::before {
+  opacity: 1;
+}
+
+@keyframes rotateBorder {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ─── Active Drag State ─── */
+.dropzoneActive {
+  @apply
+    scale-[1.015]
+    border-accent
+    bg-gradient-to-br from-white/[0.10] to-white/[0.04]
+    shadow-[0_0_40px_rgba(255,20,147,0.25),inset_0_0_30px_rgba(255,20,147,0.05)];
+}
+
+.dropzoneActive::before {
+  opacity: 1;
+}
+
+/* ─── Upload Icon Wrapper ─── */
+.iconWrapper {
+  @apply
+    relative
+    p-5 rounded-2xl
+    bg-gradient-to-br from-accent/[0.12] to-accent/[0.04]
+    border border-accent/20
+    text-accent mb-5
+    transition-all duration-500 ease-out
+    shadow-[0_4px_16px_rgba(255,20,147,0.1)];
+}
+
+.iconWrapper::after {
+  content: '';
+  @apply
+    absolute inset-0 rounded-2xl
+    opacity-0 transition-opacity duration-500;
+  background: radial-gradient(circle, rgba(255, 45, 120, 0.2) 0%, transparent 70%);
+  animation: iconPulse 3s ease-in-out infinite;
+}
+
+.dropzoneContainer:hover .iconWrapper::after {
+  @apply opacity-100;
+}
+
+.dropzoneContainer:hover .iconWrapper {
+  @apply scale-110 -translate-y-1 shadow-[0_8px_24px_rgba(255,20,147,0.2)];
+}
+
+@keyframes iconPulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+/* ─── Text ─── */
+.textTitle {
+  @apply text-sm font-extrabold tracking-wide text-text/90 mb-1.5 transition-colors duration-300;
+}
+
+.textSub {
+  @apply text-xs text-text/40 transition-colors duration-300;
+}
+
+.dropzoneContainer:hover .textTitle {
+  @apply text-text;
+}
+
+.dropzoneContainer:hover .textSub {
+  @apply text-text/55;
+}
+
+/* ─── Preview / Thumbnail ─── */
+.previewContainer {
+  @apply mt-6 w-full flex flex-col items-center gap-4;
+}
+
+.thumbnailWrapper {
+  @apply
+    overflow-hidden rounded-2xl
+    border border-white/10
+    shadow-[0_8px_24px_rgba(0,0,0,0.3)]
+    bg-white/5
+    max-h-[160px] max-w-[160px] aspect-square
+    flex items-center justify-center
+    transition-all duration-300 hover:scale-105
+    hover:shadow-[0_12px_32px_rgba(0,0,0,0.4),0_0_12px_rgba(255,20,147,0.1)];
+}
+
+/* ─── Progress Bar ─── */
+.progressContainer {
+  @apply
+    w-full
+    bg-white/[0.06]
+    border border-white/[0.06]
+    rounded-full h-2.5 overflow-hidden mt-4
+    shadow-[inset_0_1px_3px_rgba(0,0,0,0.3)]
+    backdrop-blur-sm;
+}
+
+.progressBar {
+  @apply
+    h-full
+    rounded-full
+    transition-all duration-300;
+  background: linear-gradient(90deg, rgba(255, 45, 120, 0.8) 0%, rgba(255, 45, 120, 1) 50%, rgba(0, 255, 204, 0.7) 100%);
+  box-shadow: 0 0 12px rgba(255, 45, 120, 0.5), 0 0 4px rgba(255, 45, 120, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shimmer effect on progress bar */
+.progressBar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.35), transparent);
+  animation: progressShimmer 1.5s infinite;
+}
+
+@keyframes progressShimmer {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}

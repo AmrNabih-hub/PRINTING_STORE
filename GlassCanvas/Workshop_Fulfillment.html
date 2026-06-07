@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Neon Courier - Workshop Fulfillment Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#001a1a",
+                        "outline": "#5a5068",
+                        "primary-fixed": "#ffe0ec",
+                        "inverse-primary": "#8c0038",
+                        "surface-container-low": "#111118",
+                        "error-container": "#3d0f0f",
+                        "on-surface": "#e8e0f0",
+                        "surface": "#0f0f1a",
+                        "secondary-container": "#004d3d",
+                        "on-error": "#1a0000",
+                        "on-error-container": "#ffa0a0",
+                        "inverse-surface": "#e8e0f0",
+                        "surface-variant": "#1e1e30",
+                        "surface-container-high": "#1e1e30",
+                        "on-tertiary-fixed": "#1a1000",
+                        "on-background": "#e8e0f0",
+                        "tertiary-container": "#665200",
+                        "on-tertiary-fixed-variant": "#665200",
+                        "on-tertiary": "#1a1000",
+                        "on-secondary-container": "#c0fff4",
+                        "on-tertiary-container": "#fff0c0",
+                        "surface-bright": "#1a1a2e",
+                        "outline-variant": "#302840",
+                        "on-secondary": "#001a1a",
+                        "surface-tint": "#ff2d78",
+                        "surface-container": "#141422",
+                        "surface-container-lowest": "#0a0a12",
+                        "on-primary-container": "#ffe0ec",
+                        "secondary-fixed-dim": "#00e6b8",
+                        "secondary-fixed": "#c0fff4",
+                        "on-surface-variant": "#a098b0",
+                        "secondary": "#00ffcc",
+                        "primary": "#ff2d78",
+                        "tertiary-fixed-dim": "#ffe04a",
+                        "tertiary-fixed": "#fff0c0",
+                        "surface-container-highest": "#28283e",
+                        "on-secondary-fixed-variant": "#004d4d",
+                        "inverse-on-surface": "#0a0a12",
+                        "background": "#0a0a12",
+                        "on-primary-fixed-variant": "#8c0038",
+                        "surface-dim": "#0f0f1a",
+                        "on-primary": "#1a0010",
+                        "error": "#ff4444",
+                        "tertiary": "#ffe04a",
+                        "primary-container": "#b3004e",
+                        "on-primary-fixed": "#3d0020",
+                        "primary-fixed-dim": "#ff80aa"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Sora", "sans-serif"],
+                        "display": ["Sora", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Space Grotesk", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #0a0a12; color: #e8e0f0; }
+        .neon-glow-primary { text-shadow: 0 0 8px #ff2d78; }
+        .neon-border-primary { border: 1px solid rgba(255, 45, 120, 0.5); box-shadow: inset 0 0 12px rgba(255, 45, 120, 0.1); }
+        .neon-glow-hover:hover { box-shadow: 0 0 16px rgba(255, 45, 120, 0.4); border-color: #ff2d78; }
+        .neon-text-secondary { text-shadow: 0 0 8px #00ffcc; }
+        .grid-bg {
+            background-image: linear-gradient(rgba(255, 45, 120, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 45, 120, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="font-body bg-background text-on-background antialiased overflow-x-hidden">
+<!-- TopNavBar (Web Only) -->
+<nav aria-label="Top Navigation" class="hidden md:flex justify-between items-center px-6 py-4 w-full bg-surface-container-highest dark:bg-surface-container-highest fixed top-0 w-full z-50 shadow-lg">
+<div class="text-xl font-headline font-bold text-primary dark:text-primary [text-shadow:0_0_8px_#ff2d78]">
+            Neon Courier
+        </div>
+<div class="flex gap-8">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-secondary hover:text-secondary transition-colors duration-200 active:opacity-80 font-label" href="#">Active</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-secondary hover:text-secondary transition-colors duration-200 active:opacity-80 font-label" href="#">History</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-secondary hover:text-secondary transition-colors duration-200 active:opacity-80 font-label" href="#">Maps</a>
+</div>
+<div class="flex gap-4">
+<button aria-label="Notifications" class="text-on-surface-variant hover:text-secondary transition-colors duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button aria-label="Account" class="text-on-surface-variant hover:text-secondary transition-colors duration-200">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</nav>
+<div class="flex h-screen pt-0 md:pt-16">
+<!-- SideNavBar (Web Only) -->
+<aside class="hidden md:flex flex-col h-full py-6 h-screen w-64 fixed left-0 top-16 bg-surface-container dark:bg-surface-container-low border-r border-outline-variant/30 shadow-[inset_0_0_12px_rgba(255,45,120,0.1)] z-40">
+<div class="px-6 mb-8 flex items-center gap-4">
+<img alt="User Profile" class="w-12 h-12 rounded-full border-2 border-primary" data-alt="A striking portrait of a cyberpunk operator in a dimly lit neon environment. The lighting is high-contrast, featuring intense pink and cyan glows reflecting off subtle cybernetic implants. The aesthetic is gritty, futuristic, and deeply atmospheric." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDP5mE2lItz4CKyafX9nFamvrRLWPMVQJ9M8gtqdP20oWwEYGBbSYTb7dKPnWEttIzWRpCdlwUpGT8Bn0LT0gqxJ0DtmKuFTWFpfdq44cKDvrbzbxoYTCpyvZzzij8qHGzI3mUrLnz24GDSgIsX9YqF9pm2Uf1Mn82lMmijQZegF32591FlBWUUG67zwWV-A0GwqYJf37wDitrrvy2-RbB8lPktdroEeDdNMACK0X3A8AOrS-eY7pI2rGU-y9_mKbjBFXY_k-rE5D6A"/>
+<div>
+<h2 class="font-headline font-bold text-on-surface">Neon Tokyo</h2>
+<p class="font-label text-sm text-on-surface-variant">Admin Hub</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-2 px-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:text-secondary hover:bg-surface-variant/50 transition-all duration-300 active:scale-95 transition-transform rounded-DEFAULT font-label" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+                    Dashboard
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary dark:text-primary font-bold border-l-4 border-primary bg-primary-container/10 [text-shadow:0_0_8px_#ff2d78] rounded-r-DEFAULT font-label" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+                    Logistics
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:text-secondary hover:bg-surface-variant/50 transition-all duration-300 active:scale-95 transition-transform rounded-DEFAULT font-label" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+                    Art Vault
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:text-secondary hover:bg-surface-variant/50 transition-all duration-300 active:scale-95 transition-transform rounded-DEFAULT font-label" href="#">
+<span class="material-symbols-outlined">package_2</span>
+                    Shipments
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:text-secondary hover:bg-surface-variant/50 transition-all duration-300 active:scale-95 transition-transform rounded-DEFAULT font-label" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+</nav>
+<div class="px-6 mt-auto">
+<button class="w-full py-3 px-4 bg-surface-variant neon-border-primary text-primary font-label font-bold rounded-DEFAULT neon-glow-hover transition-all duration-300 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+                    New Shipment
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto md:ml-64 p-6 md:p-10 relative z-10 grid-bg min-h-full pb-24 md:pb-10">
+<header class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+<div>
+<h1 class="font-headline text-3xl md:text-5xl font-bold text-on-surface mb-2 tracking-tight">Workshop Fulfillment</h1>
+<p class="font-body text-on-surface-variant max-w-2xl text-lg">Live production queue and logistics status.</p>
+</div>
+</header>
+<!-- Bento Grid Stats -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+<!-- Stat Card 1 -->
+<div class="bg-surface-container rounded-xl p-6 border border-outline-variant/30 relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-all duration-500"></div>
+<p class="font-label text-on-surface-variant text-sm mb-2 uppercase tracking-widest">Active Jobs</p>
+<div class="flex items-end gap-4">
+<span class="font-headline text-5xl font-bold text-primary neon-glow-primary">42</span>
+<span class="font-body text-secondary text-sm flex items-center mb-1"><span class="material-symbols-outlined text-sm mr-1">trending_up</span>+12%</span>
+</div>
+</div>
+<!-- Stat Card 2 -->
+<div class="bg-surface-container rounded-xl p-6 border border-outline-variant/30 relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-secondary/10 rounded-full blur-2xl group-hover:bg-secondary/20 transition-all duration-500"></div>
+<p class="font-label text-on-surface-variant text-sm mb-2 uppercase tracking-widest">Completed Today</p>
+<div class="flex items-end gap-4">
+<span class="font-headline text-5xl font-bold text-secondary neon-text-secondary">128</span>
+<span class="font-body text-on-surface-variant text-sm flex items-center mb-1">units</span>
+</div>
+</div>
+<!-- Stat Card 3 -->
+<div class="bg-surface-container rounded-xl p-6 border border-outline-variant/30 relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-tertiary/10 rounded-full blur-2xl group-hover:bg-tertiary/20 transition-all duration-500"></div>
+<p class="font-label text-on-surface-variant text-sm mb-2 uppercase tracking-widest">Avg Cycle Time</p>
+<div class="flex items-end gap-4">
+<span class="font-headline text-5xl font-bold text-tertiary">3.4</span>
+<span class="font-body text-on-surface-variant text-sm flex items-center mb-1">hours</span>
+</div>
+</div>
+</div>
+<!-- Job List -->
+<section>
+<div class="flex justify-between items-center mb-6 border-b border-outline-variant/30 pb-4">
+<h2 class="font-headline text-2xl font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">view_list</span>
+                        Production Queue
+                    </h2>
+<div class="flex gap-2">
+<button class="bg-surface-variant text-on-surface px-4 py-2 rounded-DEFAULT font-label text-sm hover:bg-surface-container-highest transition-colors border border-outline-variant/50">Filter</button>
+</div>
+</div>
+<div class="space-y-4">
+<!-- Job Item 1 -->
+<div class="bg-surface-container rounded-xl p-5 border border-outline-variant/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:bg-surface-container-high transition-colors duration-300">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-lg overflow-hidden border border-outline-variant/50 shrink-0">
+<img alt="Abstract Art Print" class="w-full h-full object-cover" data-alt="A highly detailed close-up of an abstract digital art piece featuring flowing lines of neon pink and bright cyan against a deep, dark background. The artwork has a glossy, metallic finish, typical of high-end acrylic prints. The scene is illuminated by dramatic, moody studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRNAX3GX_Cl9jOmeP99i6_wiPx7Brs3gAmQRhgFBZaZhAq2huSKm9RZiUCKfH1GCmzymZh3bcqNJ2tnp-Gb3Z-GaBD5bQn8Q_k9W69ATC2GB2sFgDl-q9tda4ppVdSPWpS9gP5dlONPG0HAHzAiY5HVGIhMJ4OTyKGbXnSf_JHU4jYpYvWaCZ5Sb_1216EuXPiLI1O4K2mM_94cMBKI4qVeR9XHRYsICZ89uj6RGCU4c4RVjoUUD0l5a4Dm6btHrJTCOUf18e0Innc"/>
+</div>
+<div>
+<h3 class="font-headline font-bold text-on-surface text-lg">Cyber Synth #04</h3>
+<div class="flex items-center gap-3 mt-1">
+<span class="font-label text-xs text-on-surface-variant bg-surface px-2 py-1 rounded">Acrylic</span>
+<span class="font-label text-xs text-on-surface-variant">ORD-9921</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-6 w-full md:w-auto justify-between md:justify-end">
+<div class="flex flex-col items-start md:items-end">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-label font-bold bg-primary/10 text-primary border border-primary/30">
+<span class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_5px_#ff2d78] animate-pulse"></span>
+                                    Printing
+                                </span>
+<span class="text-xs font-label text-on-surface-variant mt-1">Est. 15m</span>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface border border-outline-variant/50 flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary transition-colors duration-300">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Job Item 2 -->
+<div class="bg-surface-container rounded-xl p-5 border border-outline-variant/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:bg-surface-container-high transition-colors duration-300">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-lg overflow-hidden border border-outline-variant/50 shrink-0">
+<img alt="Geometric Art" class="w-full h-full object-cover" data-alt="A striking digital artwork showcasing harsh geometric shapes interlocking in a brutalist composition. The primary colors are deep blacks and stark whites, with subtle accents of warm neon yellow. The texture appears to be brushed metal, reflecting a sophisticated, industrial aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuASAcm47BaAaz5z6uUMIkXEMyKjUCBucDhgC7feePyWXyh6RqCTWAACX-ZGV_iRp-6hcV_G6iRrRLrpSIhtf25WruVTXnizk41L9PtGp4RGx4xN2xz_8ztOLPx7m6oH87MmHHRxI4G1FxcBH0akO7XRr6Gzztlc76xYKEXxVvA8_OKY2UdJpyAnqseLBPL0Oj6kqq8XXx90OpSsxQghrgEIJLMXtIzdbdqiSVnc-pTalNM4_YNA7xJrzBt-KNEiaAI5_ZjaETPG65wv"/>
+</div>
+<div>
+<h3 class="font-headline font-bold text-on-surface text-lg">Neon Grid Alpha</h3>
+<div class="flex items-center gap-3 mt-1">
+<span class="font-label text-xs text-on-surface-variant bg-surface px-2 py-1 rounded">Metal</span>
+<span class="font-label text-xs text-on-surface-variant">ORD-9920</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-6 w-full md:w-auto justify-between md:justify-end">
+<div class="flex flex-col items-start md:items-end">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-label font-bold bg-tertiary/10 text-tertiary border border-tertiary/30">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                                    Drying
+                                </span>
+<span class="text-xs font-label text-on-surface-variant mt-1">Est. 45m</span>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface border border-outline-variant/50 flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary transition-colors duration-300">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Job Item 3 -->
+<div class="bg-surface-container rounded-xl p-5 border border-outline-variant/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:bg-surface-container-high transition-colors duration-300 opacity-75">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-lg overflow-hidden border border-outline-variant/50 shrink-0 grayscale hover:grayscale-0 transition-all duration-500">
+<img alt="Canvas Art" class="w-full h-full object-cover" data-alt="A serene yet complex digital painting printed on textured canvas. The image features sweeping, organic curves in muted tones of deep teal and dark purple, creating a moody, atmospheric vibe. The texture of the canvas is clearly visible under soft, diffused lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhjrMvM6lZxv2k5zlPbib-eun_c-QYsYlP-eC3mWcY0HrtEJu7hKogeYKqqttAMGPFIkJ68tZ85a-BNMZW9m-_MIwBtV2i40YkJ9roNFDtEddoUMqUfHuT7MUZkb_m6S0pBvBGRFjKPcfqUsAh13OHfHmroFoCIMcslfB5gnPK4eA6AmJUnuEfjxWZQpiHxhyS-nxFtmLFA0T8Rbxvm6I3lD4138ZMsFLezcnMcJl4VK9VReCMOzHh77nzv4CJXy4T6k0Rx9RvE_Qi"/>
+</div>
+<div>
+<h3 class="font-headline font-bold text-on-surface text-lg">Void Walker</h3>
+<div class="flex items-center gap-3 mt-1">
+<span class="font-label text-xs text-on-surface-variant bg-surface px-2 py-1 rounded">Canvas</span>
+<span class="font-label text-xs text-on-surface-variant">ORD-9918</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-6 w-full md:w-auto justify-between md:justify-end">
+<div class="flex flex-col items-start md:items-end">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-label font-bold bg-secondary/10 text-secondary border border-secondary/30">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                    Ready
+                                </span>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface border border-outline-variant/50 flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary transition-colors duration-300">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav aria-label="Bottom Navigation" class="md:hidden fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant/30 shadow-[0_-4px_20px_rgba(0,255,204,0.1)] flex justify-around items-center h-16 px-4">
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary [text-shadow:0_0_8px_#ff2d78] active:scale-110 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">warehouse</span>
+<span class="font-label text-[10px] uppercase tracking-wider">Hub</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-secondary active:scale-110 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1">route</span>
+<span class="font-label text-[10px] uppercase tracking-wider">Deliveries</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-secondary active:scale-110 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1">emergency_home</span>
+<span class="font-label text-[10px] uppercase tracking-wider">Alerts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-secondary active:scale-110 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1">person_filled</span>
+<span class="font-label text-[10px] uppercase tracking-wider">Profile</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Neon Courier - Dispatch Hub</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Sora:wght@400;600;700;800&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed": "#001a1a",
+                      "outline": "#5a5068",
+                      "primary-fixed": "#ffe0ec",
+                      "inverse-primary": "#8c0038",
+                      "surface-container-low": "#111118",
+                      "error-container": "#3d0f0f",
+                      "on-surface": "#e8e0f0",
+                      "surface": "#0f0f1a",
+                      "secondary-container": "#004d3d",
+                      "on-error": "#1a0000",
+                      "on-error-container": "#ffa0a0",
+                      "inverse-surface": "#e8e0f0",
+                      "surface-variant": "#1e1e30",
+                      "surface-container-high": "#1e1e30",
+                      "on-tertiary-fixed": "#1a1000",
+                      "on-background": "#e8e0f0",
+                      "tertiary-container": "#665200",
+                      "on-tertiary-fixed-variant": "#665200",
+                      "on-tertiary": "#1a1000",
+                      "on-secondary-container": "#c0fff4",
+                      "on-tertiary-container": "#fff0c0",
+                      "surface-bright": "#1a1a2e",
+                      "outline-variant": "#302840",
+                      "on-secondary": "#001a1a",
+                      "surface-tint": "#ff2d78",
+                      "surface-container": "#141422",
+                      "surface-container-lowest": "#0a0a12",
+                      "on-primary-container": "#ffe0ec",
+                      "secondary-fixed-dim": "#00e6b8",
+                      "secondary-fixed": "#c0fff4",
+                      "on-surface-variant": "#a098b0",
+                      "secondary": "#00ffcc",
+                      "primary": "#ff2d78",
+                      "tertiary-fixed-dim": "#ffe04a",
+                      "tertiary-fixed": "#fff0c0",
+                      "surface-container-highest": "#28283e",
+                      "on-secondary-fixed-variant": "#004d4d",
+                      "inverse-on-surface": "#0a0a12",
+                      "background": "#0a0a12",
+                      "on-primary-fixed-variant": "#8c0038",
+                      "surface-dim": "#0f0f1a",
+                      "on-primary": "#1a0010",
+                      "error": "#ff4444",
+                      "tertiary": "#ffe04a",
+                      "primary-container": "#b3004e",
+                      "on-primary-fixed": "#3d0020",
+                      "primary-fixed-dim": "#ff80aa"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {},
+              "fontFamily": {
+                      "headline": [
+                              "Sora"
+                      ],
+                      "display": [
+                              "Sora"
+                      ],
+                      "body": [
+                              "Inter"
+                      ],
+                      "label": [
+                              "Space Grotesk"
+                      ]
+              },
+              "fontSize": {}
+      },
+          },
+        }
+      </script>
+<style>
+        .neon-text-primary { text-shadow: 0 0 8px currentColor; }
+        .neon-border-primary { border: 1px solid rgba(255, 45, 120, 0.5); box-shadow: inset 0 0 12px rgba(255, 45, 120, 0.1); }
+        .neon-border-secondary { border: 1px solid rgba(0, 255, 204, 0.5); box-shadow: inset 0 0 12px rgba(0, 255, 204, 0.1); }
+        .neon-glow-primary:hover { box-shadow: 0 0 16px rgba(255, 45, 120, 0.4); }
+        .neon-glow-secondary:hover { box-shadow: 0 0 16px rgba(0, 255, 204, 0.4); }
+        
+        .scan-line {
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0,0,0,0.2) 50%,
+                rgba(0,0,0,0.2)
+            );
+            background-size: 100% 4px;
+        }
+
+        /* Hide scrollbar for clean aesthetic */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 45, 120, 0.3); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 45, 120, 0.6); }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body h-screen overflow-hidden flex scan-line">
+<!-- TopNavBar (Web) -->
+<nav class="hidden md:flex justify-between items-center px-6 py-4 w-full bg-surface-container-highest dark:bg-surface-container-highest fixed top-0 w-full z-50 border-b border-outline-variant/30 shadow-lg">
+<div class="flex items-center gap-8">
+<span class="text-xl font-headline font-bold text-primary dark:text-primary neon-text-primary">Neon Courier</span>
+<div class="flex gap-6">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label" href="#">Active</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-secondary transition-colors duration-200 font-label" href="#">History</a>
+<a class="text-primary dark:text-primary border-b-2 border-primary pb-1 neon-text-primary font-label" href="#">Maps</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-secondary cursor-pointer" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-secondary cursor-pointer" data-icon="account_circle">account_circle</span>
+</div>
+</nav>
+<!-- SideNavBar (Web) -->
+<aside class="hidden md:flex flex-col h-full py-6 bg-surface-container dark:bg-surface-container-low h-screen w-64 fixed left-0 top-0 border-r border-outline-variant/30 shadow-[inset_0_0_12px_rgba(255,45,120,0.1)] z-40 mt-[72px]">
+<div class="px-6 mb-8 mt-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-variant border border-outline overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover opacity-80 mix-blend-luminosity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5y4fUy1ordPkyWvPThHd2WOWq2iRLr5FIzG1Ips06JHMwDMiTd_nzWDwZ0JSmBAYEqCdO57_ub2zQaxk4xrz10nnEj5Zws4GMlr2ZIazQuNBljyr_F130dlFbq1_KRFkPP7ELC13fe6K_EL_fC-h0A80e8Wr89Rw7BgyIrS2p6CDkeCBAnW-7EJLD0VdrNkKLUjLjTmIKI3B7XZj0DxTCgo0QqwYk2O3Xm-_Agg0lSU-B1sl0Jk1u1nL8uMRo5C_9trFC6YYUDRpA"/>
+</div>
+<div>
+<h2 class="font-headline font-bold text-sm text-on-surface">Neon Tokyo</h2>
+<p class="font-label text-xs text-secondary">Admin Hub</p>
+</div>
+</div>
+</div>
+<div class="flex-1 space-y-2 mt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-primary dark:text-primary font-bold border-l-4 border-primary bg-primary-container/10 neon-text-primary active:scale-95 transition-transform font-label" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:text-secondary hover:bg-surface-variant/50 transition-all duration-300 active:scale-95 transition-transform font-label" href="#">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+                Logistics
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:text-secondary hover:bg-surface-variant/50 transition-all duration-300 active:scale-95 transition-transform font-label" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+                Art Vault
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:text-secondary hover:bg-surface-variant/50 transition-all duration-300 active:scale-95 transition-transform font-label" href="#">
+<span class="material-symbols-outlined" data-icon="package_2">package_2</span>
+                Shipments
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:text-secondary hover:bg-surface-variant/50 transition-all duration-300 active:scale-95 transition-transform font-label" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+</div>
+<div class="px-4 mt-auto mb-20">
+<button class="w-full py-3 bg-surface-variant text-primary font-headline font-bold rounded-lg neon-border-primary neon-glow-primary transition-all duration-300 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                New Shipment
+            </button>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 md:ml-64 mt-[72px] h-[calc(100vh-72px)] p-6 relative overflow-hidden flex flex-col lg:flex-row gap-6">
+<!-- Map Area -->
+<section class="flex-1 relative rounded-xl border border-outline-variant/50 overflow-hidden bg-surface-container shadow-[0_0_20px_rgba(0,255,204,0.05)]">
+<!-- Simulated Map Background -->
+<div class="absolute inset-0 bg-[#05050a] opacity-80" style="background-image: radial-gradient(circle at 50% 50%, rgba(0, 255, 204, 0.05) 0%, transparent 60%), linear-gradient(rgba(0, 255, 204, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 204, 0.05) 1px, transparent 1px); background-size: 100% 100%, 40px 40px, 40px 40px;">
+</div>
+<!-- Map Overlay Controls -->
+<div class="absolute top-4 left-4 z-10 flex gap-2">
+<button class="w-10 h-10 bg-surface-container-high rounded border border-outline-variant flex items-center justify-center hover:border-secondary hover:text-secondary transition-colors">
+<span class="material-symbols-outlined text-xl">layers</span>
+</button>
+<button class="w-10 h-10 bg-surface-container-high rounded border border-outline-variant flex items-center justify-center hover:border-secondary hover:text-secondary transition-colors">
+<span class="material-symbols-outlined text-xl">filter_alt</span>
+</button>
+</div>
+<!-- Fake Map Points & Routes -->
+<svg class="absolute inset-0 w-full h-full z-0 pointer-events-none" preserveaspectratio="xMidYMid slice" viewbox="0 0 800 600">
+<!-- Route Line -->
+<path class="animate-[dash_20s_linear_infinite]" d="M 200 400 Q 300 300 400 350 T 600 200" fill="none" stroke="#ff2d78" stroke-dasharray="10 5" stroke-width="3" style="filter: drop-shadow(0 0 6px rgba(255,45,120,0.8));"></path>
+<style>
+                    @keyframes dash {
+                        to {
+                            stroke-dashoffset: -1000;
+                        }
+                    }
+                    @keyframes pulse-ring {
+                        0% { transform: scale(0.8); opacity: 0.5; }
+                        100% { transform: scale(2.5); opacity: 0; }
+                    }
+                </style>
+<!-- Vehicle Node 1 -->
+<g transform="translate(400, 350)">
+<circle class="animate-[pulse-ring_2s_cubic-bezier(0.215,0.61,0.355,1)_infinite]" fill="rgba(255,45,120,0.2)" r="15"></circle>
+<circle fill="#ff2d78" r="6"></circle>
+<text fill="#e8e0f0" font-family="Space Grotesk" font-size="12" font-weight="600" x="15" y="4">V-Alpha</text>
+</g>
+<!-- Destination Node -->
+<g transform="translate(600, 200)">
+<circle fill="none" r="8" stroke="#00ffcc" stroke-width="2" style="filter: drop-shadow(0 0 4px #00ffcc);"></circle>
+<circle fill="#00ffcc" r="3"></circle>
+<text fill="#00ffcc" font-family="Space Grotesk" font-size="10" x="15" y="4">DROP: Neo-Shinjuku</text>
+</g>
+</svg>
+<!-- Bottom Stats Overlay -->
+<div class="absolute bottom-6 left-6 right-6 flex justify-between gap-4">
+<div class="bg-surface-container-high/90 backdrop-blur-md rounded-lg p-4 border border-outline-variant flex-1 max-w-sm shadow-lg">
+<h3 class="font-label text-xs text-on-surface-variant mb-1 tracking-wider uppercase">Active Fleet Status</h3>
+<div class="flex items-end justify-between">
+<div>
+<span class="font-headline text-2xl font-bold neon-text-primary">42</span>
+<span class="font-label text-sm text-secondary ml-2">+3 online</span>
+</div>
+<div class="h-8 w-16 bg-surface-variant rounded flex items-end overflow-hidden p-1 gap-1">
+<div class="w-1/4 bg-primary h-[40%] rounded-sm"></div>
+<div class="w-1/4 bg-primary h-[70%] rounded-sm"></div>
+<div class="w-1/4 bg-primary h-[50%] rounded-sm"></div>
+<div class="w-1/4 bg-primary h-[90%] rounded-sm"></div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-high/90 backdrop-blur-md rounded-lg p-4 border border-outline-variant flex-1 max-w-sm shadow-lg hidden md:block">
+<h3 class="font-label text-xs text-on-surface-variant mb-1 tracking-wider uppercase">Network Load</h3>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full border-4 border-secondary/30 border-t-secondary flex items-center justify-center animate-spin" style="animation-duration: 3s;">
+<div class="w-8 h-8 rounded-full border-4 border-primary/30 border-b-primary animate-spin" style="animation-duration: 2s; animation-direction: reverse;"></div>
+</div>
+<div>
+<p class="font-headline font-bold text-lg text-secondary">Optimal</p>
+<p class="font-label text-xs text-on-surface-variant">Latency: 12ms</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Sidebar (Dispatch Center) -->
+<section class="w-full lg:w-96 flex flex-col gap-4 overflow-y-auto pr-2 pb-20 md:pb-0">
+<!-- Quick Stats -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low rounded-lg p-4 neon-border-secondary">
+<p class="font-label text-xs text-on-surface-variant mb-1">Avg Speed</p>
+<p class="font-headline font-bold text-xl text-secondary">142 <span class="text-xs font-normal">km/h</span></p>
+</div>
+<div class="bg-surface-container-low rounded-lg p-4 border border-outline-variant/50">
+<p class="font-label text-xs text-on-surface-variant mb-1">Critical Power</p>
+<p class="font-headline font-bold text-xl text-tertiary">2 <span class="text-xs font-normal">units</span></p>
+</div>
+</div>
+<!-- Active Assignments List -->
+<div class="bg-surface-container rounded-xl border border-outline-variant/30 flex-1 flex flex-col overflow-hidden">
+<div class="p-4 border-b border-outline-variant/30 bg-surface-container-high flex justify-between items-center">
+<h2 class="font-headline font-bold text-sm tracking-wide">Active Dispatch</h2>
+<span class="material-symbols-outlined text-secondary text-sm">filter_list</span>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-4">
+<!-- Assignment Card 1 (Focus) -->
+<div class="bg-surface-variant/40 rounded-lg p-4 neon-border-primary relative overflow-hidden group cursor-pointer transition-colors hover:bg-surface-variant">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex justify-between items-start mb-2">
+<div>
+<span class="font-label text-xs bg-primary/20 text-primary px-2 py-0.5 rounded border border-primary/30">Priority-1</span>
+<h3 class="font-headline font-bold text-sm mt-1">Courier V-Alpha</h3>
+</div>
+<span class="font-label text-xs text-secondary">00:12:45</span>
+</div>
+<p class="font-body text-xs text-on-surface-variant mb-3">Transporting high-value synthetic components to Sector 7. Route clear.</p>
+<div class="flex gap-2">
+<button class="flex-1 bg-surface-container text-xs font-label py-1.5 rounded border border-outline hover:border-secondary hover:text-secondary transition-colors">Ping</button>
+<button class="flex-1 bg-primary/10 text-primary text-xs font-label py-1.5 rounded border border-primary/50 hover:bg-primary/20 transition-colors">Reroute</button>
+</div>
+</div>
+<!-- Assignment Card 2 -->
+<div class="bg-surface-container-low rounded-lg p-4 border border-outline-variant/50 hover:border-outline transition-colors cursor-pointer relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary/50"></div>
+<div class="flex justify-between items-start mb-2">
+<div>
+<span class="font-label text-xs bg-secondary/10 text-secondary px-2 py-0.5 rounded border border-secondary/30">Routine</span>
+<h3 class="font-headline font-bold text-sm mt-1 text-on-surface">Courier N-Beta</h3>
+</div>
+<span class="font-label text-xs text-on-surface-variant">00:45:10</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-1.5 mb-2 overflow-hidden">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 75%"></div>
+</div>
+<p class="font-label text-[10px] text-on-surface-variant text-right">75% Complete</p>
+</div>
+<!-- Assignment Card 3 (Warning) -->
+<div class="bg-surface-container-low rounded-lg p-4 border border-tertiary/30 hover:border-tertiary/60 transition-colors cursor-pointer relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-tertiary"></div>
+<div class="flex justify-between items-start mb-2">
+<div>
+<span class="font-label text-xs bg-tertiary/10 text-tertiary px-2 py-0.5 rounded border border-tertiary/30 flex items-center gap-1">
+<span class="material-symbols-outlined text-[10px]">warning</span> Low Battery
+                                </span>
+<h3 class="font-headline font-bold text-sm mt-1 text-on-surface">Courier Z-Gamma</h3>
+</div>
+<span class="font-label text-xs text-on-surface-variant">01:10:05</span>
+</div>
+<p class="font-body text-xs text-on-surface-variant mb-2">Approaching Sector 4 charge station.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden flex justify-around items-center h-16 px-4 bg-surface-container-lowest dark:bg-surface-container-lowest fixed bottom-0 w-full z-50 rounded-t-xl border-t border-outline-variant/30 shadow-[0_-4px_20px_rgba(0,255,204,0.1)]">
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary neon-text-primary active:scale-110 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="warehouse" style="font-variation-settings: 'FILL' 1;">warehouse</span>
+<span class="font-label text-[10px] uppercase tracking-wider mt-1">Hub</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-secondary active:scale-110 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="route">route</span>
+<span class="font-label text-[10px] uppercase tracking-wider mt-1">Deliveries</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-secondary active:scale-110 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="emergency_home">emergency_home</span>
+<span class="font-label text-[10px] uppercase tracking-wider mt-1">Alerts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-secondary active:scale-110 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person_filled">person</span>
+<span class="font-label text-[10px] uppercase tracking-wider mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

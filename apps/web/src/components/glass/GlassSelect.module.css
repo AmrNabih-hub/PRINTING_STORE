@@ -1,0 +1,169 @@
+@reference "../../app/globals.css";
+
+/* ─── GlassSelect Container ─── */
+.selectWrapper {
+  @apply relative w-full;
+  transition: z-index 0.3s step-start;
+}
+
+.selectWrapperOpen {
+  z-index: 40;
+}
+
+/* ─── Trigger Button ─── */
+.trigger {
+  @apply
+    relative w-full flex items-center justify-between gap-2
+    px-4 py-2.5
+    rounded-xl
+    border border-white/15
+    text-text text-xs sm:text-sm font-semibold
+    cursor-pointer
+    outline-none
+    transition-all duration-300
+    hover:border-accent/40
+    hover:shadow-[0_4px_20px_rgba(255,20,147,0.08)]
+    focus:border-accent/50 focus:ring-1 focus:ring-accent/25 focus:shadow-[0_0_15px_rgba(255,20,147,0.12)];
+  background: var(--surface-container, #141422);
+}
+
+.triggerOpen {
+  @apply
+    border-accent/50
+    shadow-[0_0_20px_rgba(255,20,147,0.12)]
+    ring-1 ring-accent/25;
+  background: var(--surface-container-high, #1e1e30);
+}
+
+.triggerDisabled {
+  @apply opacity-50 pointer-events-none cursor-not-allowed;
+}
+
+.triggerLabel {
+  @apply truncate;
+}
+
+/* ─── Chevron Icon ─── */
+.chevron {
+  @apply w-4 h-4 text-text/40 transition-transform duration-300 shrink-0;
+}
+
+.chevronOpen {
+  @apply rotate-180 text-accent;
+}
+
+/* ─── Dropdown Panel ─── */
+.dropdownPanel {
+  @apply
+    absolute z-50 mt-2
+    rounded-xl
+    border border-white/15
+    shadow-[0_16px_48px_rgba(0,0,0,0.6),0_0_20px_rgba(255,20,147,0.06)]
+    max-h-[240px] overflow-y-auto;
+  background: rgba(242, 242, 247, 0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  min-width: 180px;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+}
+
+:global(.dark) .dropdownPanel {
+  background: rgba(20, 20, 34, 0.9);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dropdownPanelLtr {
+  left: 0;
+}
+
+.dropdownPanelRtl {
+  right: 0;
+}
+
+/* Custom Scrollbar styling */
+.dropdownPanel::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.dropdownPanel::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dropdownPanel::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 9999px;
+}
+
+:global(.dark) .dropdownPanel::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.dropdownPanel::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 45, 120, 0.4);
+}
+
+/* ─── Option Item ─── */
+.option {
+  @apply
+    relative
+    w-full flex items-center gap-3
+    px-4 py-3
+    text-xs sm:text-sm font-medium text-text/90
+    cursor-pointer
+    transition-all duration-200
+    hover:text-text;
+  background: transparent;
+}
+
+.option:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.option::before {
+  content: '';
+  @apply
+    absolute inset-y-0 left-0 w-0.5
+    bg-transparent rounded-r
+    transition-all duration-300;
+}
+
+.optionSelected {
+  @apply text-accent font-bold;
+  background: rgba(255, 45, 120, 0.12);
+}
+
+.optionSelected:hover {
+  background: rgba(255, 45, 120, 0.18);
+}
+
+.optionSelected::before {
+  @apply bg-accent shadow-[0_0_8px_rgba(255,20,147,0.5)];
+}
+
+.option:not(:last-child) {
+  @apply border-b border-white/[0.04];
+}
+
+/* ─── Selected Indicator Dot ─── */
+.optionDot {
+  @apply
+    w-1.5 h-1.5 rounded-full
+    bg-transparent
+    transition-all duration-300
+    shrink-0;
+}
+
+.optionSelected .optionDot {
+  @apply bg-accent shadow-[0_0_6px_rgba(255,20,147,0.6)];
+}
+
+/* ─── Glow Overlay (mouse-tracked) ─── */
+.glowOverlay {
+  @apply pointer-events-none absolute -inset-px rounded-xl opacity-0 transition-opacity duration-300;
+}
+
+.selectWrapper:hover .glowOverlay {
+  @apply opacity-100;
+}

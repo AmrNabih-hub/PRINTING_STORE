@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+
+<html class="" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Access Control | Creator Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Sora:wght@400;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "tertiary-fixed": "#fff0c0",
+                "surface-container-high": "#1e1e30",
+                "on-tertiary-fixed-variant": "#665200",
+                "on-background": "#e8e0f0",
+                "on-tertiary": "#1a1000",
+                "on-primary": "#1a0010",
+                "secondary-container": "#004d3d",
+                "surface-container": "#141422",
+                "surface-container-low": "#111118",
+                "secondary-fixed": "#c0fff4",
+                "inverse-on-surface": "#0a0a12",
+                "primary-container": "#b3004e",
+                "on-primary-fixed": "#3d0020",
+                "on-primary-container": "#ffe0ec",
+                "surface-tint": "#ff2d78",
+                "on-tertiary-fixed": "#1a1000",
+                "inverse-primary": "#8c0038",
+                "error-container": "#3d0f0f",
+                "tertiary-container": "#665200",
+                "tertiary": "#ffe04a",
+                "secondary-fixed-dim": "#00e6b8",
+                "tertiary-fixed-dim": "#ffe04a",
+                "outline": "#5a5068",
+                "outline-variant": "#302840",
+                "on-secondary-container": "#c0fff4",
+                "surface-container-lowest": "#0a0a12",
+                "secondary": "#00ffcc",
+                "on-primary-fixed-variant": "#8c0038",
+                "error": "#ff4444",
+                "on-tertiary-container": "#fff0c0",
+                "on-error": "#1a0000",
+                "on-secondary": "#001a1a",
+                "primary": "#ff2d78",
+                "surface-bright": "#1a1a2e",
+                "on-surface": "#e8e0f0",
+                "surface-container-highest": "#28283e",
+                "on-secondary-fixed": "#001a1a",
+                "background": "#0a0a12",
+                "primary-fixed": "#ffe0ec",
+                "primary-fixed-dim": "#ff80aa",
+                "on-error-container": "#ffa0a0",
+                "surface-variant": "#1e1e30",
+                "inverse-surface": "#e8e0f0",
+                "on-secondary-fixed-variant": "#004d4d",
+                "surface": "#0f0f1a",
+                "on-surface-variant": "#a098b0",
+                "surface-dim": "#0f0f1a"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+            "margin-mobile": "16px",
+            "bento-gap": "20px",
+            "gutter": "24px",
+            "margin-desktop": "64px",
+            "unit": "4px"
+        },
+        "fontFamily": {
+                "headline": [
+                        "Sora"
+                ],
+                "display": [
+                        "Sora"
+                ],
+                "body": [
+                        "Inter"
+                ],
+                "label": [
+                        "Space Grotesk"
+                ]
+        },
+        "fontSize": {
+            "display-lg": ["64px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
+            "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+            "headline-lg": ["32px", { lineHeight: "1.3", fontWeight: "600" }],
+            "display-lg-mobile": ["40px", { lineHeight: "1.2", fontWeight: "700" }],
+            "label-sm": ["12px", { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" }],
+            "headline-xl": ["40px", { lineHeight: "1.2", fontWeight: "600" }],
+            "body-md": ["16px", { lineHeight: "1.5", fontWeight: "400" }]
+        }
+},
+    },
+  }
+</script>
+<style>
+        .glass-panel {
+            background-color: rgba(15, 15, 26, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(90, 80, 104, 0.2);
+        }
+        .glass-pill {
+            background-color: rgba(15, 15, 26, 0.8);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(90, 80, 104, 0.3);
+        }
+        .interactive-hover:hover {
+            background-image: radial-gradient(circle at center, rgba(255, 45, 120, 0.05) 0%, transparent 70%);
+        }
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(90, 80, 104, 0.3);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(90, 80, 104, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col md:flex-row overflow-hidden font-body">
+<!-- TopNavBar (Mobile Only) -->
+<nav class="md:hidden flex justify-between items-center px-gutter py-4 sticky top-0 z-50 w-full bg-surface/80 backdrop-blur-xl border-b border-outline/10">
+<div class="flex items-center gap-3">
+<span class="font-display text-display-lg-mobile text-primary tracking-tight">Creator Hub</span>
+</div>
+<div class="flex items-center gap-2 text-primary">
+<button class="hover:bg-primary/10 rounded-full p-2 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="hover:bg-primary/10 rounded-full p-2 transition-colors">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</button>
+<button class="hover:bg-primary/10 rounded-full p-2 transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline/20">
+<img alt="Administrator Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeq1HOaN-n4mWaiyRtskJD_sNRgqTHwMB4RHYt-_5lGQvZtcWbTTI4vWWok2rWP7Od37zNM5Iv2uWICEP4Y9YvB5FNg68H9945c1WKgHOF0ApulkPBxsqlBCXvkcJDi6tj4M4O8nwMt6E9rwkUFpTGn00ciVv9ayAimXE9thxoSxh2komL5pjshQOCUgcx2RRcREQ2NMB_rK77ChR-anFxBcROc6Lmd2N9_IMrcI0nZKS3hQ2ghRunpHImCxxiBTDkplS8IlYL6g10"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar (Desktop Only) -->
+<aside class="hidden md:flex flex-col h-full py-gutter px-4 bg-surface-container-low/80 backdrop-blur-3xl h-screen w-64 border-r border-outline/10 shadow-sm z-40 relative flex-shrink-0">
+<div class="mb-12 px-2">
+<h1 class="font-display text-display-lg text-primary tracking-tight leading-none mb-1">Creator Hub</h1>
+<p class="font-label text-label-sm text-on-surface-variant uppercase tracking-widest">Premium POD Admin</p>
+</div>
+<nav class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors font-body text-body-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors font-body text-body-md" href="#">
+<span class="material-symbols-outlined">palette</span>
+                Artworks
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors font-body text-body-md" href="#">
+<span class="material-symbols-outlined">shopping_bag</span>
+                Orders
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors font-body text-body-md" href="#">
+<span class="material-symbols-outlined">auto_awesome_motion</span>
+                Collections
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors font-body text-body-md" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+                Analytics
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-primary font-bold bg-primary/10 border-r-2 border-primary font-body text-body-md" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline/10">
+<button class="w-full flex items-center justify-center gap-2 bg-primary/10 text-primary hover:bg-primary/20 border border-primary/20 py-3 rounded-xl transition-colors font-label text-label-sm uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm">add</span>
+                New Artwork
+            </button>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 overflow-y-auto p-margin-mobile md:p-margin-desktop relative bg-background">
+<!-- Ambient Background Effects -->
+<div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
+<div class="absolute top-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px]"></div>
+<div class="absolute bottom-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full bg-tertiary-container/5 blur-[150px]"></div>
+</div>
+<!-- Header -->
+<header class="flex justify-between items-end mb-8 md:mb-12">
+<div>
+<h2 class="font-headline text-headline-xl text-on-surface mb-2">Access Control</h2>
+<p class="font-body text-body-md text-on-surface-variant max-w-xl">Manage administrative privileges, curator access, and monitor platform security activities.</p>
+</div>
+<!-- Desktop Action Bar -->
+<div class="hidden md:flex glass-pill px-6 py-3 rounded-full items-center gap-6 shadow-sm">
+<div class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+<span class="font-label text-label-sm">FILTER</span>
+</div>
+<div class="w-px h-4 bg-outline/20"></div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-on-surface font-body text-body-md pl-9 w-48 focus:w-64 transition-all placeholder:text-on-surface-variant/50" placeholder="Search roster..." type="text"/>
+</div>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-bento-gap">
+<!-- Main Roster Column (Spans 8) -->
+<div class="md:col-span-8 flex flex-col gap-bento-gap">
+<!-- Stat Cards Row -->
+<div class="grid grid-cols-2 md:grid-cols-3 gap-bento-gap">
+<div class="glass-panel rounded-xl p-6 relative overflow-hidden group interactive-hover transition-all shadow-sm">
+<div class="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+<span class="material-symbols-outlined text-6xl">admin_panel_settings</span>
+</div>
+<p class="font-label text-label-sm text-on-surface-variant uppercase tracking-widest mb-2">Admins</p>
+<p class="font-display text-display-lg text-primary mb-1">12</p>
+<p class="font-body text-body-md text-primary/70 text-sm flex items-center gap-1"><span class="material-symbols-outlined text-xs">arrow_upward</span> 2 this week</p>
+</div>
+<div class="glass-panel rounded-xl p-6 relative overflow-hidden group interactive-hover transition-all shadow-sm">
+<div class="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+<span class="material-symbols-outlined text-6xl">draw</span>
+</div>
+<p class="font-label text-label-sm text-on-surface-variant uppercase tracking-widest mb-2">Curators</p>
+<p class="font-display text-display-lg text-on-surface mb-1">48</p>
+<p class="font-body text-body-md text-on-surface-variant text-sm flex items-center gap-1">Stable</p>
+</div>
+<div class="glass-panel rounded-xl p-6 relative overflow-hidden group interactive-hover transition-all hidden md:block shadow-sm">
+<div class="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity text-error">
+<span class="material-symbols-outlined text-6xl">gpp_maybe</span>
+</div>
+<p class="font-label text-label-sm text-on-surface-variant uppercase tracking-widest mb-2">Pending Reviews</p>
+<p class="font-display text-display-lg text-on-surface mb-1">5</p>
+<p class="font-body text-body-md text-error/80 text-sm flex items-center gap-1">Action required</p>
+</div>
+</div>
+<!-- Active Roster Table Component -->
+<div class="glass-panel rounded-xl overflow-hidden flex-1 flex flex-col shadow-sm">
+<div class="px-6 py-5 border-b border-outline/10 flex justify-between items-center bg-surface-container-high/50">
+<h3 class="font-headline text-headline-lg text-on-surface text-xl">Active Roster</h3>
+<button class="text-primary hover:text-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline/10 bg-surface-container/50">
+<th class="py-4 px-6 font-label text-label-sm text-on-surface-variant uppercase tracking-widest">User</th>
+<th class="py-4 px-6 font-label text-label-sm text-on-surface-variant uppercase tracking-widest">Role</th>
+<th class="py-4 px-6 font-label text-label-sm text-on-surface-variant uppercase tracking-widest">Status</th>
+<th class="py-4 px-6 font-label text-label-sm text-on-surface-variant uppercase tracking-widest text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="font-body text-body-md">
+<!-- Selected User Row -->
+<tr class="border-b border-outline/5 hover:bg-surface-variant/50 transition-colors bg-primary/5 relative cursor-pointer group">
+<td class="py-4 px-6 relative">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-primary/30">
+<img alt="Profile of Elena Rostova, Curator" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_vBptQcy6PaAF4HONbks-AhTlySCZcICv9F1IJWrYvTMg2ajVa_IN2l0O2PUJzAnfxZIDWb8dNVThoHKHSmRDJEZv0iwsBtg_PJ240SBhofPAWMwv24odekA_XqEvR7kh2HxMe4E2zceu_keZmwc9TQDxRbk5zkjqAkv8ZutQ_lFxcGWwW2ZfHKiZVQnrvQL6aXmOWiQDKa_P1BjytCqVQ3Dvz71APb72qtluN1DpYAD2Wl4r8wdj-EDkQBhvoRKdKogEJpVfDeKu"/>
+</div>
+<div>
+<p class="font-medium text-primary">Elena Rostova</p>
+<p class="text-sm text-on-surface-variant">elena@gallery.io</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-secondary-container/30 border border-secondary/20 text-secondary text-xs font-label uppercase tracking-wide">
+<span class="material-symbols-outlined text-[14px]">draw</span> Curator
+                                        </span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(255,45,120,0.5)]"></div>
+<span class="text-sm">Active</span>
+</div>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors rounded-lg hover:bg-surface-variant opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<!-- Standard Rows -->
+<tr class="border-b border-outline/5 hover:bg-surface-variant/50 transition-colors cursor-pointer group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline/20">
+<img alt="Profile of Marcus Chen, Administrator" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFtNSi019TA9CX9FoRpgNkLHDEiEnjkrXaXEM_4J_FmmjbBp_x5XcYALxWZT0zO3euB0zkBG0LnuXqniwI4lHzHgxAPIqfmxEbVjitvkz_TED11uqpVlogB6p9ncsilQnEQeyduJzAjUsnT_cpQreA-uMMExv_Ujq8en1pDmPIfF0K1ZvWKG92VLzcHAMt8GfCS4waJ8KRipwGEMianWfPqxAKfh-GVK2RNWMuvsvryVw15L7UUYinhktmeFPaOrmo_X3Ymi996Een"/>
+</div>
+<div>
+<p class="font-medium text-on-surface">Marcus Chen</p>
+<p class="text-sm text-on-surface-variant">m.chen@gallery.io</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-label uppercase tracking-wide">
+<span class="material-symbols-outlined text-[14px]">admin_panel_settings</span> Admin
+                                        </span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(255,45,120,0.5)]"></div>
+<span class="text-sm">Active</span>
+</div>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors rounded-lg hover:bg-surface-variant opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<tr class="border-b border-outline/5 hover:bg-surface-variant/50 transition-colors cursor-pointer group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline/20">
+<div class="w-full h-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant">
+                                                    SJ
+                                                </div>
+</div>
+<div>
+<p class="font-medium text-on-surface">Sarah Jenkins</p>
+<p class="text-sm text-on-surface-variant">sarah.j@external.net</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-variant border border-outline/10 text-on-surface-variant text-xs font-label uppercase tracking-wide">
+<span class="material-symbols-outlined text-[14px]">visibility</span> Viewer
+                                        </span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-outline-variant border border-outline/20"></div>
+<span class="text-sm text-on-surface-variant">Offline</span>
+</div>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors rounded-lg hover:bg-surface-variant opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-outline/10 flex justify-center">
+<button class="text-sm font-label text-on-surface-variant hover:text-primary transition-colors uppercase tracking-widest flex items-center gap-1">
+                            Load More <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Detail / Action Sidebar (Spans 4) -->
+<div class="md:col-span-4 flex flex-col gap-bento-gap">
+<!-- Profile Detail Card -->
+<div class="glass-panel rounded-xl overflow-hidden relative shadow-sm">
+<!-- Decor Banner -->
+<div class="h-24 bg-gradient-to-r from-primary/20 to-transparent relative">
+<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4wNSkiLz48L3N2Zz4=')] opacity-30"></div>
+</div>
+<div class="px-6 pb-6 relative">
+<!-- Avatar floating over banner -->
+<div class="absolute -top-12 left-6 w-24 h-24 rounded-xl overflow-hidden border-4 border-surface shadow-md">
+<img alt="Detailed profile portrait of Elena Rostova" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMbUfjSVZPxygZtiMkLFbs9OglPZTG9L3IB6KDwFm5uuiRMjx1WakCMoaZkYzkrNXkOwaSYa0QcE36zN4IxA2nVjjAQ0Po5z31MTPbnJfml-V6p9_moOcN--udzrtmYLU1u2e8hhQvN5WeQF13DYMNmFuRUZtEIP2dur5U1ivtavQC1MRY00__UmgKfOyZu2eYZmoydl8YlCHJ9lDgiBHZXHLUzLKJ_KbYJPa6tjmk_vq9XJVUY80ajFx1tza23pNWSunNBE32-IUQ"/>
+</div>
+<div class="mt-14 flex justify-between items-start">
+<div>
+<h3 class="font-headline text-headline-lg text-on-surface text-2xl flex items-center gap-2">
+                                    Elena Rostova
+                                    <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;" title="Verified User">verified</span>
+</h3>
+<p class="text-on-surface-variant text-sm mb-4">elena@gallery.io • Joined Mar 2023</p>
+</div>
+</div>
+<!-- Access Controls -->
+<div class="mt-4 space-y-5">
+<div>
+<p class="font-label text-label-sm text-on-surface-variant uppercase tracking-widest mb-3">Access Level</p>
+<div class="flex bg-surface-container-high p-1 rounded-lg">
+<button class="flex-1 py-2 text-sm text-on-surface-variant rounded-md hover:bg-surface-variant transition-colors">Admin</button>
+<button class="flex-1 py-2 text-sm bg-surface text-primary border border-primary/20 rounded-md shadow-sm font-medium">Curator</button>
+<button class="flex-1 py-2 text-sm text-on-surface-variant rounded-md hover:bg-surface-variant transition-colors">Viewer</button>
+</div>
+</div>
+<div class="h-px w-full bg-outline/10"></div>
+<div>
+<p class="font-label text-label-sm text-on-surface-variant uppercase tracking-widest mb-3">Editor Permissions</p>
+<div class="space-y-3">
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="text-sm text-on-surface group-hover:text-primary transition-colors">Publish Artworks</span>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-200 ease-in-out translate-x-5 border-primary" id="toggle1" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-primary/40 cursor-pointer" for="toggle1"></label>
+</div>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="text-sm text-on-surface group-hover:text-primary transition-colors">Manage Collections</span>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-200 ease-in-out translate-x-5 border-primary" id="toggle2" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-primary/40 cursor-pointer" for="toggle2"></label>
+</div>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="text-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Delete Records</span>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-surface-variant border-4 border-surface appearance-none cursor-pointer transition-transform duration-200 ease-in-out" id="toggle3" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-outline-variant/50 cursor-pointer" for="toggle3"></label>
+</div>
+</label>
+</div>
+</div>
+<button class="w-full py-3 bg-primary text-on-primary rounded-lg font-label text-label-sm uppercase tracking-widest shadow-sm hover:shadow-md transition-shadow">
+                                Save Changes
+                            </button>
+</div>
+</div>
+</div>
+<!-- Recent Activity Timeline -->
+<div class="glass-panel rounded-xl p-6 flex-1 shadow-sm">
+<h3 class="font-headline text-headline-lg text-on-surface text-xl mb-6">Recent Activity</h3>
+<div class="relative border-l border-outline/20 ml-3 space-y-6">
+<!-- Timeline Item 1 -->
+<div class="relative pl-6">
+<div class="absolute -left-[5px] top-1 w-[10px] h-[10px] rounded-full bg-primary shadow-[0_0_8px_rgba(255,45,120,0.6)]"></div>
+<p class="text-sm text-on-surface mb-1">Permission modified</p>
+<p class="text-xs text-on-surface-variant">Admin granted 'Publish' rights to Elena Rostova.</p>
+<p class="text-xs text-primary/80 mt-1 font-label uppercase tracking-widest">2 hours ago</p>
+</div>
+<!-- Timeline Item 2 -->
+<div class="relative pl-6">
+<div class="absolute -left-[5px] top-1 w-[10px] h-[10px] rounded-full bg-surface-variant border border-outline/30"></div>
+<p class="text-sm text-on-surface mb-1">New login detected</p>
+<p class="text-xs text-on-surface-variant">IP: 192.168.1.1 (Paris, FR)</p>
+<p class="text-xs text-on-surface-variant/70 mt-1 font-label uppercase tracking-widest">Yesterday, 14:32</p>
+</div>
+<!-- Timeline Item 3 -->
+<div class="relative pl-6">
+<div class="absolute -left-[5px] top-1 w-[10px] h-[10px] rounded-full bg-surface-variant border border-outline/30"></div>
+<p class="text-sm text-on-surface mb-1">Role assigned</p>
+<p class="text-xs text-on-surface-variant">Promoted from Viewer to Curator.</p>
+<p class="text-xs text-on-surface-variant/70 mt-1 font-label uppercase tracking-widest">Mar 15, 2023</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Inline script for custom toggle styling (Tailwind forms plugin handles basics, this ensures exact positioning) -->
+<style>
+        /* Custom toggle styles to supplement Tailwind forms */
+        input:checked ~ .toggle-label {
+            background-color: rgba(255, 45, 120, 0.4);
+        }
+        input:checked.toggle-checkbox {
+            border-color: #ff2d78;
+            background-color: #ff2d78;
+        }
+    </style>
+</body></html>

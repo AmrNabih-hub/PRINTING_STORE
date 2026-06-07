@@ -1,0 +1,80 @@
+@reference "../../app/globals.css";
+
+.container {
+  @apply flex flex-col gap-8 py-4 px-2 sm:px-4;
+}
+
+.title {
+  @apply text-3xl sm:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-accent via-text to-accent bg-clip-text text-transparent text-center mb-1;
+}
+
+.subtitle {
+  @apply text-sm sm:text-base text-text/60 text-center max-w-xl mx-auto mb-6;
+}
+
+/* Bento Grid styling with dynamic columns */
+.grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6;
+}
+
+.card {
+  @apply relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 cursor-pointer transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl hover:shadow-accent/5 dark:border-white/5 flex flex-col h-full;
+}
+
+/* Make every third card slightly taller for dynamic Bento feel */
+.card:nth-child(3n) {
+  @apply md:row-span-2;
+}
+
+.imgWrapper {
+  @apply relative w-full flex-grow bg-white/5 overflow-hidden min-h-[250px] sm:min-h-[300px];
+}
+
+.image {
+  @apply object-cover w-full h-full transition-transform duration-700 ease-out hover:scale-105;
+}
+
+.content {
+  @apply p-5 flex flex-col gap-2 border-t border-white/5 bg-gradient-to-b from-transparent to-white/5;
+}
+
+.cardTitle {
+  @apply text-base font-extrabold text-text;
+}
+
+.cardDesc {
+  @apply text-xs text-text/75 leading-relaxed truncate max-w-xs;
+}
+
+.artistWrapper {
+  @apply flex items-center justify-between mt-2 border-t border-white/5 pt-2;
+}
+
+.artistLabel {
+  @apply text-[10px] uppercase font-bold text-text/40 tracking-wider;
+}
+
+.artistName {
+  @apply text-xs font-bold text-accent;
+}
+
+/* Pagination panel */
+.pagination {
+  @apply flex items-center justify-center gap-4 mt-8 py-4 border-t border-white/5;
+}
+
+.pageBtn {
+  @apply px-4 py-2 rounded-lg font-bold text-xs bg-white/5 text-text hover:bg-white/10 active:scale-[0.98] transition-all duration-200 cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:active:scale-100 uppercase tracking-wider;
+}
+
+.pageIndicator {
+  @apply text-xs font-bold text-text/60;
+}
+
+.emptyState {
+  @apply flex flex-col items-center justify-center py-24 text-center text-text/50 gap-4;
+}
+
+.emptyIcon {
+  @apply w-12 h-12 opacity-20;
+}

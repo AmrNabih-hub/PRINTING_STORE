@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Glass-Canvas - Elevate Your Art</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Sora:wght@400;600;700;800&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "tertiary-fixed": "#fff0c0",
+                "surface-container-high": "#1e1e30",
+                "on-tertiary-fixed-variant": "#665200",
+                "on-background": "#e8e0f0",
+                "on-tertiary": "#1a1000",
+                "on-primary": "#1a0010",
+                "secondary-container": "#004d3d",
+                "surface-container": "#141422",
+                "surface-container-low": "#111118",
+                "secondary-fixed": "#c0fff4",
+                "inverse-on-surface": "#0a0a12",
+                "primary-container": "#b3004e",
+                "on-primary-fixed": "#3d0020",
+                "on-primary-container": "#ffe0ec",
+                "surface-tint": "#ff2d78",
+                "on-tertiary-fixed": "#1a1000",
+                "inverse-primary": "#8c0038",
+                "error-container": "#3d0f0f",
+                "tertiary-container": "#665200",
+                "tertiary": "#ffe04a",
+                "secondary-fixed-dim": "#00e6b8",
+                "tertiary-fixed-dim": "#ffe04a",
+                "outline": "#5a5068",
+                "outline-variant": "#302840",
+                "on-secondary-container": "#c0fff4",
+                "surface-container-lowest": "#0a0a12",
+                "secondary": "#00ffcc",
+                "on-primary-fixed-variant": "#8c0038",
+                "error": "#ff4444",
+                "on-tertiary-container": "#fff0c0",
+                "on-error": "#1a0000",
+                "on-secondary": "#001a1a",
+                "primary": "#ff2d78",
+                "surface-bright": "#1a1a2e",
+                "on-surface": "#e8e0f0",
+                "surface-container-highest": "#28283e",
+                "on-secondary-fixed": "#001a1a",
+                "background": "#0a0a12",
+                "primary-fixed": "#ffe0ec",
+                "primary-fixed-dim": "#ff80aa",
+                "on-error-container": "#ffa0a0",
+                "surface-variant": "#1e1e30",
+                "inverse-surface": "#e8e0f0",
+                "on-secondary-fixed-variant": "#004d4d",
+                "surface": "#0f0f1a",
+                "on-surface-variant": "#a098b0",
+                "surface-dim": "#0f0f1a"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {},
+        "fontFamily": {
+                "headline": [
+                        "Sora"
+                ],
+                "display": [
+                        "Sora"
+                ],
+                "body": [
+                        "Inter"
+                ],
+                "label": [
+                        "Space Grotesk"
+                ]
+        },
+        "fontSize": {}
+},
+    },
+  }
+</script>
+<style>
+        .stagger-1 { animation: fadeUp 1s ease-out 0.2s forwards; opacity: 0; transform: translateY(20px); }
+        .stagger-2 { animation: fadeUp 1s ease-out 0.4s forwards; opacity: 0; transform: translateY(20px); }
+        .stagger-3 { animation: fadeUp 1s ease-out 0.6s forwards; opacity: 0; transform: translateY(20px); }
+        
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .lift-word {
+            opacity: 0;
+            animation: lift-reveal 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes lift-reveal {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+                filter: blur(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        .glass-glow-hover:hover {
+            box-shadow: 0 0 60px rgba(255, 45, 120, 0.3);
+        }
+
+        .tilt-card {
+            transition: transform 0.1s ease-out;
+            transform-style: preserve-3d;
+        }
+        
+        .tilt-content {
+            transform: translateZ(30px);
+        }
+
+        .btn-glow-shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-glow-shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transform: skewX(-20deg);
+            transition: none;
+        }
+
+        .btn-glow-shimmer:hover::after {
+            animation: shimmer-effect 1.5s infinite;
+        }
+
+        @keyframes shimmer-effect {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen overflow-x-hidden selection:bg-primary/30 selection:text-primary-fixed">
+<!-- TopNavBar (Shared Component) -->
+<nav class="hidden md:flex fixed top-0 left-0 right-0 z-50 items-center justify-between px-6 py-2 max-w-7xl mx-auto rounded-full mt-6 w-fit bg-surface-container/60 backdrop-blur-2xl border border-outline-variant/50 shadow-md shadow-primary/5">
+<div class="flex items-center gap-8 px-6">
+<span class="font-display text-2xl font-bold text-on-surface tracking-tight drop-shadow-[0_0_8px_rgba(255,45,120,0.5)]">Glass-Canvas</span>
+<div class="flex gap-6">
+<a class="font-body text-base text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-variant/50 hover:backdrop-blur-3xl transition-all duration-300 px-3 py-1 rounded-full" href="#">Gallery</a>
+<a class="font-body text-base text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-variant/50 hover:backdrop-blur-3xl transition-all duration-300 px-3 py-1 rounded-full" href="#">Dashboard</a>
+<a class="font-body text-base text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-variant/50 hover:backdrop-blur-3xl transition-all duration-300 px-3 py-1 rounded-full" href="#">Auth</a>
+</div>
+</div>
+<div class="px-6 flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface cursor-pointer hover:text-primary transition-colors">search</span>
+<button class="font-label text-sm font-semibold text-primary hover:bg-primary/20 transition-all duration-300 scale-95 active:scale-90 transition-transform px-4 py-2 rounded-full border border-primary/50 shadow-[0_0_15px_rgba(255,45,120,0.2)]">Create</button>
+</div>
+</nav>
+<!-- BottomNavBar (Mobile fallback) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 flex justify-center items-center gap-6 bg-surface-container/80 backdrop-blur-3xl border border-outline-variant/50 shadow-lg shadow-primary/10 rounded-full mb-8 mx-auto w-max px-6 py-3">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-3 hover:text-primary hover:scale-105 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label text-xs font-semibold mt-1">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-3 hover:text-primary hover:scale-105 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">palette</span>
+<span class="font-label text-xs font-semibold mt-1">Studio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-3 hover:text-primary hover:scale-105 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-label text-xs font-semibold mt-1">Activity</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-3 hover:text-primary hover:scale-105 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">person_outline</span>
+<span class="font-label text-xs font-semibold mt-1">Profile</span>
+</a>
+</nav>
+<!-- Main Hero Section -->
+<main class="relative min-h-screen flex flex-col items-center justify-center px-4 md:px-16 overflow-hidden">
+<!-- Ambient Background Gradients -->
+<div class="absolute inset-0 pointer-events-none z-0">
+<div class="absolute top-1/4 left-1/4 w-[50vw] h-[50vw] bg-primary/20 rounded-full blur-[120px] mix-blend-screen"></div>
+<div class="absolute bottom-1/4 right-1/4 w-[40vw] h-[40vw] bg-tertiary/10 rounded-full blur-[100px] mix-blend-screen"></div>
+</div>
+<div class="relative z-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-24">
+<!-- Text Content -->
+<div class="flex-1 text-center md:text-left pt-24 md:pt-0">
+<h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-on-surface mb-6 leading-tight">
+<span class="inline-block lift-word" style="animation-delay: 0.1s;">Elevate</span>
+<span class="inline-block lift-word" style="animation-delay: 0.2s;">Your</span>
+<span class="inline-block lift-word" style="animation-delay: 0.3s;">Art</span>
+<span class="inline-block lift-word" style="animation-delay: 0.4s;">to</span> <br/>
+<span class="inline-block lift-word text-primary drop-shadow-[0_0_15px_rgba(255,45,120,0.6)]" style="animation-delay: 0.5s;">Glass-Canvas</span>
+<span class="inline-block lift-word" style="animation-delay: 0.6s;">Perfection</span>
+</h1>
+<p class="font-body text-lg text-on-surface-variant mb-10 max-w-xl mx-auto md:mx-0 stagger-2 leading-relaxed">
+                    Step into a premium, immersive digital gallery environment. Experience optical refraction, deep luminance, and the quiet luxury of curated high-end aesthetics.
+                </p>
+<div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 stagger-3">
+<button class="btn-glow-shimmer w-full sm:w-auto bg-primary text-on-primary font-label text-sm font-semibold uppercase tracking-widest px-8 py-4 rounded-xl shadow-[0_0_20px_rgba(255,45,120,0.4)] hover:shadow-[0_0_30px_rgba(255,45,120,0.6)] hover:scale-105 active:scale-95 transition-all duration-300">
+                        Start Creating
+                    </button>
+<button class="w-full sm:w-auto bg-surface-container/50 backdrop-blur-md border border-outline-variant/50 text-on-surface font-label text-sm font-semibold uppercase tracking-widest px-8 py-4 rounded-xl hover:bg-surface-variant hover:border-primary/50 hover:shadow-[0_0_15px_rgba(255,45,120,0.2)] transition-all duration-300">
+                        Explore the Gallery
+                    </button>
+</div>
+</div>
+<!-- Interactive 3D Art Frame -->
+<div class="flex-1 w-full max-w-md mx-auto stagger-2 perspective-[1000px]">
+<div class="tilt-card relative w-full aspect-[4/5] rounded-[1.5rem] bg-surface-container-low/80 backdrop-blur-[24px] border border-outline-variant/50 p-4 shadow-2xl shadow-primary/10 glass-glow-hover overflow-hidden group" id="tiltCard">
+<!-- Glass inner reflection -->
+<div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none rounded-[1.5rem]"></div>
+<div class="relative w-full h-full rounded-xl overflow-hidden tilt-content">
+<img alt="Abstract digital art piece" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A striking abstract digital art piece featuring swirling, luminous fluid dynamics in deep indigo and shimmering gold. Set against a pitch-black background, the artwork looks like glowing liquid suspended in zero gravity. The lighting is cinematic, highlighting the intricate details and glossy texture of the fluid, perfectly fitting a premium, high-end digital gallery aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnE28CFSybgA5u4IuCxjffMppN_yi_2jJvZLNNhH7l5dAK3vLZUIQtnWVwG1ENUXKA-iCi9Bh6dKiejwXmNkqkEbv7SL4oUFHxH1vWl-EXDv8IH5u_6hswvx4TTm4cVBf8I5O-415Dy6HCI-VZBAIV7n-gy18vasd4Nc2Op7rFMBYpLCbpRbrD-rcCZbGAblErYi1TONo3bKcQKZS7KFU-bvww-_uyZ1es-1URc6074izZJsW-qZJD8p7nb8xzLwiSyfZx2ct2V3B_"/>
+<!-- Floating Meta Glass Panel -->
+<div class="absolute bottom-4 left-4 right-4 bg-surface/80 backdrop-blur-md border border-primary/30 rounded-xl p-4 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+<div class="flex justify-between items-end">
+<div>
+<h3 class="font-headline text-lg font-semibold text-on-surface">Ethereal Flux</h3>
+<p class="font-label text-sm text-on-surface-variant">By Studio Lumen</p>
+</div>
+<div class="bg-primary/20 px-3 py-1 rounded-full border border-primary/40 shadow-[0_0_10px_rgba(255,45,120,0.3)]">
+<span class="font-label text-xs font-bold text-primary drop-shadow-[0_0_4px_rgba(255,45,120,0.8)]">Featured</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Subtle 3D tilt effect for the art card
+        const card = document.getElementById('tiltCard');
+        
+        if (card) {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -10;
+                const rotateY = ((x - centerX) / centerX) * 10;
+                
+                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'rotateX(0) rotateY(0)';
+            });
+        }
+    </script>
+</body></html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Financial Ledger &amp; Transaction Hub - Creator Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&amp;family=Inter:wght@100..900&amp;family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "tertiary-fixed": "#fff0c0",
+                "surface-container-high": "#1e1e30",
+                "on-tertiary-fixed-variant": "#665200",
+                "on-background": "#e8e0f0",
+                "on-tertiary": "#1a1000",
+                "on-primary": "#1a0010",
+                "secondary-container": "#004d3d",
+                "surface-container": "#141422",
+                "surface-container-low": "#111118",
+                "secondary-fixed": "#c0fff4",
+                "inverse-on-surface": "#0a0a12",
+                "primary-container": "#b3004e",
+                "on-primary-fixed": "#3d0020",
+                "on-primary-container": "#ffe0ec",
+                "surface-tint": "#ff2d78",
+                "on-tertiary-fixed": "#1a1000",
+                "inverse-primary": "#8c0038",
+                "error-container": "#3d0f0f",
+                "tertiary-container": "#665200",
+                "tertiary": "#ffe04a",
+                "secondary-fixed-dim": "#00e6b8",
+                "tertiary-fixed-dim": "#ffe04a",
+                "outline": "#5a5068",
+                "outline-variant": "#302840",
+                "on-secondary-container": "#c0fff4",
+                "surface-container-lowest": "#0a0a12",
+                "secondary": "#00ffcc",
+                "on-primary-fixed-variant": "#8c0038",
+                "error": "#ff4444",
+                "on-tertiary-container": "#fff0c0",
+                "on-error": "#1a0000",
+                "on-secondary": "#001a1a",
+                "primary": "#ff2d78",
+                "surface-bright": "#1a1a2e",
+                "on-surface": "#e8e0f0",
+                "surface-container-highest": "#28283e",
+                "on-secondary-fixed": "#001a1a",
+                "background": "#0a0a12",
+                "primary-fixed": "#ffe0ec",
+                "primary-fixed-dim": "#ff80aa",
+                "on-error-container": "#ffa0a0",
+                "surface-variant": "#1e1e30",
+                "inverse-surface": "#e8e0f0",
+                "on-secondary-fixed-variant": "#004d4d",
+                "surface": "#0f0f1a",
+                "on-surface-variant": "#a098b0",
+                "surface-dim": "#0f0f1a"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "margin-desktop": "64px",
+                "bento-gap": "24px",
+                "unit": "4px",
+                "margin-mobile": "16px",
+                "gutter": "24px"
+        },
+        "fontFamily": {
+                "body-lg": [
+                        "Inter"
+                ],
+                "label-sm": [
+                        "Space Grotesk"
+                ],
+                "headline-xl": [
+                        "Sora"
+                ],
+                "display-lg": [
+                        "Sora"
+                ],
+                "body-md": [
+                        "Inter"
+                ],
+                "display-lg-mobile": [
+                        "Sora"
+                ],
+                "headline-lg": [
+                        "Sora"
+                ],
+                "headline": [
+                        "Sora"
+                ],
+                "display": [
+                        "Sora"
+                ],
+                "body": [
+                        "Inter"
+                ],
+                "label": [
+                        "Space Grotesk"
+                ]
+        },
+        "fontSize": {
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "1",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "headline-xl": [
+                        "40px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg": [
+                        "64px",
+                        {
+                                "lineHeight": "1.1",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "1.5",
+                                "fontWeight": "400"
+                        }
+                ],
+                "display-lg-mobile": [
+                        "40px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "700"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "1.3",
+                                "fontWeight": "600"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        
+        .card-panel {
+            background-color: theme('colors.surface-container-lowest');
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid theme('colors.surface-container-high');
+        }
+        
+        .status-settled { color: theme('colors.secondary'); background: theme('colors.secondary-container'); border: 1px solid theme('colors.secondary'); box-shadow: 0 0 8px theme('colors.secondary-container');}
+        .status-pending { color: theme('colors.tertiary'); background: theme('colors.tertiary-container'); border: 1px solid theme('colors.tertiary'); box-shadow: 0 0 8px theme('colors.tertiary-container');}
+        .status-refunded { color: theme('colors.error'); background: theme('colors.error-container'); border: 1px solid theme('colors.error'); box-shadow: 0 0 8px theme('colors.error-container');}
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: theme('colors.surface-container-low');
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.outline-variant');
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.outline');
+        }
+        
+        .glow-chart {
+            filter: drop-shadow(0 0 8px theme('colors.primary'));
+        }
+    </style>
+</head>
+<body class="min-h-screen overflow-x-hidden flex">
+<!-- SideNavBar -->
+<nav class="hidden md:flex h-screen w-72 flex-col fixed left-0 top-0 bg-surface border-r border-surface-container-high shadow-sm z-40 py-margin-desktop px-6">
+<div class="mb-12">
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary tracking-tight">Creator Hub</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-2">Admin Suite</p>
+</div>
+<ul class="flex-1 space-y-2">
+<li>
+<a class="flex items-center gap-4 py-3 text-on-surface-variant font-medium hover:bg-surface-container hover:text-on-surface transition-all duration-300 rounded-lg px-4" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-body-md text-body-md">Users</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-4 py-3 text-on-surface-variant font-medium hover:bg-surface-container hover:text-on-surface transition-all duration-300 rounded-lg px-4" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-body-md text-body-md">Inventory</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-4 py-3 bg-secondary-container text-on-secondary-container font-bold border-l-4 border-secondary rounded-r-lg px-4 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-body-md text-body-md">Ledger</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-4 py-3 text-on-surface-variant font-medium hover:bg-surface-container hover:text-on-surface transition-all duration-300 rounded-lg px-4" href="#">
+<span class="material-symbols-outlined" data-icon="settings_suggest">settings_suggest</span>
+<span class="font-body-md text-body-md">System</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto pt-8 border-t border-surface-container-high space-y-4">
+<button class="w-full bg-primary text-on-primary font-label-sm text-label-sm py-3 rounded-lg uppercase tracking-wider hover:bg-primary/90 transition-colors shadow-sm shadow-primary/20">Add Resource</button>
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-4 py-3 text-on-surface-variant font-medium hover:bg-surface-container hover:text-on-surface transition-all duration-300 rounded-lg px-4" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-sm text-label-sm">Support</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-4 py-3 text-on-surface-variant font-medium hover:bg-surface-container hover:text-on-surface transition-all duration-300 rounded-lg px-4" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-sm text-label-sm">Sign Out</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-72 min-h-screen flex flex-col relative">
+<!-- TopNavBar -->
+<header class="docked full-width top-0 sticky z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 bg-surface/80 backdrop-blur-md border-b border-surface-container-high shadow-sm">
+<div class="flex items-center gap-8">
+<span class="font-headline-xl text-headline-xl italic text-on-surface">Glass-Canvas</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm" href="#">Analytics</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm" href="#">Reports</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container border border-outline-variant rounded-full text-body-md font-body-md focus:ring-1 focus:ring-primary focus:border-primary focus:outline-none w-64 text-on-surface placeholder:text-on-surface-variant/70 transition-all" placeholder="Search Ledger..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="apps">apps</span>
+</button>
+<button class="bg-secondary-container text-on-secondary-container border border-secondary/30 font-label-sm text-label-sm px-5 py-2 rounded-full uppercase tracking-wider hover:bg-secondary-container/80 transition-colors ml-2 shadow-[0_0_10px_rgba(0,255,204,0.2)] hover:shadow-[0_0_15px_rgba(0,255,204,0.4)]">Create New</button>
+<img alt="Admin Avatar" class="w-10 h-10 rounded-full border-2 border-primary ml-2 object-cover" data-alt="A close-up portrait of a professional man with a slight smile, acting as an admin avatar. He is wearing a dark, elegant suit against a clean, softly lit gallery-like background with premium Glass-Canvas aesthetic lighting. The tone is sophisticated and trustworthy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGXyjXw3nh8Eko3Z89bhhF6CoBKogFB07i7aIJq9qu_T4fkwGdqscP8eZoM9iUzCTrXOwfxYf1z5ol6x0l8dhyQkQhoEU5J97wIzZDNLcrRQq-5Taxyrg_q6Q9EKCbgsFcC-4lwzlo9TbJSTotGx9BIZjQhiqQa1w5tYyRZPdg6n9FkKA7qZvzqecwH8P72a3Sr5anjkPs0AOKluyxGZcgpzPeyv9I9t22QoSBIzxRFTmBMux0HphiyzcFXrunZ65VP0_SvDIM9BDt"/>
+</div>
+</div>
+</header>
+<!-- Canvas Content -->
+<div class="p-margin-mobile md:p-margin-desktop space-y-bento-gap relative z-10 flex-1 flex flex-col">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
+<div>
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface">Financial Ledger</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Real-time overview of platform economics and artist payouts.</p>
+</div>
+<button class="bg-surface-container-highest border border-outline hover:bg-surface-container-high px-6 py-3 rounded-full flex items-center gap-2 transition-all duration-300 shadow-sm hover:shadow-[0_0_15px_rgba(255,45,120,0.2)] group">
+<span class="material-symbols-outlined text-primary group-hover:text-primary-fixed transition-colors" data-icon="download">download</span>
+<span class="font-label-sm text-label-sm text-on-surface uppercase tracking-wider font-semibold">Export Ledger</span>
+</button>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-bento-gap">
+<!-- Revenue Chart (Spans 8 columns) -->
+<div class="card-panel rounded-xl p-8 md:col-span-8 flex flex-col min-h-[400px]">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Revenue Trends</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Past 30 Days (USD)</p>
+</div>
+<div class="flex gap-2 bg-surface-container p-1 rounded-lg border border-surface-container-high">
+<span class="px-4 py-1.5 rounded-md text-on-surface-variant font-label-sm text-label-sm cursor-pointer hover:bg-surface-container-high transition-colors">7D</span>
+<span class="px-4 py-1.5 rounded-md bg-primary-container text-on-primary-container font-label-sm text-label-sm cursor-pointer shadow-[0_0_10px_rgba(179,0,78,0.5)] border border-primary/30">30D</span>
+<span class="px-4 py-1.5 rounded-md text-on-surface-variant font-label-sm text-label-sm cursor-pointer hover:bg-surface-container-high transition-colors">1Y</span>
+</div>
+</div>
+<!-- Faux Area Chart Visualization using CSS Gradients -->
+<div class="flex-1 relative w-full rounded-lg overflow-hidden border-b border-l border-outline-variant p-4 mt-4">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/40 to-transparent opacity-80" style="clip-path: polygon(0 100%, 0 60%, 20% 50%, 40% 70%, 60% 30%, 80% 40%, 100% 10%, 100% 100%);"></div>
+<svg class="absolute inset-0 h-full w-full glow-chart" preserveaspectratio="none" viewbox="0 0 100 100">
+<polyline class="text-primary" fill="none" points="0,60 20,50 40,70 60,30 80,40 100,10" stroke="currentColor" stroke-width="2" vector-effect="non-scaling-stroke"></polyline>
+</svg>
+<!-- Y Axis Labels -->
+<div class="absolute left-2 top-2 bottom-2 flex flex-col justify-between text-on-surface-variant font-label-sm text-label-sm text-[11px] font-headline">
+<span>$120k</span>
+<span>$80k</span>
+<span>$40k</span>
+<span>0</span>
+</div>
+</div>
+</div>
+<!-- Key Metrics (Spans 4 columns) -->
+<div class="flex flex-col gap-bento-gap md:col-span-4">
+<div class="card-panel rounded-xl p-8 flex-1 flex flex-col justify-center relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 p-4 opacity-5 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-8xl text-secondary" data-icon="account_balance">account_balance</span>
+</div>
+<h4 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-3">Total Volume</h4>
+<span class="font-display-lg text-display-lg text-secondary drop-shadow-[0_0_8px_rgba(0,255,204,0.4)]">$1.2M</span>
+<div class="flex items-center gap-2 mt-4">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="trending_up">trending_up</span>
+<span class="font-body-md text-body-md text-on-surface-variant"><span class="text-secondary font-bold">+12.4%</span> vs last month</span>
+</div>
+</div>
+<div class="card-panel rounded-xl p-8 flex-1 flex flex-col justify-center relative overflow-hidden group">
+<div class="absolute -right-4 -bottom-4 p-4 opacity-5 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-8xl text-primary" data-icon="payments">payments</span>
+</div>
+<h4 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-3">Platform Fees (2.5%)</h4>
+<span class="font-display-lg text-display-lg text-primary drop-shadow-[0_0_8px_rgba(255,45,120,0.4)]">$30k</span>
+<div class="flex items-center gap-2 mt-4">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="trending_up">trending_up</span>
+<span class="font-body-md text-body-md text-on-surface-variant"><span class="text-primary font-bold">+5.2%</span> vs last month</span>
+</div>
+</div>
+</div>
+<!-- Recent High-Value Transactions List (Spans full 12 columns) -->
+<div class="card-panel rounded-xl p-8 md:col-span-12 bg-surface-container-low border-surface-container-high">
+<div class="flex justify-between items-center mb-6 border-b border-surface-container pb-4">
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Recent High-Value Transactions</h3>
+<button class="text-secondary hover:text-secondary-fixed transition-colors font-label-sm text-label-sm uppercase tracking-wider font-bold drop-shadow-[0_0_4px_rgba(0,255,204,0.3)]">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-surface-container-high text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<th class="py-4 pr-4 font-bold font-headline">Transaction ID</th>
+<th class="py-4 px-4 font-bold font-headline">Artwork / Artist</th>
+<th class="py-4 px-4 font-bold font-headline">Date</th>
+<th class="py-4 px-4 font-bold text-right font-headline">Amount</th>
+<th class="py-4 pl-4 font-bold text-center font-headline">Status</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface">
+<!-- Row 1 -->
+<tr class="border-b border-surface-container hover:bg-surface-container-high transition-colors group cursor-pointer">
+<td class="py-4 pr-4 text-on-surface-variant font-headline">#TRX-9021</td>
+<td class="py-4 px-4 flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high border border-outline-variant overflow-hidden shadow-sm">
+<img alt="Artwork Thumbnail" class="w-full h-full object-cover" data-alt="A small square thumbnail showing a vibrant, abstract digital painting with sweeping strokes of deep blue and gold. The style is modern and premium, fitting a high-end digital art gallery interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD00r0bTlNXA8AkuoCgH6QBL2v38Tq314D5Mi9pboSwRiwYkSrci2V7EufOq1Zcc_GpHaLOxVl1fiYvvIXZ-BAOlusUtlnG0jMb0PpqMUYErY9K96fsq_-WughIQCgTqpm4CsOQgIKXpnt37OWUTJGY2qW0rajeMXvk1GjYwRNwTANrYyGozG3AJwfmCWZBatjFU7NVtpLZ4a_EXiBIRAxqSscbJvhFOADFxo2UF608SQNCi2-WCbUHGJuBW9rT-aJ9cVX-pY7o54X6"/>
+</div>
+<div>
+<div class="font-bold text-on-surface font-headline">Midnight Resonance</div>
+<div class="text-sm text-on-surface-variant">by E. Vance</div>
+</div>
+</td>
+<td class="py-4 px-4 text-on-surface-variant font-headline">Oct 24, 2023</td>
+<td class="py-4 px-4 text-right font-bold text-on-surface font-headline">$12,500.00</td>
+<td class="py-4 pl-4 text-center">
+<span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider status-settled font-headline">
+                                            Settled
+                                        </span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-surface-container hover:bg-surface-container-high transition-colors group cursor-pointer">
+<td class="py-4 pr-4 text-on-surface-variant font-headline">#TRX-9020</td>
+<td class="py-4 px-4 flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high border border-outline-variant overflow-hidden shadow-sm">
+<img alt="Artwork Thumbnail" class="w-full h-full object-cover" data-alt="A small square thumbnail showing a minimalist gradient art piece transitioning from deep purple to soft pink. The aesthetic is clean, modern, and serene, typical of contemporary digital art." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxMoGTexLDZiuzb7YhVoCLbI81932S_EttJFSUVGBLu5VGezmtoeRuwIPjN9fzg4EHhYRmFj-2SfyGA_Q3UDbfDpu7BpB5nrVCqCfrSjDcjuSG0S9_pAnFpuI-7mB0QW5zJ-bN5pD6bxiY1qNQ5HcR_8bmn1YksMrgmVPSYAqUmlE2pD5tYujGWjTiCvDj6huin-SQlc8EzJDPvdL4sLe1wb_L1MgSq-HCmKKVBMg7visXaUmzXInbY4KZjls0TOZE81771RPuZMEf"/>
+</div>
+<div>
+<div class="font-bold text-on-surface font-headline">Ethereal Gradient IV</div>
+<div class="text-sm text-on-surface-variant">by Studio K</div>
+</div>
+</td>
+<td class="py-4 px-4 text-on-surface-variant font-headline">Oct 23, 2023</td>
+<td class="py-4 px-4 text-right font-bold text-on-surface font-headline">$8,200.00</td>
+<td class="py-4 pl-4 text-center">
+<span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider status-pending font-headline">
+                                            Pending
+                                        </span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-high transition-colors group cursor-pointer">
+<td class="py-4 pr-4 text-on-surface-variant font-headline">#TRX-9018</td>
+<td class="py-4 px-4 flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high border border-outline-variant overflow-hidden shadow-sm">
+<img alt="Artwork Thumbnail" class="w-full h-full object-cover" data-alt="A small square thumbnail featuring a stark, monochromatic architectural digital rendering. The image uses sharp contrasts between deep black shadows and bright white highlights, evoking a premium, sophisticated mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgAUhQFCQEyiHaXeswEi5OCjiwLNRGgbb4yiYksdLYFqhz2HoIs23_lsATpTpyW_bCkyzEdF_R43P18_YNhYrBpcESpaZ1np3W7Rilk9HhJrIrEpTv5MKtAcDw-DYe3qlBr_9Xq42bCtHo2_HqLZ-oGWtJduoa7lGHaamgz5_A9h1LaQYCXNckY9ZrI_gKhkmYf1gZJXouX_iKGTHFq5FlcbPzNemWo7SAE-zQswIFEjpJNsP6_p7R-y-Cnn-ZoSH9DgkLVhYC5uZR"/>
+</div>
+<div>
+<div class="font-bold text-on-surface font-headline">Monolith</div>
+<div class="text-sm text-on-surface-variant">by Arch_Digi</div>
+</div>
+</td>
+<td class="py-4 px-4 text-on-surface-variant font-headline">Oct 21, 2023</td>
+<td class="py-4 px-4 text-right font-bold text-on-surface font-headline">$15,000.00</td>
+<td class="py-4 pl-4 text-center">
+<span class="inline-flex items-center justify-center px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider status-refunded font-headline">
+                                            Refunded
+                                        </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

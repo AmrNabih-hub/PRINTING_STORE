@@ -1,0 +1,200 @@
+@reference "../../../app/globals.css";
+
+.container {
+  @apply flex flex-col gap-6 py-4 px-2 sm:px-4;
+}
+
+.header {
+  @apply
+    flex flex-col sm:flex-row justify-between sm:items-center gap-4
+    border-b border-white/8 pb-5;
+}
+
+.title {
+  @apply text-2xl font-black text-text;
+}
+
+.subtitle {
+  @apply text-xs text-text/55;
+}
+
+.employeeBadge {
+  @apply
+    text-xs font-black text-accent
+    bg-gradient-to-r from-accent/12 to-accent/6
+    border border-accent/20
+    px-4 py-2 rounded-xl
+    self-start sm:self-auto
+    shadow-[0_0_10px_rgba(255,20,147,0.08)]
+    uppercase tracking-wider;
+}
+
+/* ─── Task List ─── */
+.taskList {
+  @apply flex flex-col gap-5 mt-2;
+}
+
+/* ─── Task Card with Status Accent Bar ─── */
+.taskCard {
+  @apply
+    relative
+    p-6 flex flex-col sm:flex-row items-center justify-between gap-6
+    transition-all duration-400
+    hover:shadow-[0_12px_40px_0_rgba(0,0,0,0.3),0_0_20px_rgba(255,20,147,0.06)]
+    hover:-translate-y-0.5
+    overflow-hidden;
+}
+
+/* Status accent bar on the left edge */
+.taskCard::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 0;
+  width: 3px;
+  border-radius: 0 4px 4px 0;
+  background: linear-gradient(to bottom, rgba(255, 45, 120, 0.6), rgba(255, 45, 120, 0.2));
+  transition: all 0.3s ease;
+}
+
+.taskCard:hover::before {
+  width: 4px;
+  background: linear-gradient(to bottom, rgba(255, 45, 120, 0.9), rgba(255, 45, 120, 0.4));
+  box-shadow: 0 0 10px rgba(255, 45, 120, 0.3);
+}
+
+/* RTL - move accent bar to right */
+[dir="rtl"] .taskCard::before {
+  left: auto;
+  right: 0;
+  border-radius: 4px 0 0 4px;
+}
+
+.taskInfo {
+  @apply flex flex-col sm:flex-row items-center gap-5 w-full;
+}
+
+/* ─── Glassmorphic Preview Image ─── */
+.previewImageContainer {
+  @apply
+    w-24 h-24 rounded-2xl overflow-hidden
+    bg-white/5
+    border border-white/12
+    flex items-center justify-center shrink-0
+    relative
+    shadow-[0_4px_16px_rgba(0,0,0,0.3)]
+    transition-all duration-500;
+}
+
+.previewImage {
+  @apply object-cover w-full h-full transition-transform duration-700 ease-out;
+}
+
+.previewImageContainer:hover .previewImage {
+  transform: scale(1.1);
+}
+
+.previewImageContainer:hover {
+  @apply shadow-[0_8px_28px_rgba(0,0,0,0.4),0_0_12px_rgba(255,20,147,0.08)] border-white/20;
+}
+
+/* ─── Meta Section ─── */
+.metaSection {
+  @apply flex flex-col gap-1.5 w-full text-center sm:text-left;
+}
+
+.orderNumber {
+  @apply text-sm font-extrabold text-text tracking-wide;
+}
+
+.customerName {
+  @apply text-xs text-text/60 font-medium;
+}
+
+.detailsBadge {
+  @apply
+    self-center sm:self-start
+    px-3 py-1.5
+    text-[10px] font-black uppercase tracking-wider
+    rounded-xl
+    bg-accent/[0.08] border border-accent/15
+    text-accent my-1
+    shadow-[0_0_8px_rgba(255,20,147,0.06)];
+}
+
+.dateText {
+  @apply text-[10px] text-text/40;
+}
+
+/* ─── Action Section ─── */
+.actionSection {
+  @apply flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full sm:w-auto;
+}
+
+.statusIndicator {
+  @apply shrink-0;
+}
+
+/* ─── Action Buttons with Shimmer ─── */
+.primaryBtn {
+  @apply
+    w-full sm:w-auto
+    px-6 py-2.5
+    rounded-xl font-bold
+    transition-all duration-200
+    cursor-pointer text-xs uppercase tracking-wider text-center
+    active:scale-[0.97]
+    relative overflow-hidden;
+}
+
+/* Shimmer on hover */
+.primaryBtn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transform: skewX(-20deg);
+}
+
+.primaryBtn:hover::after {
+  animation: shimmerBtn 1.2s infinite;
+}
+
+@keyframes shimmerBtn {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+.startBtn {
+  @apply
+    bg-gradient-to-r from-blue-500 to-blue-600
+    text-white
+    shadow-[0_4px_16px_rgba(59,130,246,0.25)]
+    hover:brightness-110 hover:shadow-[0_6px_24px_rgba(59,130,246,0.35)];
+}
+
+.readyBtn {
+  @apply
+    bg-gradient-to-r from-emerald-500 to-emerald-600
+    text-white
+    shadow-[0_4px_16px_rgba(16,185,129,0.25)]
+    hover:brightness-110 hover:shadow-[0_6px_24px_rgba(16,185,129,0.35)];
+}
+
+/* ─── Empty State ─── */
+.emptyState {
+  @apply flex flex-col items-center justify-center py-20 text-center text-text/50 gap-4;
+}
+
+.emptyIcon {
+  @apply w-12 h-12 opacity-20;
+}
+
+/* ─── Loader ─── */
+.loader {
+  @apply flex flex-col items-center justify-center gap-3 py-20 text-sm text-text/60 font-semibold;
+}

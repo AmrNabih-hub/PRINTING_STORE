@@ -1,0 +1,57 @@
+@reference "../../app/globals.css";
+
+.breakdownCard {
+  @apply p-6 flex flex-col gap-6 w-full;
+}
+
+.title {
+  @apply text-lg font-bold text-text border-b border-white/10 pb-3;
+}
+
+.priceList {
+  @apply flex flex-col gap-3;
+}
+
+.priceRow {
+  @apply flex justify-between items-center text-sm text-text/75;
+}
+
+.priceLabel {
+  @apply font-medium;
+}
+
+.priceValue {
+  @apply font-bold font-mono text-text;
+}
+
+.divider {
+  @apply h-px bg-white/10 my-1;
+}
+
+.subTotalRow {
+  @apply flex justify-between items-center text-sm font-semibold text-accent;
+}
+
+.discountRow {
+  @apply flex justify-between items-center text-sm text-emerald-500 font-semibold;
+}
+
+.totalRow {
+  @apply flex justify-between items-center text-lg font-extrabold border-t border-white/10 pt-4 mt-2;
+}
+
+.totalLabel {
+  @apply text-text;
+}
+
+.totalValue {
+  @apply font-mono text-xl text-transparent bg-clip-text bg-gradient-to-r from-accent to-text;
+}
+
+.warningBanner {
+  @apply p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-xs text-red-500 font-medium leading-normal flex flex-col gap-1;
+}
+
+.warningTitle {
+  @apply font-bold uppercase tracking-wider text-[10px];
+}

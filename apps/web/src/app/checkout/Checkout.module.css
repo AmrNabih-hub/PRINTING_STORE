@@ -1,0 +1,158 @@
+@reference "../../app/globals.css";
+
+.container {
+  @apply flex flex-col gap-8 py-4 px-2 sm:px-4;
+}
+
+.title {
+  @apply text-3xl font-extrabold tracking-tight bg-gradient-to-r from-accent via-text to-accent bg-clip-text text-transparent mb-2;
+}
+
+.subtitle {
+  @apply text-sm text-text/60;
+}
+
+.twoColumnLayout {
+  @apply grid grid-cols-1 lg:grid-cols-12 gap-8 items-start;
+}
+
+.leftColumn {
+  @apply lg:col-span-8 flex flex-col gap-6;
+}
+
+.rightColumn {
+  @apply lg:col-span-4 flex flex-col gap-6 sticky top-28;
+}
+
+.card {
+  @apply p-6 flex flex-col gap-5;
+}
+
+.previewCard {
+  @apply flex flex-col sm:flex-row gap-6 items-center p-6;
+}
+
+.previewImageContainer {
+  @apply w-32 h-32 sm:w-40 sm:h-40 rounded-xl overflow-hidden bg-white/5 border border-white/10 flex items-center justify-center relative shrink-0;
+}
+
+.previewImage {
+  @apply object-cover w-full h-full;
+}
+
+.previewDetails {
+  @apply flex flex-col gap-2 w-full text-center sm:text-left;
+}
+
+.previewTitle {
+  @apply font-bold text-lg text-text;
+}
+
+.previewBadge {
+  @apply self-center sm:self-start px-3 py-1 text-xs font-semibold rounded-full bg-accent/10 border border-accent/20 text-accent;
+}
+
+.inputGroup {
+  @apply flex flex-col gap-2;
+}
+
+.inputLabel {
+  @apply text-xs font-bold uppercase tracking-wider text-text/80;
+}
+
+.textInput {
+  @apply w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-text placeholder-text/30 outline-none transition-all duration-300 focus:border-accent/50 focus:bg-white/10 focus:ring-1 focus:ring-accent/30;
+}
+
+.dimensionsGrid {
+  @apply grid grid-cols-2 gap-4;
+}
+
+.promoWrapper {
+  @apply flex gap-2;
+}
+
+.promoInput {
+  @apply flex-grow;
+}
+
+.promoBtn {
+  @apply px-6 rounded-xl font-bold bg-white/10 text-text hover:bg-white/15 active:scale-[0.98] transition-all duration-200 cursor-pointer;
+}
+
+.promoError {
+  @apply text-xs text-red-500 font-medium;
+}
+
+.promoSuccess {
+  @apply text-xs text-emerald-500 font-medium;
+}
+
+.textarea {
+  @apply min-h-[100px] resize-none;
+}
+
+.payButton {
+  @apply w-full py-4 px-6 rounded-xl font-bold bg-accent text-midnight-bg hover:brightness-110 active:scale-[0.98] transition-all duration-200 shadow-lg shadow-accent/20 cursor-pointer text-center text-base;
+}
+
+.payButton:disabled {
+  @apply opacity-50 cursor-not-allowed active:scale-100;
+}
+
+/* Modal Styling */
+.modalOverlay {
+  @apply fixed inset-0 z-50 flex items-center justify-center bg-midnight-bg/85 backdrop-blur-md p-4;
+}
+
+.modalContent {
+  @apply w-full max-w-md p-8 md:p-10 shadow-2xl flex flex-col gap-6 border-white/10 dark:border-white/5;
+}
+
+.modalTitle {
+  @apply text-2xl font-extrabold text-text text-center;
+}
+
+.modalDesc {
+  @apply text-sm text-text/75 text-center leading-relaxed mb-4;
+}
+
+.modalBtnSuccess {
+  @apply w-full py-3.5 px-6 rounded-xl font-bold bg-emerald-500 text-white hover:brightness-110 active:scale-[0.98] transition-all duration-200 shadow-md shadow-emerald-500/20 cursor-pointer text-center;
+}
+
+.modalBtnFail {
+  @apply w-full py-3.5 px-6 rounded-xl font-bold bg-red-500 text-white hover:brightness-110 active:scale-[0.98] transition-all duration-200 shadow-md shadow-red-500/20 cursor-pointer text-center;
+}
+
+.modalCloseBtn {
+  @apply w-full py-3 px-6 rounded-xl font-semibold bg-white/5 text-text/60 hover:bg-white/10 active:scale-[0.98] transition-all duration-200 cursor-pointer text-center text-sm;
+}
+
+.presetGrid {
+  @apply grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4;
+}
+
+.presetCard {
+  @apply p-3.5 rounded-xl border border-white/10 bg-white/5 cursor-pointer text-center hover:bg-white/10 transition-all duration-200 flex flex-col gap-1 select-none;
+}
+
+.activePresetCard {
+  @apply border-accent/70 bg-accent/10 text-accent;
+}
+
+.presetLabel {
+  @apply text-xs font-black uppercase tracking-wider;
+}
+
+.presetDimensions {
+  @apply text-[10px] font-bold opacity-60 font-mono;
+}
+
+.selectInput {
+  @apply w-full px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-text outline-none transition-all duration-300 focus:border-accent/50 focus:bg-white/10 focus:ring-1 focus:ring-accent/30;
+}
+
+.selectInput option {
+  @apply bg-midnight-bg text-text;
+}

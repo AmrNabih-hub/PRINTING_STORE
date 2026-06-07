@@ -1,0 +1,95 @@
+@reference "../../app/globals.css";
+
+.footerContainer {
+  @apply w-full border-t border-white/10 dark:border-white/5 bg-white/3 dark:bg-white/1 backdrop-blur-md pt-16 pb-8 px-6 md:px-12 mt-24;
+}
+
+.footerInner {
+  @apply max-w-7xl mx-auto w-full flex flex-col gap-8;
+}
+
+.footerGrid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-10 pb-8;
+}
+
+.columnBrand {
+  @apply flex flex-col gap-4;
+}
+
+.brandLogo {
+  @apply flex items-center gap-3;
+}
+
+.logoIcon {
+  @apply flex items-center justify-center w-6 h-6 rounded-full bg-accent/10 border border-accent/30;
+}
+
+.logoDot {
+  @apply w-2 h-2 rounded-full bg-accent;
+}
+
+.brandTitle {
+  @apply font-black text-sm tracking-[0.1em] text-text;
+}
+
+.brandDesc {
+  @apply text-xs leading-relaxed text-text/60 max-w-sm;
+}
+
+.statusPanel {
+  @apply flex items-center gap-2 mt-1 text-[10px] font-bold text-text/50 uppercase tracking-wider;
+}
+
+.statusIndicatorConnected {
+  @apply w-2 h-2 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/50;
+  animation: pulseStatus 2s infinite ease-in-out;
+}
+
+@keyframes pulseStatus {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.statusText {
+  @apply font-bold text-[10px];
+}
+
+/* Links columns */
+.columnLinks {
+  @apply flex flex-col gap-4;
+}
+
+.columnHeader {
+  @apply text-xs font-black tracking-widest text-accent uppercase border-b border-white/5 pb-2;
+}
+
+.linkList {
+  @apply flex flex-col gap-2.5 list-none p-0 m-0;
+}
+
+.footerLink {
+  @apply text-xs font-medium text-text/60 transition-colors duration-300 hover:text-accent hover:opacity-100;
+}
+
+.supportInfoItem {
+  @apply text-xs text-text/50 font-medium;
+}
+
+/* Footer Bottom row */
+.footerBottom {
+  @apply border-t border-white/5 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left;
+}
+
+.copyrightText {
+  @apply text-[11px] font-medium text-text/40;
+}
+
+.footerLangBtn {
+  @apply text-[10px] font-black tracking-wide text-text/50 hover:text-accent border border-white/5 hover:border-accent/30 px-3 py-1.5 rounded-lg bg-white/3 hover:bg-accent/5 transition-all duration-300 cursor-pointer;
+}

@@ -1,0 +1,194 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "gallery": "Art Gallery",
+    "account": "Account Center",
+    "logout": "Sign Out",
+    "login": "Sign In",
+    "register": "Create Account",
+    "orders": "My Orders",
+    "checkout": "Checkout",
+    "admin": "Admin Control",
+    "fulfillment": "Fulfillment Board"
+  },
+  "common": {
+    "success": "Action completed successfully.",
+    "error": "An unexpected error occurred. Please try again.",
+    "loading": "Loading...",
+    "welcome": "Welcome back.",
+    "save": "Save",
+    "cancel": "Cancel",
+    "back": "Back"
+  },
+  "upload": {
+    "errorTooLarge": "File is too large! Maximum limit is {limit}MB.",
+    "errorFormat": "File format not supported. Please upload JPG, PNG, or TIFF image.",
+    "errorFailed": "Failed to upload asset. Please try again."
+  },
+  "warnings": {
+    "qualityTitle": "Print Quality Warning",
+    "qualityFallback": "Low resolution detected. Print details may be pixelated.",
+    "compressionTitle": "Compression Artifacts Detected",
+    "compressionDesc": "Digital compression artifacts found; fine print details may be degraded.",
+    "pricingTitle": "High Ink Density Alert",
+    "pricingDesc": "Extreme ink density relative to size detected. Request routed to manual review.",
+    "aiAuditFailed": "Automated print quality check is temporarily unavailable. Our prepress technicians will manually verify your design readiness before production.",
+    "ratioMismatchTitle": "Aspect Ratio Mismatch",
+    "ratioMismatchDesc": "Your design has a {designRatio} aspect ratio, but your print size is {printWidth}x{printHeight} cm. Some cropping or padding will occur.",
+    "ratioMatchTitle": "Perfect Fit",
+    "ratioMatchDesc": "Your selected print size matches your design's aspect ratio exactly. No cropping required.",
+    "recommendSizeTitle": "Recommended Print Dimensions:",
+    "dynamicQuality": "Low resolution ({dpi} DPI) detected. Details may be pixelated at {width}x{height}cm."
+  },
+  "auth": {
+    "loginTitle": "Sign In",
+    "registerTitle": "Create Your Account",
+    "emailLabel": "Email Address",
+    "passwordLabel": "Password",
+    "confirmPasswordLabel": "Confirm Password",
+    "fullNameLabel": "Full Name",
+    "loginButton": "Sign In",
+    "registerButton": "Create Account",
+    "noAccount": "Don't have an account? Sign up",
+    "hasAccount": "Already have an account? Sign in",
+    "invalidCredentials": "Invalid email or password.",
+    "emailExists": "This email is already registered.",
+    "passwordsDoNotMatch": "Passwords do not match.",
+    "passwordTooShort": "Password must be at least 8 characters.",
+    "requiredField": "This field is required."
+  },
+  "checkout": {
+    "title": "Configure Your Print",
+    "widthLabel": "Width (cm)",
+    "heightLabel": "Height (cm)",
+    "substrateLabel": "Print Material (Substrate)",
+    "frameLabel": "Frame Material",
+    "noFrame": "No Frame",
+    "promoLabel": "Promo Code",
+    "applyPromo": "Apply",
+    "shippingLabel": "Detailed Shipping Address",
+    "galleryOptIn": "Feature my print in the public gallery",
+    "payButton": "Place Order & Pay",
+    "priceBreakdown": "Price Breakdown",
+    "subtotal": "Subtotal (Substrate)",
+    "inkCost": "Estimated Ink Cost",
+    "frameCost": "Frame Cost",
+    "serviceFee": "Service Fee",
+    "baseTotal": "Production Cost",
+    "markupTotal": "Retail Price",
+    "discount": "Promo Discount",
+    "total": "Total Price (EGP)",
+    "marginWarning": "Margin protection rule violated. Pricing cannot be processed under this configuration.",
+    "simModalTitle": "Payment Gateway Simulation",
+    "simModalDesc": "Simulate the payment gateway response webhooks for validation testing.",
+    "simSuccess": "Simulate Successful Payment",
+    "simFail": "Simulate Failed Payment",
+    "processingOrder": "Processing your order securely...",
+    "invalidPromo": "Invalid or expired promo code.",
+    "promoSuccess": "Promo code applied successfully!"
+  },
+  "orders": {
+    "title": "My Orders",
+    "emptyState": "No orders yet — upload your first artwork to begin!",
+    "activeOrders": "Active Production Pipeline",
+    "sseStatus": {
+      "connected": "Live Stream Active",
+      "connecting": "Reconnecting Stream..."
+    },
+    "history": "Purchase History",
+    "orderId": "Order ID",
+    "date": "Date",
+    "dimensions": "Dimensions",
+    "status": {
+      "pending": "Pending Verification",
+      "processing": "Printing & Processing",
+      "ready_for_handover": "Ready for Handover",
+      "in_transit": "Out for Delivery",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled"
+    }
+  },
+  "admin": {
+    "title": "Admin Control Center",
+    "subtitle": "Manage permissions, inventory pricing formulas, and curation pipelines",
+    "tabs": {
+      "roles": "Role Manager",
+      "materials": "Inventory Rates",
+      "config": "System Pricing",
+      "gallery": "Gallery Audit"
+    },
+    "roles": {
+      "fullName": "Full Name",
+      "email": "Email Address",
+      "signedUp": "Signed Up",
+      "currentRole": "Current Role",
+      "controls": "Privilege Controls",
+      "options": {
+        "customer": "Customer",
+        "employee": "Employee",
+        "courier": "Courier",
+        "admin": "Admin"
+      }
+    },
+    "materials": {
+      "editTitle": "Update Material rate",
+      "newTitle": "Register New Material catalog item",
+      "name": "Name",
+      "type": "Type",
+      "unitName": "Unit Name",
+      "costPerUnit": "Cost Per Unit (EGP)",
+      "stockLevel": "Stock Level",
+      "namePlaceholder": "Matte Canvas Gold",
+      "unitPlaceholder": "sq_meter, cm, ml",
+      "btnUpdate": "Update",
+      "btnRegister": "Register",
+      "tblName": "Material Name",
+      "tblCategory": "Category",
+      "tblUnit": "Unit",
+      "tblCost": "Cost Base",
+      "tblStock": "Inventory Stock",
+      "tblControls": "Actions Control",
+      "btnEdit": "Edit",
+      "btnDelete": "Delete",
+      "deleteConfirm": "Are you sure you want to delete this material?"
+    },
+    "config": {
+      "cardTitle": "Constant Parameters",
+      "autoSaved": "Auto-saved on blur",
+      "valueLabel": "Config Value"
+    },
+    "gallery": {
+      "artist": "Artist: {name}",
+      "dimensions": "Dimensions: {width} x {height} cm",
+      "ordered": "Ordered: {date}",
+      "btnPublish": "Publish & Curate",
+      "emptyState": "Audit queue clear",
+      "emptyDesc": "No AI-approved orders requesting gallery placement.",
+      "modal": {
+        "title": "Publish to Public Gallery",
+        "subtitle": "Specify curation parameters for public search indexes.",
+        "displayTitle": "Display Title",
+        "description": "Curation Description",
+        "btnCurate": "Curate & Publish",
+        "publishing": "Publishing..."
+      }
+    }
+  },
+  "fulfillment": {
+    "title": "Fulfillment Hub",
+    "subtitle": "Prioritized queue for manual prints stretching & assembly",
+    "operator": "Workshop Operator",
+    "orderId": "Order ID: #{id}",
+    "customer": "Customer: {name}",
+    "sizing": "Sizing Configuration: {width} x {height} cm",
+    "received": "Received: {date}",
+    "startBtn": "Start Printing",
+    "starting": "Starting...",
+    "readyBtn": "Mark Ready",
+    "completing": "Completing...",
+    "emptyState": "Print Queue Clear",
+    "emptyDesc": "No pending or processing print tasks assigned to you.",
+    "fetchError": "Failed to retrieve assigned print queue.",
+    "unexpectedError": "An unexpected error occurred loading queue."
+  }
+}

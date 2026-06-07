@@ -1,0 +1,109 @@
+@reference "../../app/globals.css";
+
+.sectionTitle {
+  @apply text-lg font-bold text-text mb-4;
+}
+
+.grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6;
+}
+
+/* ─── Material Card ─── */
+.card {
+  @apply
+    relative p-5 rounded-2xl
+    border border-white/8
+    bg-gradient-to-br from-white/[0.05] to-white/[0.015]
+    backdrop-blur-xl
+    cursor-pointer select-none
+    transition-all duration-400
+    hover:border-accent/30 hover:from-white/[0.08] hover:to-white/[0.03]
+    hover:scale-[1.02] hover:-translate-y-0.5
+    hover:shadow-[0_8px_28px_rgba(0,0,0,0.3),0_0_15px_rgba(255,20,147,0.06)]
+    flex flex-col gap-2.5
+    overflow-hidden;
+}
+
+/* Subtle inner glow overlay on hover */
+.card::before {
+  content: '';
+  @apply absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-400 pointer-events-none;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255, 45, 120, 0.05) 0%, transparent 60%);
+}
+
+.card:hover::before {
+  @apply opacity-100;
+}
+
+/* ─── Selected Card ─── */
+.selectedCard {
+  @apply
+    border-accent/50
+    bg-gradient-to-br from-accent/[0.08] to-accent/[0.02]
+    ring-1 ring-accent/25
+    shadow-[0_4px_20px_rgba(255,20,147,0.1),0_0_12px_rgba(255,20,147,0.06)];
+}
+
+.selectedCard::before {
+  @apply opacity-100;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255, 45, 120, 0.08) 0%, transparent 60%);
+}
+
+.cardHeader {
+  @apply flex justify-between items-start;
+}
+
+.cardName {
+  @apply font-bold text-text text-sm sm:text-base;
+}
+
+/* ─── Radio Indicator with Glow ─── */
+.radioIndicator {
+  @apply
+    w-5 h-5 rounded-full
+    border-2 border-white/20
+    flex items-center justify-center
+    transition-all duration-400
+    bg-white/[0.03];
+}
+
+.selectedCard .radioIndicator {
+  @apply
+    border-accent bg-accent
+    shadow-[0_0_10px_rgba(255,20,147,0.4)];
+  animation: radioGlow 2s ease-in-out infinite;
+}
+
+@keyframes radioGlow {
+  0%, 100% { box-shadow: 0 0 8px rgba(255, 45, 120, 0.3); }
+  50% { box-shadow: 0 0 14px rgba(255, 45, 120, 0.5); }
+}
+
+.radioDot {
+  @apply w-2 h-2 rounded-full bg-midnight-bg opacity-0 transition-all duration-300;
+}
+
+.selectedCard .radioDot {
+  @apply opacity-100 scale-100;
+}
+
+.cardCost {
+  @apply text-xs font-semibold text-accent/80 mt-1;
+}
+
+.cardDetail {
+  @apply text-[11px] text-text/45 leading-relaxed;
+}
+
+/* ─── Loader / Error ─── */
+.loader {
+  @apply flex justify-center items-center py-12 text-sm text-text/60 gap-3 font-semibold;
+}
+
+.error {
+  @apply
+    p-4 rounded-xl
+    bg-red-500/8 border border-red-500/15
+    text-sm text-red-400 text-center font-medium
+    shadow-[0_0_12px_rgba(239,68,68,0.06)];
+}

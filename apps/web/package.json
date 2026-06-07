@@ -1,0 +1,37 @@
+{
+  "name": "@printing-store/web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1063.0",
+    "@aws-sdk/s3-request-presigner": "^3.1063.0",
+    "@printing-store/core-logic": "*",
+    "@tailwindcss/postcss": "^4.3.0",
+    "autoprefixer": "^10.5.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.40.0",
+    "jose": "^5.2.0",
+    "next": "16.2.7",
+    "postcss": "^8.5.15",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "sharp": "^0.34.5",
+    "tailwind-merge": "^3.6.0",
+    "tailwindcss": "^4.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "16.2.7",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.1"
+  }
+}

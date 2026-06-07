@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: printing-store-db-prod
+    restart: always
+    environment:
+      POSTGRES_DB: printing_store
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: supersecretpassword
+    volumes:
+      - pgdata_prod:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  pgbouncer:
+    image: edoburu/pgbouncer:latest
+    container_name: printing-store-pgbouncer-prod
+    restart: always
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: supersecretpassword
+      DB_NAME: printing_store
+      PORT: 6432
+      POOL_MODE: session
+      MAX_CLIENT_CONN: 1000
+      DEFAULT_POOL_SIZE: 20
+    depends_on:
+      - postgres
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    container_name: printing-store-web-prod
+    restart: always
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      DB_HOST: pgbouncer
+      DB_PORT: 6432
+      DB_USER: postgres
+      DB_PASSWORD: supersecretpassword
+      DB_DATABASE: printing_store
+    volumes:
+      - ./data/uploads:/app/apps/web/public/uploads
+    depends_on:
+      - pgbouncer
+
+  nginx:
+    image: nginx:alpine
+    container_name: printing-store-nginx-prod
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./data/uploads:/app/apps/web/public/uploads:ro
+    depends_on:
+      - web
+
+volumes:
+  pgdata_prod:
+    driver: local

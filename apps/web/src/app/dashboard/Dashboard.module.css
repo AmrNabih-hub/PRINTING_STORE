@@ -1,0 +1,112 @@
+@reference "../globals.css";
+
+.dashboardGrid {
+  @apply grid grid-cols-1 lg:grid-cols-3 gap-8 auto-rows-max mt-8;
+}
+
+.bentoItem {
+  @apply p-8 flex flex-col gap-5 shadow-xl border border-white/10 bg-white/5 backdrop-blur-xl rounded-3xl dark:border-white/5 transition-all duration-300;
+}
+
+.profileBox {
+  @apply flex flex-col md:flex-row md:items-center justify-between gap-5 bg-gradient-to-r from-accent/10 to-transparent p-8 rounded-3xl border border-white/10 dark:border-white/5 shadow-lg;
+}
+
+.uploadBox {
+  @apply lg:col-span-2 flex flex-col gap-5;
+}
+
+.calculatorBox {
+  @apply lg:col-span-1 flex flex-col gap-5;
+}
+
+.queueBox {
+  @apply lg:col-span-3 flex flex-col gap-5;
+}
+
+.sliderRow {
+  @apply flex flex-col gap-2.5 w-full;
+}
+
+.sliderLabel {
+  @apply flex justify-between text-xs font-bold text-text/60;
+}
+
+.rangeInput {
+  @apply w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-accent focus:outline-none transition-all duration-200;
+}
+
+.infoItem {
+  @apply flex justify-between items-center text-xs py-2 border-b border-white/5 text-text/75;
+}
+
+.infoValue {
+  @apply font-black text-accent text-sm;
+}
+
+/* Proceed to Checkout Button */
+.checkoutBtn {
+  @apply w-full mt-4 py-4 px-6 rounded-xl font-bold bg-accent text-midnight-bg hover:brightness-110 active:scale-[0.99] transition-all duration-200 shadow-lg shadow-accent/25 cursor-pointer text-center text-xs tracking-wider uppercase;
+}
+
+/* SSE Status indicator styles */
+.headerWithSSE {
+  @apply flex justify-between items-center border-b border-white/10 pb-3;
+}
+
+.sseStatusWrapper {
+  @apply flex items-center gap-2 text-[10px] font-black uppercase tracking-wider text-text/50;
+}
+
+.sseIndicator {
+  @apply w-2 h-2 rounded-full;
+  animation: pulseIndicator 2s infinite ease-in-out;
+}
+
+.sseIndicatorConnected {
+  @apply bg-emerald-500 shadow-sm shadow-emerald-500/50;
+}
+
+.sseIndicatorConnecting {
+  @apply bg-amber-500 shadow-sm shadow-amber-500/50;
+}
+
+.sseIndicatorDisconnected {
+  @apply bg-red-500 shadow-sm shadow-red-500/50;
+}
+
+@keyframes pulseIndicator {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* Order Queue layout */
+.orderList {
+  @apply flex flex-col gap-4 my-2;
+}
+
+.orderRow {
+  @apply flex items-center justify-between p-5 rounded-2xl bg-gradient-to-r from-white/[0.04] to-white/[0.01] border border-white/10 text-xs transition-all duration-500 hover:from-white/[0.08] hover:to-white/[0.02] hover:border-accent/35 hover:shadow-[0_8px_32px_0_rgba(0,0,0,0.25),0_0_15px_rgba(255,20,147,0.15)] hover:scale-[1.008];
+}
+
+.orderMeta {
+  @apply flex flex-col gap-1.5;
+}
+
+.orderTitle {
+  @apply font-extrabold text-text text-sm tracking-wide;
+}
+
+.orderSub {
+  @apply text-[10px] text-text/45 font-medium;
+}
+
+.emptyState {
+  @apply flex flex-col items-center justify-center py-12 text-center text-text/45 gap-3;
+}

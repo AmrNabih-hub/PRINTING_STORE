@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Glass-Canvas | Sovereign Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "tertiary-fixed": "#fff0c0",
+                "surface-container-high": "#1e1e30",
+                "on-tertiary-fixed-variant": "#665200",
+                "on-background": "#e8e0f0",
+                "on-tertiary": "#1a1000",
+                "on-primary": "#1a0010",
+                "secondary-container": "#004d3d",
+                "surface-container": "#141422",
+                "surface-container-low": "#111118",
+                "secondary-fixed": "#c0fff4",
+                "inverse-on-surface": "#0a0a12",
+                "primary-container": "#b3004e",
+                "on-primary-fixed": "#3d0020",
+                "on-primary-container": "#ffe0ec",
+                "surface-tint": "#ff2d78",
+                "on-tertiary-fixed": "#1a1000",
+                "inverse-primary": "#8c0038",
+                "error-container": "#3d0f0f",
+                "tertiary-container": "#665200",
+                "tertiary": "#ffe04a",
+                "secondary-fixed-dim": "#00e6b8",
+                "tertiary-fixed-dim": "#ffe04a",
+                "outline": "#5a5068",
+                "outline-variant": "#302840",
+                "on-secondary-container": "#c0fff4",
+                "surface-container-lowest": "#0a0a12",
+                "secondary": "#00ffcc",
+                "on-primary-fixed-variant": "#8c0038",
+                "error": "#ff4444",
+                "on-tertiary-container": "#fff0c0",
+                "on-error": "#1a0000",
+                "on-secondary": "#001a1a",
+                "primary": "#ff2d78",
+                "surface-bright": "#1a1a2e",
+                "on-surface": "#e8e0f0",
+                "surface-container-highest": "#28283e",
+                "on-secondary-fixed": "#001a1a",
+                "background": "#0a0a12",
+                "primary-fixed": "#ffe0ec",
+                "primary-fixed-dim": "#ff80aa",
+                "on-error-container": "#ffa0a0",
+                "surface-variant": "#1e1e30",
+                "inverse-surface": "#e8e0f0",
+                "on-secondary-fixed-variant": "#004d4d",
+                "surface": "#0f0f1a",
+                "on-surface-variant": "#a098b0",
+                "surface-dim": "#0f0f1a"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "margin-mobile": "16px",
+                "margin-desktop": "64px",
+                "gutter": "24px",
+                "unit": "4px",
+                "bento-gap": "20px"
+        },
+        "fontFamily": {
+                "headline": [
+                        "Sora"
+                ],
+                "display": [
+                        "Sora"
+                ],
+                "body": [
+                        "Inter"
+                ],
+                "label": [
+                        "Space Grotesk"
+                ]
+        },
+        "fontSize": {
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "1.3",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "1.5",
+                                "fontWeight": "400"
+                        }
+                ],
+                "display-lg": [
+                        "64px",
+                        {
+                                "lineHeight": "1.1",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "1",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-xl": [
+                        "40px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg-mobile": [
+                        "40px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex overflow-x-hidden selection:bg-primary selection:text-on-primary font-body">
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface border-r border-outline-variant/50 py-8 px-4 z-40">
+<div class="mb-12 px-4">
+<h1 class="font-display text-display-lg text-primary text-3xl mb-1 drop-shadow-[0_0_8px_rgba(255,45,120,0.5)]">Creator Hub</h1>
+<p class="font-label text-label-sm text-on-surface-variant uppercase tracking-widest text-secondary">Premium Tier</p>
+</div>
+<div class="flex flex-col gap-2 flex-grow">
+<!-- Active Tab: Home (Dashboard) -->
+<a class="flex items-center gap-4 bg-primary-container text-on-primary-container border border-primary/30 rounded-lg px-6 py-3 hover:scale-95 transition-transform duration-150 shadow-[0_0_15px_rgba(179,0,78,0.2)]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label text-label-sm font-bold uppercase tracking-wider">Home</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-primary px-6 py-3 transition-all duration-150 hover:bg-surface-variant/50 rounded-lg active:scale-95 hover:border hover:border-primary/20 border border-transparent" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label text-label-sm font-bold uppercase tracking-wider">Explore</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-secondary px-6 py-3 transition-all duration-150 hover:bg-surface-variant/50 rounded-lg active:scale-95 hover:border hover:border-secondary/20 border border-transparent" href="#">
+<span class="material-symbols-outlined">brush</span>
+<span class="font-label text-label-sm font-bold uppercase tracking-wider">Create</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-tertiary px-6 py-3 transition-all duration-150 hover:bg-surface-variant/50 rounded-lg active:scale-95 hover:border hover:border-tertiary/20 border border-transparent" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label text-label-sm font-bold uppercase tracking-wider">Orders</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-on-surface px-6 py-3 transition-all duration-150 hover:bg-surface-variant/50 rounded-lg active:scale-95 hover:border hover:border-outline/20 border border-transparent" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label text-label-sm font-bold uppercase tracking-wider">Settings</span>
+</a>
+</div>
+<button class="mt-auto bg-primary text-on-primary font-label text-label-sm rounded-lg py-4 px-6 hover:bg-primary-fixed hover:text-on-primary-fixed transition-all duration-150 active:scale-95 uppercase tracking-widest font-bold shadow-[0_0_20px_rgba(255,45,120,0.4)] hover:shadow-[0_0_30px_rgba(255,45,120,0.6)]">
+            New Canvas
+        </button>
+</nav>
+<!-- TopNavBar (Mobile Fallback / Top Strip) -->
+<nav class="md:hidden fixed top-0 left-0 right-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant/50">
+<div class="flex justify-between items-center w-full px-margin-mobile py-unit mx-auto">
+<span class="font-display text-display-lg-mobile text-primary drop-shadow-[0_0_8px_rgba(255,45,120,0.5)] tracking-tighter text-2xl">Glass-Canvas</span>
+<div class="flex gap-4 text-secondary">
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-variant p-2 rounded-lg transition-all duration-150 active:scale-95 hover:text-primary">shopping_cart</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-variant p-2 rounded-lg transition-all duration-150 active:scale-95 hover:text-primary">account_circle</span>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 p-margin-mobile md:p-margin-desktop pt-24 md:pt-margin-desktop min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-surface-bright via-background to-background">
+<!-- Header -->
+<header class="mb-12 flex justify-between items-end flex-wrap gap-6 border-b border-outline-variant/30 pb-6">
+<div>
+<h2 class="font-headline text-headline-xl text-on-surface mb-2 tracking-tight">Sovereign Oversight</h2>
+<p class="font-body text-body-md text-on-surface-variant font-medium">Global exhibition status and network integrity.</p>
+</div>
+<div class="bg-surface-container-high px-6 py-3 rounded-lg flex items-center gap-3 shadow-[0_0_10px_rgba(0,255,204,0.1)] border border-secondary/30 backdrop-blur-sm">
+<span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(0,255,204,0.8)] animate-pulse"></span>
+<span class="font-label text-label-sm text-secondary font-bold uppercase tracking-widest">System Optimal</span>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-bento-gap">
+<!-- Global Exhibition Analytics (Spans 8 cols) -->
+<section class="md:col-span-8 bg-surface-container rounded-xl p-8 relative overflow-hidden shadow-lg border border-primary/20 backdrop-blur-md" id="analytics-card">
+<!-- Cyberpunk grid background accent -->
+<div class="absolute inset-0 bg-[linear-gradient(rgba(255,45,120,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,45,120,0.03)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none"></div>
+<div class="flex justify-between items-start mb-8 relative z-10">
+<div>
+<h3 class="font-headline text-headline-lg text-on-surface mb-1">Global Traffic</h3>
+<p class="font-label text-label-sm text-primary uppercase tracking-widest font-bold">Live Viewers</p>
+</div>
+<span class="material-symbols-outlined text-primary text-3xl drop-shadow-[0_0_8px_rgba(255,45,120,0.5)]">monitoring</span>
+</div>
+<div aria-hidden="true" class="h-64 w-full relative z-10 flex items-end gap-3">
+<!-- High-fidelity Faux Chart Bars - Cyberpunk Style -->
+<div class="w-full bg-primary/20 border-t-2 border-primary shadow-[0_-5px_15px_rgba(255,45,120,0.2)] h-[30%] rounded-t-sm hover:bg-primary/40 transition-colors duration-300"></div>
+<div class="w-full bg-primary/30 border-t-2 border-primary shadow-[0_-5px_15px_rgba(255,45,120,0.3)] h-[45%] rounded-t-sm hover:bg-primary/50 transition-colors duration-300"></div>
+<div class="w-full bg-primary/20 border-t-2 border-primary shadow-[0_-5px_15px_rgba(255,45,120,0.2)] h-[20%] rounded-t-sm hover:bg-primary/40 transition-colors duration-300"></div>
+<div class="w-full bg-primary/50 border-t-2 border-primary shadow-[0_-5px_15px_rgba(255,45,120,0.4)] h-[60%] rounded-t-sm hover:bg-primary/70 transition-colors duration-300"></div>
+<div class="w-full bg-primary border-t-2 border-primary-fixed shadow-[0_0_25px_rgba(255,45,120,0.8)] h-[90%] rounded-t-sm hover:bg-primary-fixed transition-all duration-300 relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface-container-high border border-primary px-3 py-1.5 rounded-sm text-xs font-label text-primary font-bold opacity-0 group-hover:opacity-100 transition-opacity shadow-[0_0_10px_rgba(255,45,120,0.3)] uppercase tracking-wider">Peak</div>
+</div>
+<div class="w-full bg-primary/40 border-t-2 border-primary shadow-[0_-5px_15px_rgba(255,45,120,0.3)] h-[50%] rounded-t-sm hover:bg-primary/60 transition-colors duration-300"></div>
+<div class="w-full bg-primary/30 border-t-2 border-primary shadow-[0_-5px_15px_rgba(255,45,120,0.2)] h-[35%] rounded-t-sm hover:bg-primary/50 transition-colors duration-300"></div>
+</div>
+</section>
+<!-- System Integrity (Spans 4 cols) -->
+<section class="md:col-span-4 bg-surface-container rounded-xl p-8 relative overflow-hidden shadow-lg border border-secondary/20 flex flex-col backdrop-blur-md" id="integrity-card">
+<h3 class="font-headline text-headline-lg text-on-surface mb-6 relative z-10">Print Network</h3>
+<div class="flex flex-col gap-6 relative z-10 flex-grow justify-center">
+<div class="flex justify-between items-center border-b border-outline-variant/50 pb-4 group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary group-hover:text-secondary-fixed transition-colors">router</span>
+<span class="font-body text-body-md text-on-surface font-medium">EU Central</span>
+</div>
+<span class="font-label text-label-sm text-secondary font-bold tracking-widest drop-shadow-[0_0_5px_rgba(0,255,204,0.5)]">99.9%</span>
+</div>
+<div class="flex justify-between items-center border-b border-outline-variant/50 pb-4 group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary group-hover:text-secondary-fixed transition-colors">router</span>
+<span class="font-body text-body-md text-on-surface font-medium">US East</span>
+</div>
+<span class="font-label text-label-sm text-secondary font-bold tracking-widest drop-shadow-[0_0_5px_rgba(0,255,204,0.5)]">99.8%</span>
+</div>
+<div class="flex justify-between items-center bg-error-container/20 -mx-4 px-4 py-3 rounded-lg border border-error/30">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-error animate-pulse">warning</span>
+<span class="font-body text-body-md text-on-surface font-medium">APAC Edge</span>
+</div>
+<span class="font-label text-label-sm text-error animate-pulse font-bold tracking-widest uppercase drop-shadow-[0_0_8px_rgba(255,68,68,0.5)]">Syncing</span>
+</div>
+</div>
+</section>
+<!-- Artist Onboarding Queue (Spans full width, 12 cols) -->
+<section class="md:col-span-12 bg-surface-container rounded-xl p-8 relative overflow-hidden shadow-lg border border-outline-variant/50 backdrop-blur-md" id="queue-card">
+<div class="flex justify-between items-center mb-8 relative z-10">
+<h3 class="font-headline text-headline-lg text-on-surface">Artist Queue</h3>
+<button class="text-tertiary hover:text-tertiary-fixed transition-colors font-label text-label-sm uppercase tracking-widest hover:bg-tertiary/10 px-4 py-2 rounded-lg border border-tertiary/30 hover:border-tertiary active:scale-95 duration-150 font-bold shadow-[0_0_10px_rgba(255,224,74,0.1)]">View All</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
+<!-- Queue Item 1 -->
+<div class="bg-surface-container-high rounded-xl p-6 border border-outline-variant hover:border-primary/50 transition-colors flex flex-col gap-4 group/card hover:shadow-[0_0_15px_rgba(255,45,120,0.1)]">
+<div class="flex justify-between items-start">
+<div class="w-14 h-14 rounded-lg bg-surface flex items-center justify-center overflow-hidden border-2 border-outline-variant group-hover/card:border-primary transition-colors shadow-[0_0_10px_rgba(0,0,0,0.5)]">
+<img alt="Elena Rostova Avatar" class="w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-300 mix-blend-luminosity group-hover/card:mix-blend-normal" data-alt="A sophisticated close-up portrait of a contemporary artist in a dimly lit, high-end studio setting. The lighting is moody and dramatic, featuring deep blacks and a subtle indigo rim light that aligns with a premium glassmorphism aesthetic. The mood is intense and creative, capturing a modern 'quiet luxury' vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWxWlUVqF2WCnbP0XKSA9xC7y42U6cFJr0zcX8VC4xdo-7Iw08RqTk_5r4LfgNs-M1hdmVTSrvSha8WIHOyH96ZqinAYP2HALyyhl7MiSAl16NYG6rM3MeiRxc1RTw4dKMffY6gRv08aJl2TZdHO20c1L9HY1MO6ckZiOAzs9CzVdhQxZ1bI5nBK-hOx1KsMmklamXA26IEzYyzs0O1BnWFSHYa-F544cgwRBbOqP5X-ZcKu1fvjeTrYr5Kt4WFoDklYGqjyfXGaUF"/>
+</div>
+<span class="px-3 py-1.5 rounded-sm text-[10px] font-bold tracking-widest bg-tertiary-container/30 text-tertiary uppercase border border-tertiary/50 drop-shadow-[0_0_5px_rgba(255,224,74,0.3)]">Pending Review</span>
+</div>
+<div>
+<h4 class="font-headline text-body-md text-on-surface font-semibold text-lg tracking-wide">Elena Rostova</h4>
+<p class="font-label text-label-sm text-on-surface-variant mt-1 uppercase tracking-wider">Digital / Generative</p>
+</div>
+<div class="flex gap-3 mt-4">
+<button class="flex-1 bg-surface-container hover:bg-surface-variant text-on-surface font-label py-2.5 rounded-lg transition-all duration-150 active:scale-95 border border-outline-variant hover:border-outline font-bold uppercase tracking-wider text-xs">Decline</button>
+<button class="flex-1 bg-primary/20 text-primary hover:bg-primary hover:text-on-primary border border-primary font-label py-2.5 rounded-lg transition-all duration-150 active:scale-95 font-bold uppercase tracking-wider text-xs shadow-[0_0_10px_rgba(255,45,120,0.2)] hover:shadow-[0_0_20px_rgba(255,45,120,0.5)]">Approve</button>
+</div>
+</div>
+<!-- Queue Item 2 -->
+<div class="bg-surface-container-high rounded-xl p-6 border border-outline-variant hover:border-secondary/50 transition-colors flex flex-col gap-4 group/card hover:shadow-[0_0_15px_rgba(0,255,204,0.1)]">
+<div class="flex justify-between items-start">
+<div class="w-14 h-14 rounded-lg bg-surface flex items-center justify-center overflow-hidden border-2 border-outline-variant group-hover/card:border-secondary transition-colors shadow-[0_0_10px_rgba(0,0,0,0.5)]">
+<img alt="Marcus Chen Avatar" class="w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-300 mix-blend-luminosity group-hover/card:mix-blend-normal" data-alt="A portrait of a male digital sculptor standing against a dark, textured charcoal background. Soft, diffused lighting creates gentle reflections on his glasses, hinting at a modern digital gallery environment. The color palette is muted with deep blacks, emphasizing a premium, focused, and sophisticated atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuABXoZRUDPAiFQzBuvkWl0AxbxQSqHQVMwlg2FFXfKS1JPjbfdSeXJ28Mp6vTRfR8U8Z6-WeLxfUXVfKhEPG0WW6A_xX0zeSXP7JMmNdyQyJT2EEt75DC4-Umlt9DhuOHGZCUioRyK5OrLvx1mUMuooaUM2FYJ8kf6x1IKGJm1z-qqDUyjU7PWg-yfrVvi4mOBo-jsdFF9JROJm5Cd3I_PdRpikZnpZEAA8gBdOoYWwq0dCF1uUp7HWgAGZyUiTay7C8qIirCXHDPqC"/>
+</div>
+<span class="px-3 py-1.5 rounded-sm text-[10px] font-bold tracking-widest bg-secondary-container/30 text-secondary uppercase border border-secondary/50 drop-shadow-[0_0_5px_rgba(0,255,204,0.3)]">Awaiting Portfolio</span>
+</div>
+<div>
+<h4 class="font-headline text-body-md text-on-surface font-semibold text-lg tracking-wide">Marcus Chen</h4>
+<p class="font-label text-label-sm text-on-surface-variant mt-1 uppercase tracking-wider">3D / Voxel</p>
+</div>
+<div class="flex gap-3 mt-4">
+<button class="flex-1 bg-secondary/10 hover:bg-secondary/20 text-secondary border border-secondary/50 hover:border-secondary font-label py-2.5 rounded-lg transition-all duration-150 active:scale-95 font-bold uppercase tracking-wider text-xs shadow-[0_0_10px_rgba(0,255,204,0.1)]">Remind</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

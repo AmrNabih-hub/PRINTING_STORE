@@ -1,0 +1,105 @@
+@reference "../../app/globals.css";
+
+.container {
+  @apply flex flex-col gap-6 py-4 px-2 sm:px-4;
+}
+
+.title {
+  @apply text-3xl font-extrabold tracking-tight bg-gradient-to-r from-accent via-text to-accent bg-clip-text text-transparent mb-2;
+}
+
+.subtitle {
+  @apply text-sm text-text/60 mb-4;
+}
+
+.orderList {
+  @apply flex flex-col gap-4;
+}
+
+.orderCard {
+  @apply p-5 flex flex-col cursor-pointer transition-all duration-300 hover:border-accent/30;
+}
+
+.orderHeader {
+  @apply flex flex-col sm:flex-row justify-between sm:items-center gap-3 w-full;
+}
+
+.orderMeta {
+  @apply flex flex-col gap-1;
+}
+
+.orderTitle {
+  @apply font-bold text-text text-base;
+}
+
+.orderDate {
+  @apply text-xs text-text/50;
+}
+
+.headerRight {
+  @apply flex items-center justify-between sm:justify-end gap-4;
+}
+
+.orderPrice {
+  @apply font-mono font-bold text-base text-accent;
+}
+
+.expandContainer {
+  @apply overflow-hidden border-t border-white/10 mt-4 pt-4;
+}
+
+.detailsGrid {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-6 text-sm;
+}
+
+.detailSection {
+  @apply flex flex-col gap-3;
+}
+
+.sectionTitle {
+  @apply text-xs font-bold uppercase tracking-wider text-text/50 border-b border-white/5 pb-1;
+}
+
+.row {
+  @apply flex justify-between text-xs py-1 text-text/75;
+}
+
+.rowLabel {
+  @apply font-medium;
+}
+
+.rowValue {
+  @apply font-bold font-mono text-text;
+}
+
+.rowValueSuccess {
+  @apply text-emerald-500 font-bold;
+}
+
+.totalRow {
+  @apply flex justify-between text-sm font-extrabold border-t border-white/5 pt-2 mt-1 text-text;
+}
+
+.totalValue {
+  @apply text-accent font-mono;
+}
+
+.shippingText {
+  @apply text-xs leading-relaxed text-text/75 bg-white/5 p-3 rounded-lg border border-white/5 font-medium;
+}
+
+.previewThumb {
+  @apply w-12 h-12 rounded bg-white/5 border border-white/10 object-cover shrink-0;
+}
+
+.previewWrapper {
+  @apply flex items-center gap-3 mt-2;
+}
+
+.emptyState {
+  @apply flex flex-col items-center justify-center py-20 text-center text-text/50 gap-4;
+}
+
+.loader {
+  @apply flex justify-center items-center py-20 text-sm text-text/60 gap-3 font-semibold;
+}
