@@ -1,19 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { query } from '@/lib/db';
+import { getCloudflareContext } from '@/lib/cloudflare';
+import { drizzle } from 'drizzle-orm/d1';
+import { eq, desc, count } from 'drizzle-orm';
+import { orders as ordersSchema } from 'core-logic/src/schema';
 
+export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
-
-interface OrderRow {
-  id: string;
-  status: string;
-  width_cm: string;
-  height_cm: string;
-  file_url: string;
-  price_egp: string;
-  discount_applied_egp: string;
-  price_breakdown: any;
-  created_at: string;
-}
 
 export async function GET(request: NextRequest) {
   try {
@@ -29,35 +21,41 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '20', 10);
     const offset = (page - 1) * limit;
 
-    // 3. Query user orders
-    const countRes = await query(
-      'SELECT COUNT(*) FROM public.orders WHERE customer_id = $1',
-      [userId]
-    );
-    const totalCount = parseInt(countRes.rows[0]?.count || '0', 10);
+    // 3. Connect to D1 via Drizzle
+    const { DB } = await getCloudflareContext();
+    const db = drizzle(DB);
 
-    const ordersRes = await query(
-      `SELECT id, status, width_cm, height_cm, file_url, price_egp, 
-              discount_applied_egp, price_breakdown, created_at
-       FROM public.orders
-       WHERE customer_id = $1
-       ORDER BY created_at DESC
-       LIMIT $2 OFFSET $3`,
-      [userId, limit, offset]
-    );
+    // 4. Query total count
+    const totalCountRes = await db
+      .select({ value: count() })
+      .from(ordersSchema)
+      .where(eq(ordersSchema.customerId, userId));
+    const totalCount = totalCountRes[0]?.value || 0;
 
-    const orders = (ordersRes.rows as OrderRow[]).map(row => ({
-      id: row.id,
-      status: row.status,
-      widthCm: parseFloat(row.width_cm),
-      heightCm: parseFloat(row.height_cm),
-      fileUrl: row.file_url,
-      priceEgp: parseFloat(row.price_egp),
-      discountAppliedEgp: parseFloat(row.discount_applied_egp),
-      priceBreakdown: typeof row.price_breakdown === 'string' 
-        ? JSON.parse(row.price_breakdown) 
-        : row.price_breakdown,
-      createdAt: row.created_at,
+    // 5. Query orders
+    const ordersData = await db
+      .select({
+        id: ordersSchema.id,
+        status: ordersSchema.status,
+        widthCm: ordersSchema.widthCm,
+        heightCm: ordersSchema.heightCm,
+        fileUrl: ordersSchema.fileUrl,
+        priceEgp: ordersSchema.priceEgp,
+        discountAppliedEgp: ordersSchema.discountAppliedEgp,
+        priceBreakdown: ordersSchema.priceBreakdown,
+        createdAt: ordersSchema.createdAt,
+      })
+      .from(ordersSchema)
+      .where(eq(ordersSchema.customerId, userId))
+      .orderBy(desc(ordersSchema.createdAt))
+      .limit(limit)
+      .offset(offset);
+
+    const orders = ordersData.map(row => ({
+      ...row,
+      priceBreakdown: typeof row.priceBreakdown === 'string'
+        ? JSON.parse(row.priceBreakdown)
+        : row.priceBreakdown,
     }));
 
     return NextResponse.json({

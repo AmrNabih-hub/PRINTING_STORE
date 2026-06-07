@@ -1,246 +1,119 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useTranslation } from '@/context/TranslationContext';
-import GlassCard from '@/components/glass/GlassCard';
-import OrderStatusBadge from '@/components/dashboard/OrderStatusBadge';
-import { OrderStatus } from '@printing-store/core-logic';
-import styles from './Fulfillment.module.css';
+import React, { useEffect, useState } from 'react';
 
-interface AssignedOrder {
+interface Material {
   id: string;
-  status: OrderStatus;
-  widthCm: number;
-  heightCm: number;
-  fileUrl: string;
-  priceEgp: number;
-  createdAt: string;
-  customerName: string;
+  name: string;
+  type: string;
+  basePriceEgp: number;
+  stockLevel: number;
+  stockUnit: string;
+  isAvailable: boolean;
 }
 
-export default function FulfillmentPage() {
-  const router = useRouter();
-  const { t, locale } = useTranslation();
-
-  const [orders, setOrders] = useState<AssignedOrder[]>([]);
+export default function FulfillmentDashboard() {
+  const [materials, setMaterials] = useState<Material[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const [mutatingOrderId, setMutatingOrderId] = useState<string | null>(null);
-  const [stockError, setStockError] = useState<{ id: string; message: string } | null>(null);
-
-  const loadAssignedOrders = useCallback(async () => {
-    try {
-      const res = await fetch('/api/orders/assigned');
-      if (!res.ok) {
-        if (res.status === 403) {
-          // Silent redirection to standard dashboard if user is not employee/admin
-          router.push('/dashboard');
-          return;
-        }
-        throw new Error(t('fulfillment.fetchError'));
-      }
-      const data = await res.json();
-      setOrders(data.orders || []);
-    } catch (err: unknown) {
-      const errMsg = err instanceof Error ? err.message : t('fulfillment.unexpectedError');
-      setError(errMsg);
-    } finally {
-      setLoading(false);
-    }
-  }, [router]);
 
   useEffect(() => {
-    // Authenticate user session immediately
-    async function checkAuth() {
-      try {
-        const res = await fetch('/api/auth/me');
-        const data = await res.json();
-        if (!data.authenticated || (data.user.role !== 'employee' && data.user.role !== 'admin')) {
-          router.push('/dashboard');
-        } else {
-          loadAssignedOrders();
-        }
-      } catch {
-        router.push('/dashboard');
-      }
-    }
-
-    checkAuth();
-  }, [router, loadAssignedOrders]);
-
-  async function handleUpdateStatus(orderId: string, newStatus: 'processing' | 'ready_for_handover') {
-    setMutatingOrderId(orderId);
-    setStockError(null);
-
-    try {
-      const res = await fetch('/api/orders/update-state', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ orderId, status: newStatus }),
+    fetch('/api/admin/materials')
+      .then(r => r.json())
+      .then(data => {
+        if (data.materials) setMaterials(data.materials);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Failed to fetch materials', err);
+        setLoading(false);
       });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        if (data.error === 'INSUFFICIENT_STOCK') {
-          setStockError({ id: orderId, message: data.message });
-        } else {
-          alert(data.message || t('common.error'));
-        }
-        return;
-      }
-
-      // Successful update -> reload orders queue
-      await loadAssignedOrders();
-    } catch {
-      alert(t('common.error'));
-    } finally {
-      setMutatingOrderId(null);
-    }
-  }
-
-  function formatDate(dateStr: string) {
-    try {
-      const d = new Date(dateStr);
-      return d.toLocaleDateString(locale === 'ar-eg' ? 'ar-EG' : 'en-US', {
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-      });
-    } catch {
-      return dateStr;
-    }
-  }
-
-  if (loading) {
-    return (
-      <div className={styles.loader}>
-        <div className="w-6 h-6 rounded-full border-2 border-accent border-t-transparent animate-spin" />
-        {t('common.loading')}
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className={styles.container}>
-        <GlassCard className="p-6 text-center text-red-500 font-bold border-red-500/20 bg-red-500/10">
-          {error}
-        </GlassCard>
-      </div>
-    );
-  }
+  }, []);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <div>
-          <h1 className={styles.title}>{t('fulfillment.title')}</h1>
-          <p className={styles.subtitle}>{t('fulfillment.subtitle')}</p>
-        </div>
-        <span className={styles.employeeBadge}>{t('fulfillment.operator')}</span>
+    <div className="min-h-screen bg-[#0a0a0a] bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.15),rgba(255,255,255,0))] p-8 text-neutral-100 font-sans">
+      <div className="max-w-7xl mx-auto space-y-12">
+        <header className="flex justify-between items-end border-b border-white/10 pb-6">
+          <div className="space-y-1">
+            <h1 className="text-4xl font-semibold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-neutral-400">
+              Fulfillment Ops
+            </h1>
+            <p className="text-neutral-500 text-sm">Material inventory and catalog management.</p>
+          </div>
+        </header>
+
+        <section className="relative overflow-hidden rounded-3xl bg-white/[0.02] backdrop-blur-2xl border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+          <div className="flex items-center justify-between p-6 border-b border-white/5 bg-white/[0.01]">
+            <h2 className="text-lg font-medium text-neutral-200">Material Inventory</h2>
+            <div className="flex items-center gap-3">
+              <div className="text-xs font-mono text-neutral-500 bg-black/40 px-3 py-1.5 rounded-full border border-white/5">
+                {materials.length} total items
+              </div>
+            </div>
+          </div>
+          
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm text-left whitespace-nowrap">
+              <thead className="text-xs uppercase tracking-wider bg-black/20 text-neutral-500">
+                <tr>
+                  <th className="px-8 py-5 font-medium">Material</th>
+                  <th className="px-8 py-5 font-medium">Type</th>
+                  <th className="px-8 py-5 font-medium">Unit Price</th>
+                  <th className="px-8 py-5 font-medium">Stock Level</th>
+                  <th className="px-8 py-5 font-medium">Status</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5">
+                {loading ? (
+                  <tr>
+                    <td colSpan={5} className="px-8 py-12 text-center">
+                      <div className="inline-block h-6 w-6 animate-spin rounded-full border-2 border-white/20 border-t-white"></div>
+                    </td>
+                  </tr>
+                ) : materials.map(item => (
+                  <tr key={item.id} className="hover:bg-white/[0.02] transition-colors group">
+                    <td className="px-8 py-4 font-medium text-neutral-200">
+                      {item.name}
+                      <div className="text-[10px] text-neutral-600 font-mono mt-1">{item.id.slice(0, 8)}...</div>
+                    </td>
+                    <td className="px-8 py-4">
+                      <span className="px-3 py-1 rounded-full text-[10px] font-semibold tracking-wide uppercase bg-white/5 text-neutral-300 border border-white/10">
+                        {item.type}
+                      </span>
+                    </td>
+                    <td className="px-8 py-4 font-mono text-neutral-300">
+                      {item.basePriceEgp?.toFixed(2)} EGP <span className="text-neutral-600 text-xs">/ {item.stockUnit}</span>
+                    </td>
+                    <td className="px-8 py-4">
+                      <div className="flex items-center gap-2">
+                        <div className={`h-1.5 w-1.5 rounded-full ${item.stockLevel > 50 ? 'bg-emerald-500' : item.stockLevel > 10 ? 'bg-amber-500' : 'bg-red-500'}`}></div>
+                        <span className="text-neutral-300 font-mono">{item.stockLevel}</span>
+                      </div>
+                    </td>
+                    <td className="px-8 py-4">
+                      {item.isAvailable ? (
+                        <span className="text-emerald-400 text-xs font-medium flex items-center gap-1.5">
+                          Available
+                        </span>
+                      ) : (
+                        <span className="text-neutral-500 text-xs font-medium flex items-center gap-1.5">
+                          Unavailable
+                        </span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+                {!loading && materials.length === 0 && (
+                  <tr>
+                    <td colSpan={5} className="px-8 py-12 text-center text-neutral-500 font-medium">
+                      No materials available in catalog.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </section>
       </div>
-
-      {orders.length > 0 ? (
-        <div className={styles.taskList}>
-          <AnimatePresence mode="popLayout">
-            {orders.map((order) => {
-              const isMutating = mutatingOrderId === order.id;
-              const hasStockErr = stockError?.id === order.id;
-
-              return (
-                <motion.div
-                  key={order.id}
-                  layout
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 20 }}
-                  transition={{ type: 'spring', stiffness: 100 }}
-                >
-                  <GlassCard className={styles.taskCard}>
-                    <div className={styles.taskInfo}>
-                      <div className={styles.previewImageContainer}>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={order.fileUrl}
-                          alt="Artwork Preview"
-                          className={styles.previewImage}
-                        />
-                      </div>
-                      <div className={styles.metaSection}>
-                        <span className={styles.orderNumber}>
-                          {t('fulfillment.orderId').replace('{id}', order.id.slice(0, 8))}
-                        </span>
-                        <span className={styles.customerName}>
-                          {t('fulfillment.customer').replace('{name}', order.customerName)}
-                        </span>
-                        <span className={styles.detailsBadge}>
-                          {t('fulfillment.sizing')
-                            .replace('{width}', String(order.widthCm))
-                            .replace('{height}', String(order.heightCm))}
-                        </span>
-                        <span className={styles.dateText}>
-                          {t('fulfillment.received').replace('{date}', formatDate(order.createdAt))}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className={styles.actionSection}>
-                      <div className={styles.statusIndicator}>
-                        <OrderStatusBadge status={order.status} />
-                      </div>
-
-                      {order.status === 'pending' && (
-                        <button
-                          type="button"
-                          onClick={() => handleUpdateStatus(order.id, 'processing')}
-                          disabled={isMutating}
-                          className={`${styles.primaryBtn} ${styles.startBtn}`}
-                        >
-                          {isMutating ? t('fulfillment.starting') : t('fulfillment.startBtn')}
-                        </button>
-                      )}
-
-                      {order.status === 'processing' && (
-                        <button
-                          type="button"
-                          onClick={() => handleUpdateStatus(order.id, 'ready_for_handover')}
-                          disabled={isMutating}
-                          className={`${styles.primaryBtn} ${styles.readyBtn}`}
-                        >
-                          {isMutating ? t('fulfillment.completing') : t('fulfillment.readyBtn')}
-                        </button>
-                      )}
-                    </div>
-                  </GlassCard>
-
-                  {/* Stock Constraint Alert */}
-                  {hasStockErr && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      className="mt-2 p-3.5 rounded-xl bg-red-500/10 border border-red-500/20 text-xs text-red-500 font-semibold max-w-lg"
-                    >
-                      ⚠️ {stockError.message}
-                    </motion.div>
-                  )}
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
-        </div>
-      ) : (
-        <div className={styles.emptyState}>
-          <svg className={styles.emptyIcon} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
-          </svg>
-          <p className="text-sm font-semibold">{t('fulfillment.emptyState')}</p>
-          <p className="text-xs text-text/40 -mt-2">{t('fulfillment.emptyDesc')}</p>
-        </div>
-      )}
     </div>
   );
 }

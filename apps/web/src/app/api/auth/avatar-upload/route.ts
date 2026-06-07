@@ -1,71 +1,85 @@
-import { NextRequest, NextResponse } from 'next/server';
-import path from 'path';
-import fs from 'fs';
-import { verifySessionToken } from '@printing-store/core-logic';
-import { query } from '@/lib/db';
+import { NextRequest, NextResponse } from "next/server";
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { verifySessionToken } from "@printing-store/core-logic";
+import { getCloudflareContext } from "@/lib/cloudflare";
+import { drizzle } from "drizzle-orm/d1";
+import { eq } from "drizzle-orm";
+import { profiles } from "core-logic/src/schema";
 
-export const runtime = 'nodejs';
-export const dynamic = 'force-dynamic';
+export const runtime = 'edge';
 
 export async function POST(request: NextRequest) {
   try {
+    const { filename, contentType } = await request.json();
+
+    if (!filename || !contentType) {
+      return NextResponse.json({ error: "Missing filename or contentType" }, { status: 400 });
+    }
+
     const cookieToken = request.cookies.get('session_token')?.value;
     const authHeader = request.headers.get('authorization');
     const bearerToken = authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : null;
     const token = bearerToken || cookieToken;
 
     if (!token) {
-      return NextResponse.json({ error: 'UNAUTHORIZED' }, { status: 401 });
+      return NextResponse.json({ error: "UNAUTHORIZED" }, { status: 401 });
     }
 
     const payload = await verifySessionToken(token);
     if (!payload) {
-      return NextResponse.json({ error: 'UNAUTHORIZED' }, { status: 401 });
+      return NextResponse.json({ error: "UNAUTHORIZED" }, { status: 401 });
+    }
+    const userId = (payload as any).userId;
+
+    const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
+    const accessKeyId = process.env.R2_ACCESS_KEY_ID;
+    const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY;
+    const bucketName = process.env.R2_BUCKET_NAME || "printing-store-assets";
+
+    let uploadUrl = "";
+    let fileKey = "";
+
+    if (!accountId || !accessKeyId || !secretAccessKey) {
+      console.warn("⚠️ No R2 credentials found in .env. Using local mock upload URL.");
+      fileKey = `mock/avatar-${userId}-${Date.now()}-${filename}`;
+      uploadUrl = `http://localhost:3000/api/uploads/mock?filename=${encodeURIComponent(filename)}`;
+    } else {
+      const S3 = new S3Client({
+        region: "auto",
+        endpoint: `https://${accountId}.r2.cloudflarestorage.com`,
+        credentials: {
+          accessKeyId,
+          secretAccessKey,
+        },
+      });
+
+      fileKey = `avatars/${userId}-${Date.now()}-${filename}`;
+      uploadUrl = await getSignedUrl(
+        S3,
+        new PutObjectCommand({
+          Bucket: bucketName,
+          Key: fileKey,
+          ContentType: contentType,
+        }),
+        { expiresIn: 3600 }
+      );
     }
 
-    const formData = await request.formData();
-    const file = formData.get('avatar') as File | null;
+    const publicUrl = process.env.NEXT_PUBLIC_R2_URL 
+      ? `${process.env.NEXT_PUBLIC_R2_URL}/${fileKey}` 
+      : `/${fileKey}`;
 
-    if (!file) {
-      return NextResponse.json({ error: 'NO_FILE_UPLOADED' }, { status: 400 });
-    }
+    const { DB } = await getCloudflareContext();
+    const db = drizzle(DB);
 
-    // Accept only image files
-    if (!file.type.startsWith('image/')) {
-      return NextResponse.json({ error: 'INVALID_FILE_TYPE' }, { status: 400 });
-    }
+    await db.update(profiles)
+      .set({ avatarUrl: publicUrl })
+      .where(eq(profiles.id, userId));
 
-    const uploadsDir = path.join(process.cwd(), 'public', 'uploads', 'avatars');
-    await fs.promises.mkdir(uploadsDir, { recursive: true });
-
-    // Sanitize extension
-    const ext = path.extname(file.name) || '.png';
-    const filename = `avatar_${payload.userId}_${Date.now()}${ext}`;
-    const filePath = path.join(uploadsDir, filename);
-
-    // Save binary data
-    const buffer = Buffer.from(await file.arrayBuffer());
-    await fs.promises.writeFile(filePath, buffer);
-
-    const avatarUrl = `/uploads/avatars/${filename}`;
-
-    // Ensure the table structure has the column
-    await query('ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS avatar_url VARCHAR(500) DEFAULT NULL;');
-
-    // Update profile
-    await query(
-      'UPDATE public.profiles SET avatar_url = $1 WHERE id = $2',
-      [avatarUrl, payload.userId]
-    );
-
-    return NextResponse.json({ success: true, avatarUrl });
-
-  } catch (error: unknown) {
-    const errMsg = error instanceof Error ? error.message : 'Unknown error';
-    console.error('Avatar upload error:', error);
-    return NextResponse.json(
-      { error: 'UPLOAD_FAILED', message: errMsg },
-      { status: 500 }
-    );
+    return NextResponse.json({ uploadUrl, fileKey, avatarUrl: publicUrl });
+  } catch (error) {
+    console.error("Error in avatar-upload presigned generation:", error);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }

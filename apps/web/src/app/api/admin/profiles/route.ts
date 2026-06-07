@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { query } from '@/lib/db';
+import { getCloudflareContext } from '@/lib/cloudflare';
+import { drizzle } from 'drizzle-orm/d1';
+import { profiles } from '../../../../../../../packages/core-logic/src/schema';
 import { verifySessionToken } from '@printing-store/core-logic';
 
-export const dynamic = 'force-dynamic';
+export const runtime = 'edge';
 
 async function getAdminSession(request: NextRequest) {
   const cookieToken = request.cookies.get('session_token')?.value;
@@ -23,28 +25,17 @@ async function getAdminSession(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
-    // Zero-Trust Admin verification
     const session = await getAdminSession(request);
     if (!session) {
       return NextResponse.json({ error: 'FORBIDDEN' }, { status: 403 });
     }
 
-    const profilesRes = await query(
-      'SELECT id, email, full_name, role, created_at FROM public.profiles ORDER BY role, full_name'
-    );
+    const { DB } = await getCloudflareContext();
+    const db = drizzle(DB);
+    const allProfiles = await db.select().from(profiles).all();
 
-    const profiles = profilesRes.rows.map(row => ({
-      id: row.id,
-      email: row.email,
-      fullName: row.full_name,
-      role: row.role,
-      createdAt: row.created_at,
-    }));
-
-    return NextResponse.json({ profiles });
-
-  } catch (error: unknown) {
-    const msg = error instanceof Error ? error.message : 'Unknown database error';
-    return NextResponse.json({ error: 'DATABASE_ERROR', details: msg }, { status: 500 });
+    return NextResponse.json({ profiles: allProfiles });
+  } catch (error: any) {
+    return NextResponse.json({ error: 'DATABASE_ERROR', details: error.message }, { status: 500 });
   }
 }

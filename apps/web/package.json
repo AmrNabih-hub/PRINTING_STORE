@@ -26,12 +26,15 @@
     "tailwindcss": "^4.3.0"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.16",
+    "@cloudflare/workers-types": "^4.20260607.1",
     "@types/node": "^20.11.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9.0.0",
     "eslint-config-next": "16.2.7",
     "typescript": "^5.3.3",
-    "vitest": "^1.2.1"
+    "vitest": "^1.2.1",
+    "wrangler": "^3.114.17"
   }
 }

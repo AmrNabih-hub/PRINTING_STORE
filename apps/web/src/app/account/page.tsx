@@ -74,7 +74,6 @@ export default function AccountCenterPage() {
     }
   };
 
-  // Handle avatar upload
   const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -82,19 +81,36 @@ export default function AccountCenterPage() {
     setUploadingAvatar(true);
     setUploadError('');
 
-    const formData = new FormData();
-    formData.append('avatar', file);
-
     try {
+      // Step 1: Get presigned URL and update DB pointer
       const res = await fetch('/api/auth/avatar-upload', {
         method: 'POST',
-        body: formData,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          filename: file.name,
+          contentType: file.type,
+        }),
       });
 
       const data = await res.json();
 
       if (!res.ok) {
         throw new Error(data.error || 'UPLOAD_FAILED');
+      }
+
+      const { uploadUrl } = data;
+
+      // Step 2: Upload file directly to R2 using the presigned URL
+      const uploadRes = await fetch(uploadUrl, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': file.type,
+        },
+        body: file,
+      });
+
+      if (!uploadRes.ok) {
+        throw new Error('Failed to upload file to R2');
       }
 
       // Refresh session info to reflect the new avatar

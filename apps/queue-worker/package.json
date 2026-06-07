@@ -8,13 +8,14 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "exifreader": "^4.22.1",
-    "drizzle-orm": "^0.30.10"
+    "drizzle-orm": "^0.45.2",
+    "exifreader": "^4.40.5"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240320.1",
+    "@printing-store/core-logic": "*",
+    "drizzle-kit": "^0.31.10",
     "typescript": "^5.4.3",
-    "wrangler": "^3.39.0",
-    "core-logic": "workspace:*"
+    "wrangler": "^3.39.0"
   }
 }
