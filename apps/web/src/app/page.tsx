@@ -100,7 +100,7 @@ export default function Home() {
       try {
         const res = await fetch('/api/auth/me');
         if (res.ok) {
-          const data = await res.json();
+          const data = await res.json() as any;
           if (data.authenticated) {
             setUser(data.user);
           }
@@ -123,7 +123,7 @@ export default function Home() {
       if (!res.ok) {
         throw new Error(locale === 'ar-eg' ? 'فشل استرداد المعروضات الفنية الحالية.' : 'Failed to retrieve curated gallery items.');
       }
-      const data = await res.json();
+      const data = await res.json() as any;
       setGalleryItems(data.items || []);
       setTotalGalleryPages(data.pagination.totalPages || 1);
     } catch (err: unknown) {
@@ -144,7 +144,7 @@ export default function Home() {
       try {
         const res = await fetch('/api/materials');
         if (res.ok) {
-          const data = await res.json();
+          const data = await res.json() as any;
           setMaterials({
             substrates: data.substrates || [],
             frames: data.frames || [],

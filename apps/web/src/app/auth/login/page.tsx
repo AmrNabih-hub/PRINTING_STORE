@@ -46,7 +46,7 @@ export default function LoginPage() {
       });
 
       if (!response.ok) {
-        const errData = await response.json();
+        const errData = await response.json() as any;
         if (errData.error === 'INVALID_CREDENTIALS') {
           setGeneralError(t('auth.invalidCredentials'));
         } else {

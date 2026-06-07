@@ -89,13 +89,13 @@ export default function Dropzone({ onUploadSuccess, widthCm, heightCm }: Dropzon
         clearInterval(interval);
         setProgress(100);
         if (!res.ok) {
-          const errData = await res.json();
+          const errData = await res.json() as any;
           throw new Error(errData.error || 'INGESTION_FAILED');
         }
         return res.json();
       })
-      .then((data: UploadResult) => {
-        onUploadSuccess(data);
+      .then((data: any) => {
+        onUploadSuccess(data as UploadResult);
       })
       .catch((err) => {
         const fallbackErr = t('upload.errorFailed');

@@ -42,7 +42,7 @@ export default function OrderHistoryHub() {
     try {
       const res = await fetch('/api/orders/history?limit=50');
       if (res.ok) {
-        const data = await res.json();
+        const data = await res.json() as any;
         setOrders(data.orders || []);
       }
     } catch (err) {

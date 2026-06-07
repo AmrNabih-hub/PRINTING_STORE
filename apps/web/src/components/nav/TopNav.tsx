@@ -40,7 +40,7 @@ export default function TopNav() {
       try {
         const res = await fetch('/api/auth/me');
         if (res.ok) {
-          const data = await res.json();
+          const data = await res.json() as any;
           if (data.authenticated) {
             setUser(data.user);
           } else {

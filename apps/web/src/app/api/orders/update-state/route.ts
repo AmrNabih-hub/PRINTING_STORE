@@ -1,3 +1,4 @@
+import { z } from 'zod';
 import { NextRequest, NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { verifySessionToken, OrderStatus } from '@printing-store/core-logic';
@@ -28,7 +29,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'FORBIDDEN' }, { status: 403 });
   }
 
-  const { orderId, status: newStatus } = await request.json();
+  const __body = await request.json();
+    const __schema = z.object({ orderId: z.any(), status: z.any() }).nonstrict();
+    const { orderId, status: newStatus  } = __schema.parse(__body);
 
   if (!orderId || !newStatus) {
     return NextResponse.json({ error: 'MISSING_PARAMETERS' }, { status: 400 });

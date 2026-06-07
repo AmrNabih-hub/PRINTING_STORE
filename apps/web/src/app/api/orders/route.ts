@@ -1,3 +1,4 @@
+import { z } from 'zod';
 import { NextRequest, NextResponse } from 'next/server';
 import { getCloudflareContext } from '@/lib/cloudflare';
 import { verifySessionToken } from '@printing-store/core-logic';
@@ -51,7 +52,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'UNAUTHORIZED' }, { status: 401 });
     }
 
-    const body = await request.json();
+    const body = z.record(z.any()).parse(await request.json());
 
     // 2. Validate essential fields (basic validation before queuing)
     if (!body.file_url || !body.width_cm || !body.height_cm || !body.substrate_material_id) {

@@ -1,9 +1,10 @@
+import { z } from 'zod';
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
 import { drizzle } from 'drizzle-orm/d1';
 import { eq } from 'drizzle-orm';
 import { getCloudflareContext } from '@/lib/cloudflare';
-import { users, profiles } from 'core-logic/src/schema';
+import { users, profiles } from '@printing-store/core-logic/src/schema';
 import { UserRegisterSchema, signSessionToken, getSessionCookieConfig } from '@printing-store/core-logic';
 
 function hashPassword(password: string): string {
@@ -15,7 +16,7 @@ function hashPassword(password: string): string {
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const body = z.record(z.any()).parse(await request.json());
     const result = UserRegisterSchema.safeParse(body);
     if (!result.success) {
       return NextResponse.json(

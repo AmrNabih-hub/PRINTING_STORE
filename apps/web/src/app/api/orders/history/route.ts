@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getCloudflareContext } from '@/lib/cloudflare';
 import { drizzle } from 'drizzle-orm/d1';
 import { eq, desc, count } from 'drizzle-orm';
-import { orders as ordersSchema } from 'core-logic/src/schema';
+import { orders as ordersSchema } from '@printing-store/core-logic/src/schema';
 
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';

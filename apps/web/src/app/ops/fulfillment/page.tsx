@@ -19,7 +19,7 @@ export default function FulfillmentDashboard() {
   useEffect(() => {
     fetch('/api/admin/materials')
       .then(r => r.json())
-      .then(data => {
+      .then((data: any) => {
         if (data.materials) setMaterials(data.materials);
         setLoading(false);
       })

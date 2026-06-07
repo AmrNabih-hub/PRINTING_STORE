@@ -58,7 +58,7 @@ export default function MaterialSelector({
         if (!response.ok) {
           throw new Error('Failed to load materials catalog.');
         }
-        const data = await response.json();
+        const data = await response.json() as any;
         setSubstrates(data.substrates || []);
         setFrames(data.frames || []);
         setCoatings(data.coatings || []);

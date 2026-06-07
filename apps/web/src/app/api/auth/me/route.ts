@@ -3,7 +3,7 @@ import { verifySessionToken } from '@printing-store/core-logic';
 import { drizzle } from 'drizzle-orm/d1';
 import { eq } from 'drizzle-orm';
 import { getCloudflareContext } from '@/lib/cloudflare';
-import { profiles } from 'core-logic/src/schema';
+import { profiles } from '@printing-store/core-logic/src/schema';
 
 export async function GET(request: NextRequest) {
   try {

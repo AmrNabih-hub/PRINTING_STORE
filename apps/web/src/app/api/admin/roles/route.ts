@@ -1,3 +1,4 @@
+import { z } from 'zod';
 import { NextRequest, NextResponse } from 'next/server';
 import { query } from '@/lib/db';
 import { verifySessionToken, UserRole } from '@printing-store/core-logic';
@@ -30,7 +31,7 @@ export async function POST(request: NextRequest) {
     }
 
     // 2. Parse request body
-    const body = await request.json();
+    const body = z.record(z.any()).parse(await request.json());
     const { targetUserId, newRole } = body;
 
     if (!targetUserId || !newRole) {

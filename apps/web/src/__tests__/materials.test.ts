@@ -84,7 +84,7 @@ describe('Admin Materials API Route Handler Integration Test', () => {
     });
 
     const response = await PUT(request);
-    const data = await response.json();
+    const data = await response.json() as any;
     console.log('--- PUT API RESPONSE START ---');
     console.log('Status:', response.status);
     console.log('Data:', JSON.stringify(data, null, 2));

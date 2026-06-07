@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getCloudflareContext } from '@/lib/cloudflare';
 import { drizzle } from 'drizzle-orm/d1';
-import { profiles } from '../../../../../../../packages/core-logic/src/schema';
+import { profiles } from '@printing-store/core-logic/src/schema';
 import { verifySessionToken } from '@printing-store/core-logic';
 
 export const runtime = 'edge';

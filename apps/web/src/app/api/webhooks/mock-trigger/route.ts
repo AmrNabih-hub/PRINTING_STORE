@@ -1,9 +1,12 @@
+import { z } from 'zod';
 import { NextRequest, NextResponse } from 'next/server';
 import { calculatePaymobHMAC } from '@printing-store/core-logic';
 
 export async function POST(request: NextRequest) {
   try {
-    const { orderId, success, amountCents } = await request.json();
+    const __body = await request.json();
+    const __schema = z.object({ orderId: z.any(), success: z.any(), amountCents: z.any() }).nonstrict();
+    const { orderId, success, amountCents  } = __schema.parse(__body);
 
     if (!orderId) {
       return NextResponse.json({ error: 'ORDER_ID_REQUIRED' }, { status: 400 });

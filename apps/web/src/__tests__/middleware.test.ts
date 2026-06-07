@@ -83,7 +83,7 @@ describe('Edge Middleware Security Guards', () => {
 
     const res = await middleware(req);
     expect(res.status).toBe(403);
-    const body = await res.json();
+    const body = await res.json() as any;
     expect(body.error).toBe('CORS_REJECTED');
   });
 

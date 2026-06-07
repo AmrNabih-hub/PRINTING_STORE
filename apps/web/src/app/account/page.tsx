@@ -37,13 +37,13 @@ export default function AccountCenterPage() {
         router.push('/auth/login');
         return;
       }
-      const data = await res.json();
+      const data = await res.json() as any;
       if (data.authenticated) {
         setUser(data.user);
         // Fetch orders count
         const historyRes = await fetch('/api/orders/history?limit=100');
         if (historyRes.ok) {
-          const historyData = await historyRes.json();
+          const historyData = await historyRes.json() as any;
           setOrderCount(historyData.orders?.length || 0);
         }
       } else {
@@ -92,7 +92,7 @@ export default function AccountCenterPage() {
         }),
       });
 
-      const data = await res.json();
+      const data = await res.json() as any;
 
       if (!res.ok) {
         throw new Error(data.error || 'UPLOAD_FAILED');

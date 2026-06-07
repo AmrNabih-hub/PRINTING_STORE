@@ -153,7 +153,7 @@ export default function Dashboard() {
     try {
       const res = await fetch('/api/orders/history?limit=5');
       if (res.ok) {
-        const data = await res.json();
+        const data = await res.json() as any;
         setOrders(data.orders || []);
       }
     } catch (err) {
@@ -168,7 +168,7 @@ export default function Dashboard() {
       try {
         const res = await fetch('/api/auth/me');
         if (res.ok) {
-          const data = await res.json();
+          const data = await res.json() as any;
           if (data.authenticated) {
             setUser(data.user);
           }
@@ -182,7 +182,7 @@ export default function Dashboard() {
       try {
         const res = await fetch('/api/materials');
         if (res.ok) {
-          const data = await res.json();
+          const data = await res.json() as any;
           setMaterials({
             substrates: data.substrates || [],
             frames: data.frames || [],

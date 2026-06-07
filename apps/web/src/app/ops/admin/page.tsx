@@ -16,7 +16,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     fetch('/api/admin/profiles')
       .then(r => r.json())
-      .then(data => {
+      .then((data: any) => {
         if (data.profiles) setProfiles(data.profiles);
         setLoading(false);
       })

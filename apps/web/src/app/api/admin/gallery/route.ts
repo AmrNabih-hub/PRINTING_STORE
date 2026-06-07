@@ -1,3 +1,4 @@
+import { z } from 'zod';
 import { NextRequest, NextResponse } from 'next/server';
 import { query } from '@/lib/db';
 import { verifySessionToken } from '@printing-store/core-logic';
@@ -69,7 +70,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'FORBIDDEN' }, { status: 403 });
     }
 
-    const { orderId, title, description } = await request.json();
+    const __body = await request.json();
+    const __schema = z.object({ orderId: z.any(), title: z.any(), description: z.any() }).nonstrict();
+    const { orderId, title, description  } = __schema.parse(__body);
 
     if (!orderId || !title || !description) {
       return NextResponse.json({ error: 'MISSING_PARAMETERS' }, { status: 400 });

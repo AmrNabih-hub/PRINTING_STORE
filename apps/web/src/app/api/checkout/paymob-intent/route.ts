@@ -1,3 +1,4 @@
+import { z } from 'zod';
 import { NextRequest, NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { verifySessionToken } from '@printing-store/core-logic';
@@ -48,7 +49,7 @@ export async function POST(request: NextRequest) {
     }
 
     // 2. Parse request body
-    const body = (await request.json()) as PaymobRequestBody;
+    const body = z.record(z.any()).parse(await request.json()) as any;
     const { orderId, paymentMethod, billingData, walletNumber } = body;
 
     if (!orderId || !paymentMethod || !billingData) {

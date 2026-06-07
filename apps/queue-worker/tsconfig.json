@@ -12,7 +12,8 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": ["src/*"],
+      "@printing-store/core-logic/*": ["../../packages/core-logic/src/*"]
     }
   },
   "include": ["src/**/*.ts"]

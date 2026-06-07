@@ -42,7 +42,7 @@ describe('Asset Ingestion Pipeline', () => {
     const response = await POST(request);
     expect(response.status).toBe(200);
 
-    const data = await response.json();
+    const data = await response.json() as any;
     expect(data.success).toBe(true);
     expect(data.originalName).toBe('test-image.png');
     expect(data.mimeType).toBe('image/png');
@@ -74,7 +74,7 @@ describe('Asset Ingestion Pipeline', () => {
     const response = await POST(request);
     expect(response.status).toBe(413);
 
-    const data = await response.json();
+    const data = await response.json() as any;
     expect(data.error).toBe('FILE_TOO_LARGE');
   });
 
@@ -95,7 +95,7 @@ describe('Asset Ingestion Pipeline', () => {
     const response = await POST(request);
     expect(response.status).toBe(500);
 
-    const data = await response.json();
+    const data = await response.json() as any;
     expect(data.error).toBe('INGESTION_FAILED');
   });
 });

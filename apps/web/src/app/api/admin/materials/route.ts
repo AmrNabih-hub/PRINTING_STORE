@@ -1,7 +1,8 @@
+import { z } from 'zod';
 import { NextRequest, NextResponse } from 'next/server';
 import { getCloudflareContext } from '@/lib/cloudflare';
 import { drizzle } from 'drizzle-orm/d1';
-import { materials } from '../../../../../../../packages/core-logic/src/schema';
+import { materials } from '@printing-store/core-logic/src/schema';
 import { verifySessionToken, MaterialInputSchema } from '@printing-store/core-logic';
 import { eq } from 'drizzle-orm';
 
@@ -50,7 +51,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'FORBIDDEN' }, { status: 403 });
     }
 
-    const body = await request.json();
+    const body = z.record(z.any()).parse(await request.json());
     const validation = MaterialInputSchema.safeParse(body);
     if (!validation.success) {
       return NextResponse.json({ error: 'VALIDATION_FAILED', details: validation.error.format() }, { status: 400 });
@@ -89,7 +90,7 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: 'FORBIDDEN' }, { status: 403 });
     }
 
-    const body = await request.json();
+    const body = z.record(z.any()).parse(await request.json());
     const { id } = body;
     if (!id) {
       return NextResponse.json({ error: 'MATERIAL_ID_REQUIRED' }, { status: 400 });

@@ -37,7 +37,7 @@ export default function OrdersPage() {
     async function checkAuth() {
       try {
         const res = await fetch('/api/auth/me');
-        const data = await res.json();
+        const data = await res.json() as any;
         if (!data.authenticated) {
           router.push('/auth/login');
           return;
@@ -48,7 +48,7 @@ export default function OrdersPage() {
         if (!ordersRes.ok) {
           throw new Error('Failed to retrieve orders history.');
         }
-        const ordersData = await ordersRes.json();
+        const ordersData = await ordersRes.json() as any;
         setOrders(ordersData.orders || []);
       } catch (err: any) {
         setError(err.message || 'An unexpected error occurred loading order list.');

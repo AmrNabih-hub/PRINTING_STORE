@@ -110,7 +110,7 @@ export default function CheckoutPage() {
     async function checkAuth() {
       try {
         const res = await fetch('/api/auth/me');
-        const data = await res.json();
+        const data = await res.json() as any;
         if (!data.authenticated) {
           router.push('/auth/login');
         }
@@ -127,7 +127,7 @@ export default function CheckoutPage() {
       try {
         const res = await fetch('/api/materials');
         if (res.ok) {
-          const data = await res.json();
+          const data = await res.json() as any;
           
           // Set system configs
           const config = data.config || { markup_margin: 1.5, service_fee: 50.0, ai_audit_fee: 0.0 };
@@ -218,7 +218,7 @@ export default function CheckoutPage() {
       const res = await fetch(
         `/api/promo/validate?code=${codeParam}&width_cm=${width}&height_cm=${height}&substrate_cost=${substrateCost}&frame_cost=${frameCost}&coating_cost=${coatingCost}&ink_density=${inkDensityMultiplier}&ai_audit_fee=${systemConfig.ai_audit_fee}`
       );
-      const data = await res.json();
+      const data = await res.json() as any;
 
       if (!res.ok || !data.isValid) {
         setPromoError(t('checkout.invalidPromo'));
@@ -268,7 +268,7 @@ export default function CheckoutPage() {
         }),
       });
 
-      const data = await res.json();
+      const data = await res.json() as any;
 
       if (!res.ok) {
         alert(data.message || t('common.error'));

@@ -98,7 +98,7 @@ export default function RegisterPage() {
       });
 
       if (!response.ok) {
-        const errData = await response.json();
+        const errData = await response.json() as any;
         if (errData.error === 'EMAIL_ALREADY_EXISTS') {
           setGeneralError(t('auth.emailExists'));
         } else {

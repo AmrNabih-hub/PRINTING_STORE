@@ -1,3 +1,4 @@
+import { z } from 'zod';
 import { NextRequest, NextResponse } from "next/server";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
@@ -5,13 +6,15 @@ import { verifySessionToken } from "@printing-store/core-logic";
 import { getCloudflareContext } from "@/lib/cloudflare";
 import { drizzle } from "drizzle-orm/d1";
 import { eq } from "drizzle-orm";
-import { profiles } from "core-logic/src/schema";
+import { profiles } from '@printing-store/core-logic/src/schema';
 
 export const runtime = 'edge';
 
 export async function POST(request: NextRequest) {
   try {
-    const { filename, contentType } = await request.json();
+    const __body = await request.json();
+    const __schema = z.object({ filename: z.any(), contentType: z.any() }).nonstrict();
+    const { filename, contentType  } = __schema.parse(__body);
 
     if (!filename || !contentType) {
       return NextResponse.json({ error: "Missing filename or contentType" }, { status: 400 });
